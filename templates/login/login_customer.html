@@ -1,0 +1,252 @@
+<!--
+文件名：login.html
+创建时间：08-21
+作者：黄文政
+简要说明：顾客扫脸界面
+修改日期：08-21
+-->
+{% load staticfiles %}
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" type="text/css" href="{% static "css/login/login_customer.css" %}"/>
+		<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap-grid.min.css" %}"/>
+		<style>
+
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-1"></div>
+				<div class="col-md-10" id="main" align="center">
+					<div id="login" align="left">
+						<font size="7" color="darkgreen">log in</font>
+					</div>
+					<div class="row">
+						<div class="col-md-2"></div>
+						<div class="col-md-8" id="camera">
+							<div id="contentHolder" align="center">
+								<video id="video" width="600" height="600" autoplay></video>
+								<canvas style="display:none;" id="canvas" width="600" height="600"></canvas>
+							</div>
+							<div id="btn_snap">登录/注册</div>
+						</div>
+						<div class="col-md-2"></div>
+					</div>
+					
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+		</div>
+		
+	</body>
+	<script src="js/jquery.js"></script>
+	<script type="text/javascript">  
+	
+		var canvas = document.getElementById("canvas"),
+		        pzBtn = document.getElementById("btn_snap"),
+		        context = canvas.getContext("2d"),
+		        video = document.getElementById("video");
+		    alert('该页面会调用您的摄像头')
+		    // 旧版本浏览器可能根本不支持mediaDevices，我们首先设置一个空对象
+		    if (navigator.mediaDevices === undefined) {
+		        navigator.mediaDevices = {};
+		    }
+		    // 一些浏览器实现了部分mediaDevices，我们不能只分配一个对象
+		    // 使用getUserMedia，因为它会覆盖现有的属性。
+		    // 这里，如果缺少getUserMedia属性，就添加它。
+		    if (navigator.mediaDevices.getUserMedia === undefined) {
+		        navigator.mediaDevices.getUserMedia = function (constraints) {
+		            // 首先获取现存的getUserMedia(如果存在)
+		            var getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+		            // 有些浏览器不支持，会返回错误信息
+		            // 保持接口一致
+		            if (!getUserMedia) {
+		                return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
+		            }
+		            //否则，使用Promise将调用包装到旧的navigator.getUserMedia
+		            return new Promise(function (resolve, reject) {
+		                getUserMedia.call(navigator, constraints, resolve, reject);
+		            });
+		        }
+		    }
+		    var constraints = { audio: false, video: {width: 720,height:720} }
+		    navigator.mediaDevices.getUserMedia(constraints)
+		        .then(function (stream) {
+		            var video = document.querySelector('video');
+		            // 旧的浏览器可能没有srcObject
+		            if ("srcObject" in video) {
+		                video.srcObject = stream;
+		            } else {
+		                //避免在新的浏览器中使用它，因为它正在被弃用。
+		                video.src = window.URL.createObjectURL(stream);
+		            }
+		            video.onloadedmetadata = function (e) {
+		                video.play();
+		            };
+		        })
+		        .catch(function (err) {
+		            console.log(err.name + ": " + err.message);
+		        });
+		
+		
+		
+		    pzBtn.addEventListener("click", function () {
+		        // 点击，canvas画图
+		        context.drawImage(video, 0, 0, 300, 300);
+		        // 获取图片base64链接
+		        var image = canvas.toDataURL('image/png');
+		        // 定义一个img
+		        var img = new Image();
+		        //设置属性和src
+		        img.id = "imgBoxxx";
+		        img.src = image;
+		        //将图片添加到页面中
+		        document.body.appendChild(img);
+		
+		        // base64转文件
+		        function dataURLtoFile(dataurl, filename) {
+		            var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+		                bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+		            while (n--) {
+		                u8arr[n] = bstr.charCodeAt(n);
+		            }
+		            return new File([u8arr], filename, {type: mime});
+		        }
+				var file = dataURLtoFile(image, 'aa.png')
+		        console.log(file);
+				
+				var formdata = new FormData();
+				formdata.append('file_obj', file);
+				var uploadAjax = $.ajax({
+				        type: "post",
+				        //后端需要调用的地址
+				        url:"http://127.0.0.1:8000/polls/upload",
+				        data: formdata,
+						processData: false,
+						contentType: false,
+						//设置超时
+				        timeout:10000,
+				        async: true,
+				        success: function (htmlVal) {
+				        	alert("登录/注册成功")
+							//成功后回调
+						},
+				        error: function(data) {
+				        },
+						//调用执行后调用的函数
+						complete: function (XMLHttpRequest, textStatus) {
+							if(textStatus == 'timeout'){
+								uploadAjax.abort(); //取消请求
+								//超时提示：请求超时，请重试
+								alert("请求超时，请重试")
+								//请求超时返回首页
+								closeCard();
+							}
+						}
+					});
+		    });
+// 		var video = document.querySelector('video');  
+// 		var audio, audioType;  
+//   
+// 		var canvas1 = document.getElementById('canvas1');  
+// 		var context1 = canvas1.getContext('2d');  
+//   
+// 		var canvas2 = document.getElementById('canvas2');  
+// 		var context2 = canvas2.getContext('2d');  
+//   
+// 		navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;  
+// 		window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL;  
+//   
+// 		var exArray = []; //存储设备源ID  
+// 		MediaStreamTrack.getSources(function (sourceInfos) {  
+// 			for (var i = 0; i != sourceInfos.length; ++i) {  
+// 				var sourceInfo = sourceInfos[i];  
+// 				//这里会遍历audio,video，所以要加以区分  
+// 				if (sourceInfo.kind === 'video') {  
+// 					exArray.push(sourceInfo.id);  
+// 				}  
+// 			}  
+// 		});  
+//   
+// 		function getMedia() {  
+// 			if (navigator.getUserMedia) {  
+// 				navigator.getUserMedia({  
+// 					'video': {  
+// 						'optional': [{  
+// 							'sourceId': exArray[1] //0为前置摄像头，1为后置  
+// 						}]  
+// 					},  
+// 					'audio':true  
+// 				}, successFunc, errorFunc);    //success是获取成功的回调函数  
+// 			}  
+// 			else {  
+// 				alert('Native device media streaming (getUserMedia) not supported in this browser.');  
+// 			}  
+// 		}  
+//   
+// 		function successFunc(stream) {  
+// 			//alert('Succeed to get media!');  
+// 			if (video.mozSrcObject !== undefined) {  
+// 				//Firefox中，video.mozSrcObject最初为null，而不是未定义的，我们可以靠这个来检测Firefox的支持  
+// 				video.mozSrcObject = stream;  
+// 			}  
+// 			else {  
+// 				video.src = window.URL && window.URL.createObjectURL(stream) || stream;  
+// 			}  
+//   
+// 			//video.play();  
+//   
+// 			// 音频  
+// 			audio = new Audio();  
+// 			audioType = getAudioType(audio);  
+// 			if (audioType) {  
+// 				audio.src = 'polaroid.' + audioType;  
+// 				audio.play();  
+// 			}  
+// 		}  
+// 		function errorFunc(e) {  
+// 			alert('Error！'+e);  
+// 		}  
+//   
+// 		  
+// 		// 将视频帧绘制到Canvas对象上,Canvas每60ms切换帧，形成肉眼视频效果  
+// 		function drawVideoAtCanvas(video,context) {  
+// 			window.setInterval(function () {  
+// 				context.drawImage(video, 0, 0,90,120);  
+// 			}, 60);  
+// 		}  
+//   
+// 		//获取音频格式  
+// 		function getAudioType(element) {  
+// 			if (element.canPlayType) {  
+// 				if (element.canPlayType('audio/mp4; codecs="mp4a.40.5"') !== '') {  
+// 					return ('aac');  
+// 				} else if (element.canPlayType('audio/ogg; codecs="vorbis"') !== '') {  
+// 					return ("ogg");  
+// 				}  
+// 			}  
+// 			return false;  
+// 		}  
+//   
+// 		// vedio播放时触发，绘制vedio帧图像到canvas  
+// //        video.addEventListener('play', function () {  
+// //            drawVideoAtCanvas(video, context2);  
+// //        }, false);  
+//   
+// 		//拍照  
+// 		function getPhoto() {  
+// 			context1.drawImage(video, 0, 0,90,120); //将video对象内指定的区域捕捉绘制到画布上指定的区域，实现拍照。  
+// 		}  
+//   
+// 		//视频  
+// 		function getVedio() {  
+// 			drawVideoAtCanvas(video, context2);  
+// 		}  
+	  
+
+	</script>
+</html>

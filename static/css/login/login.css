@@ -1,0 +1,34 @@
+#main{
+	height: 900px;
+	width: 1200px;
+	margin: auto;
+	margin-top: 40px;
+	background-color: #F0F8FF;
+	border: 1px solid;
+	border-color: black;
+	border-radius: 25px;
+	position: relative;
+	align-content: center;
+}
+#login{
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	position: relative;
+	opacity: 0.8;
+	left: 2%;
+}
+.button{
+	position: relative;
+	margin-top: 100px;
+	height: 100px;
+	width: 300px;
+}
+button{
+	height: 100px; 
+	width: 300px; 
+	font-size: xx-large;
+}
