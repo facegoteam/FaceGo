@@ -131,8 +131,19 @@
 				        timeout:10000,
 				        {#async: true,#}
 				        success: function (data) {
-				            console.log(data);
-				        	alert("验证成功");
+				            console.log(typeof(data));
+				            var obj = eval("("+data+")");
+				            console.log(obj);
+				            var confidence = obj['results'][0]['confidence'];
+				            if( confidence < 80){
+                                if(confirm('确定已经注册过了吗')){
+                                     //alert("确定");
+                                     return true;
+                                  }else{
+                                     //alert("取消");
+                                     return false;
+                                 }
+                            }
 				        	window.location.href="http://127.0.0.1:8000/customer"
 							//成功后回调
 						},
