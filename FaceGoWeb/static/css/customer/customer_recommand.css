@@ -1,0 +1,32 @@
+#main{
+	height: 900px;
+	width: 1200px;
+	margin: auto;
+	margin-top: 40px;
+	background-color: #F0F8FF;
+	border: 1px solid;
+	border-color: black;
+	border-radius: 25px;
+	position: relative;
+	align-content: center;
+}
+.clearfix{
+	margin: 10px;
+}
+button{
+	width: 50px;
+	height: 30px;
+}
+img{
+	width: 50px;
+	height: 50px;
+}
+.num{
+	font-size: large;
+}
+.head{
+	font-size: larger;
+}
+.item{
+	font-size: large;
+}
