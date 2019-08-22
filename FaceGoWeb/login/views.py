@@ -32,9 +32,9 @@ def faceUpload(request):
     print('face upload call')
     if request.method == 'POST':
         img = request.FILES.get('file_obj')
-        path = './1.jpg'
-        # django 提供的chunks方法
-        from django.core.files.uploadedfile import InMemoryUploadedFile
+        # path = './1.jpg'
+        # # django 提供的chunks方法
+        # from django.core.files.uploadedfile import InMemoryUploadedFile
         # with open(path, 'wb') as f:
         #     for chunk in img.chunks():
         #         f.write(chunk)
