@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^login_customer$', views.loginCustomer),
     url(r'^login_cashier$', views.loginCashier),
     url(r'^login_admin$', views.loginAdmin),
-    # url(r'^upload$', views.save)
+    url(r'^upload$', views.save),
 ]
