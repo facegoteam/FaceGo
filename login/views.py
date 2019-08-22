@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.

@@ -115,7 +115,7 @@
 		            return new File([u8arr], filename, {type: mime});
 		        }
 				var file = dataURLtoFile(image, 'aa.png')
-		        console.log(file);
+		        {#console.log(file);#}
 				
 				var formdata = new FormData();
 				formdata.append('file_obj', file);
@@ -129,7 +129,8 @@
 						//设置超时
 				        timeout:10000,
 				        async: true,
-				        success: function (htmlVal) {
+				        success: function (result) {
+				            console.log(result)
 				        	alert("登录/注册成功")
 							//成功后回调
 						},
