@@ -1,0 +1,8 @@
+/**index.wxss**/
+.test{
+   display: flex;
+  flex-direction:row;
+}
+#login{
+  margin-left: 10px;
+}
