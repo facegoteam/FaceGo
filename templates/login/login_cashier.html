@@ -8,36 +8,35 @@
 		<title>login</title>
 	</head>
 	<body>
-		<body>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-1"></div>
-					<div class="col-md-10" id="main" align="center">
-						<div id="login" align="left">
-							<font size="7" color="darkgreen">log in</font>
-						</div>
-						<div>
-							<label><font size="6" color="#218838">收银员登录</font></label>
-						</div>
-						<div>
-							<form action="cashier" method="post">
-							<div class="form-control" id="form">
-								<label for="user">账号：</label>
-								<input type="text" class="form-group" name="user"/>
-							</div>
-							<div class="form-control" id="form">
-								<label for="password">密码：</label>
-								<input type="password" class="form-group" name="user"/>
-							</div>
-							<div >
-								<button type="submit">登录</button>
-							</div>
-							</form>
-						</div>
-					</div>
-					<div class="col-md-1"></div>
-				</div>
-			</div>
-		</body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10" id="main" align="center">
+                    <div id="login" align="left">
+                        <font size="7" color="darkgreen">log in</font>
+                    </div>
+                    <div>
+                        <label><font size="6" color="#218838">收银员登录</font></label>
+                    </div>
+                    <div>
+                        <form action="cashier" method="post">
+                        <div class="form-control" id="form">
+                            <label for="user">账号：</label>
+                            <input type="text" class="form-group" name="user"/>
+                        </div>
+                        <div class="form-control" id="form">
+                            <label for="password">密码：</label>
+                            <input type="password" class="form-group" name="user"/>
+                        </div>
+                        <div >
+                            <button type="submit">登录</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
 	</body>
+    <script src="{% static "js/jquery.js" %}"></script>
 </html>
