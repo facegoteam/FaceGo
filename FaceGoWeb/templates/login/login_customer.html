@@ -131,6 +131,7 @@
 				            if( confidence < 80){
                                 if(confirm('确定已经注册过了吗')){
                                      //alert("确定");
+                                    window.location.href="http://127.0.0.1:8000/customer"
                                   }else{
                                      //alert("取消");
                                     var registerAjax = $.ajax({
@@ -142,14 +143,16 @@
                                                             processData: false,
                                                             contentType: false,
                                                             //设置超时
-                                                            timeout: 10000,
+                                                            timeout: 100000,
                                                             {#async: true,#}
                                                             success: function (data) {
                                                                 //成功后回调
+                                                                alert('注册成功')
                                                                 console.log(data);
+                                                                window.location.href="http://127.0.0.1:8000/customer"
                                                             },
                                                             error: function (data) {
-                                                                alert("注册失败");
+
                                                             },
                                                             //调用执行后调用的函数
                                                             complete: function (XMLHttpRequest, textStatus) {
@@ -161,10 +164,11 @@
                                                                 }
                                                             }
                                                         });
-
                                  }
+                            }else{
+				                {#window.location.href="http://127.0.0.1:8000/customer"#}
                             }
-				        	window.location.href="http://127.0.0.1:8000/customer"
+
 							//成功后回调
 						},
 				        error: function(data) {
@@ -181,6 +185,8 @@
 							}
 						}
 					});
+
+				{#window.location.href="http://127.0.0.1:8000/customer"#}
 		    });
 	</script>
 

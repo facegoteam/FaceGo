@@ -10,19 +10,37 @@ import requests
 
 # Create your views here.
 
-
+# 方法名：customer
+# 创建时间：08-21
+# 作者：黄文政
+# 简要说明：返回登录首页
+# 修改日期：08-21
 def index(request):
     return render(request, 'login/login.html')
 
-
+# 方法名：customer
+# 创建时间：08-21
+# 作者：黄文政
+# 简要说明：返回顾客登录页面
+# 修改日期：08-21
 def loginCustomer(request):
     return render_to_response('login/login_customer.html')
 
 
+# 方法名：customer
+# 创建时间：08-23
+# 作者：黄文政
+# 简要说明：返回职员登录页面
+# 修改日期：08-23
 def loginStaff(request):
     return render_to_response('login/login_staff.html')
 
 
+# 方法名：faceUpload
+# 创建时间：08-21
+# 作者：黄文政
+# 简要说明：处理上传人脸照片请求
+# 修改日期：08-22
 @csrf_exempt
 def faceUpload(request):
     # print('face upload call')
@@ -42,7 +60,7 @@ def faceUpload(request):
         }
         response = requests.post(url=url, data=data, files={'image_file': img})
         res_str = json.dumps(response.json())
-        print(res_str)
+        print('faceupload:'+res_str)
         data = response.json()
         if len(data['faces']) != 0:
             request.session['face_token'] = data['faces'][0]['face_token']
@@ -50,6 +68,12 @@ def faceUpload(request):
     else:
         return HttpResponse('无图片')
 
+# 方法名：faceRegister
+# 创建时间：08-21
+# 作者：黄文政
+# 简要说明：处理人脸注册请求
+# 修改日期：08-23
+@csrf_exempt
 def faceRegister(request):
     print('faceRegister call')
     if request.method == 'POST':
@@ -72,17 +96,21 @@ def faceRegister(request):
             'outer_id': 'facegofaceset',
         }
         response = requests.post(url=url_addface, data=data_addface)
+        # print(response.json())
 
         customer = models.Customer(customer_token=face_token)
         customer.save()
-        print(customer.id)
-        print(customer.customer_token)
+        # print('customer id:'+str(customer.id))
+        # print('customer_token:'+customer.customer_token)
 
-        print(request.session['face_token'])
+        # print('session_token'+request.session['face_token'])
         request.session['face_token'] = face_token
+        # print('session_token' + request.session['face_token'])
 
-        return render(request, 'customer/customer.html', {'face_token': face_token})
+        return HttpResponse('http://127.0.0.1:8000/customer')
 
+    else:
+        return HttpResponse('无图片')
 
 
 
