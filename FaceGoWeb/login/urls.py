@@ -4,8 +4,8 @@ from . import views
 
 urlpatterns = [
     url('login_customer/$', views.loginCustomer, name='login_customer'),
-    url('login_cashier/$', views.loginCashier, name='login_cashier'),
-    url('login_admin/$', views.loginAdmin, name='login_admin'),
+    url('login_staff/$', views.loginStaff, name='login_staff'),
     url('face_upload/$', views.faceUpload, name='upload'),
+    url('face_register/$', views.faceRegister, name='register'),
     url(r'^$', views.index),
 ]
