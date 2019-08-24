@@ -96,7 +96,7 @@
 		        img.id = "imgBoxxx";
 		        img.src = image;
 		        {#//将图片添加到页面中#}
-		        document.body.appendChild(img);
+		        {#document.body.appendChild(img);#}
 		
 		        // base64转文件
 		        function dataURLtoFile(dataurl, filename) {
@@ -166,7 +166,7 @@
                                                         });
                                  }
                             }else{
-				                {#window.location.href="http://127.0.0.1:8000/customer"#}
+				                window.location.href="http://127.0.0.1:8000/customer"
                             }
 
 							//成功后回调

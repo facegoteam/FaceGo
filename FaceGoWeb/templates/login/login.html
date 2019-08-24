@@ -16,7 +16,7 @@
         <div class="col-lg-8 col-md-12 mx-auto">
           <h1 class="mb-4 display-3">Welcome to FaceGo<br></h1>
           <p class="lead mb-5">Please choose your identity</p>
-          <a href="http:127.0.0.1:8000/login/login_customer/" class="btn btn-lg mx-1 btn-primary">Customer</a><a href="http:127.0.0.1:8000/login/login_staff/" class="btn btn-lg btn-primary mx-1">Staff</a>
+          <a href="{% url 'login_customer' %}" class="btn btn-lg mx-1 btn-primary">Customer</a><a href="{% url 'login_staff' %}" class="btn btn-lg btn-primary mx-1">Staff</a>
         </div>
       </div>
     </div>
