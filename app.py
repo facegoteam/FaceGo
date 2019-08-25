@@ -102,15 +102,37 @@ def cashier_add_goods():
 def cashier_goods_details():
     return render_template('cashier/cashier_goods_details.html')
 
-@app.route('/cashier_goods_details/change', methods=['GET', 'POST'])
+@app.route('/cashier_goods_details_add', methods=['GET', 'POST'])
+def cashier_goods_add():
+    form = request.form
+    print(form)
+    try:
+        if form['add']:
+            #保存商品信息修改
+            return render_template('cashier/cashier_management.html', result="success")
+        else:
+            #提示是否保存修改
+            return render_template('cashier/cashier_management.html')
+    except:
+        return render_template('cashier/cashier_management.html')
+    finally:
+        return render_template('cashier/cashier_management.html')
+
+@app.route('/cashier_goods_details_change', methods=['GET', 'POST'])
 def cashier_goods_change():
     form = request.form
-    if form['submit']:
-        #保存商品信息修改
-        pass
-    else:
-        #提示是否保存修改
-        pass
+    print(form)
+    try:
+        if form['add']:
+            #保存商品信息修改
+            return render_template('cashier/cashier_management.html', result="success")
+        else:
+            #提示是否保存修改
+            return render_template('cashier/cashier_management.html')
+    except:
+        return render_template('cashier/cashier_management.html')
+    finally:
+        render_template('cashier/cashier_management.html')
 
 @app.route('/cashier_management')
 def cashier_management():
