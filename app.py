@@ -86,6 +86,10 @@ def customer_goods():
 def customer_recommend():
     return render_template('customer/customer_recommend.html')
 
+@app.route('/customer_records')
+def customer_records():
+    return render_template('customer/customer_records.html')
+
 if __name__ == '__main__':
 
     app.run()
