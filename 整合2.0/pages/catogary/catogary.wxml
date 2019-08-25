@@ -1,0 +1,108 @@
+<!--
+文件名：catogary.wxml
+创建时间：8/24
+作者：黄少豪
+简要说明：小程序分类页面
+-->
+
+<!--主盒子-->
+<view class="container">
+
+  <!-- 左侧栏 -->
+  <view class='nav_left'>
+
+    <view class="nav_left_items {{curNav == 1 ? 'active' : ''}}" 
+          bindtap="switchRightTab"  data-id="1">
+      水果
+    </view>
+
+    <view class="nav_left_items {{curNav == 2 ? 'active' : ''}}" 
+          bindtap="switchRightTab"  data-id="2">
+      干果
+    </view>
+
+    <view class="nav_left_items {{curNav == 3 ? 'active' : ''}}" 
+          bindtap="switchRightTab" data-id="3">
+      蔬菜
+    </view>
+
+    <view class="nav_left_items {{curNav == 4 ? 'active' : ''}}" 
+          bindtap="switchRightTab" data-id="4">
+      海鲜
+    </view>
+
+  </view>
+
+  <!-- 右侧栏 -->
+  <view class="nav_right">
+
+    <view wx:if="{{curNav==1}}">
+      <view class="nav_right_items" wx:if="{{arr.length>0}}">
+        <image src="/images/mihoutao.png"></image>
+        <p>猕猴桃</p>
+      </view>
+
+      <view class="nav_right_items">
+        <image src="/images/longyan.png"></image>
+        <p>龙眼</p>
+      </view>
+
+      <view class="nav_right_items">
+        <image src="/images/juzi.png"></image>
+        <text>橘子</text>
+      </view>
+
+      <view class="nav_right_items">
+        <image src="/images/huolongguo.png"></image>
+        <text>火龙果</text>
+      </view>
+
+      <view class="nav_right_items">
+        <image src="/images/caomei.png"></image>
+        <text>草莓</text>
+      </view>
+    </view>
+
+    <view wx:if="{{curNav==2}}">
+      <view class="nav_right_items">
+        <image src="../images/xiaweiyi.png"></image>
+        <text>夏威夷果</text>
+      </view>
+
+      <view class="nav_right_items">
+        <image src="../images/kaixin.png"></image>
+        <text>开心果</text>
+      </view>
+
+      <view class="nav_right_items">
+        <image src="../images/bigen.png"></image>
+        <text>碧根果</text>
+      </view>
+
+      <view class="nav_right_items">
+        <image src="../images/mangguo.png"></image>
+        <text>芒果</text>
+      </view>
+
+    </view>
+
+    <view wx:if="{{curNav==3}}">
+      <view class="nav_right_items">
+        <image src="../images/huaye.png"></image>
+        <text>花椰菜</text>
+      </view>
+
+      <view class="nav_right_items">
+        <image src="../images/shengcai.png"></image>
+        <text>生菜</text>
+      </view>
+
+      <view class="nav_right_items">
+        <image src="../images/fanqie.png"></image>
+        <text>番茄</text>
+      </view>
+    </view>
+
+  </view>
+
+</view>

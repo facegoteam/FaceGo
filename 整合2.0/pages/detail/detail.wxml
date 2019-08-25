@@ -1,0 +1,62 @@
+<!--
+文件名：detail.wxml
+创建时间：8/24
+作者：黄少豪
+简要说明：小程序商品详情页
+-->
+<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+  <block wx:for="{{imgUrls}}">
+    <swiper-item>
+        <image src="{{item}}" data-src="{{item}}" bindtap="previewImage" mode="widthFix"></image>
+    </swiper-item>
+  </block>
+</swiper>
+
+<!--图文详情按钮-->
+<view class='tab-bar-detail'>
+      <text>图文</text>
+      <text>详情</text>
+</view> 
+
+<view class="product-price-wrap">
+
+ <view>
+    <p class="product-price-new">￥7935.84</p>  
+    <p class="product-price-old">原价￥9018.00</p> 
+    <p class="discount">8.8折</p>
+  </view>
+  <view>
+    <image src="/images/share.png" />  
+  </view>   
+</view>
+<view class="product-name-wrap">
+  <text>Apple iPhone X手机 苹果x 全网通4G 全面屏手机 银色 官方标配 256G</text>
+</view>
+
+<!--内页详情-->
+<view class="details"> 
+   <scroll-view scroll-y="true"> 
+       <block wx:for-items="{{detailImg}}" wx:key="name">
+       <image class="image_detail" src="{{item}}" mode="widthFix"/> 
+    </block>  
+   </scroll-view> 
+ </view>
+
+<!--底部导航-->
+<view class="footer_nav">
+    <view class="nav_list">
+    
+        <text class="iconfont icon-store_refund"></text>
+        <view class="nav_name">客服</view>
+    </view>
+    <view class="nav_list">
+        <text class="iconfont icon-star"></text>
+        <view class="nav_name">收藏</view>
+    </view>
+    <view class="nav_list">
+        <text class="iconfont icon-toolbar_cart_normal"></text>
+        <view class="nav_name">购物车</view>
+    </view>
+    <view class="add_cart goods_buy">加入购物车</view>
+    <view class="now_buy goods_buy" bindtap="bindnowbuy">立即购买</view>
+</view>

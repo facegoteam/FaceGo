@@ -1,0 +1,145 @@
+/*在使用的Wxss中引入WxParse.css,可以在app.wxss*/
+@import "/wxParse/wxParse.wxss";
+
+page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+/* 直接设置swiper属性 */
+swiper {
+  /* height: 500rpx; */
+    height: 600rpx;
+    background: #F3F4F6;
+    text-align: center;  
+}
+swiper-item image {
+  width: 80%;
+  height: 100%;
+}
+/**图文详情 浮层**/
+.tab-bar-detail{
+  width: 75rpx;
+  height: 75rpx;
+  background-color: #fff;
+  border-radius:25px;
+  position: fixed;  
+  z-index: 2;
+  right: 4%;
+  top:500rpx;
+  border:1rpx solid #F3F4F6; 
+  line-height:25rpx; 
+  text-align: center;  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.tab-bar-detail text{
+  font-size: 22rpx;
+  color: #e80080;
+}
+/**商品价格**/
+.product-price-wrap{
+  display: flex;
+  justify-content:space-between;/**两边对齐**/
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin:5px 5px;
+  height: 100%;
+   /* border:1rpx solid red;   */
+}
+ .product-price-wrap .product-price-new{
+  color: #e80080;
+  font-weight:400;
+  font-size: 24px;
+
+}
+.product-price-wrap .product-price-old{
+  color: #888;
+  text-decoration: line-through;
+  padding-left: 5px;
+  font-size: 14px;
+  line-height:30px;
+  font-weight:300;
+
+}
+.product-price-wrap .discount{
+  margin: 5px 5px;
+  background-color: #000;
+  color: #fff;
+  /* height: 100%;*/
+   height: 18px;
+  font-size: 14px;
+  border-radius:2px;
+  
+} 
+.product-price-wrap image{
+  width:40rpx;
+  height: 40rpx;
+  margin: 5px 5px; 
+}
+.product-name-wrap{
+  
+  margin: 0px 10px;
+   /* border:1rpx solid red;  */
+}
+.product-name-wrap text{
+  font-size: 14px;
+  font-weight:400;
+ /*line-height: .48rem;*/
+  height: 100%;
+  color: #404040;
+}
+
+.details{
+   padding: 0px 5px 0 5px; 
+}
+.detail {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15rpx;
+  margin-bottom: 0rpx;
+}
+
+/*底部导航*/
+.footer_nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    height: 96rpx;
+    background: white;
+    border-top: 2rpx solid #f3f3f3;
+}
+.nav_list {
+    width: 14%;
+    text-align: center;
+    height: 90rpx;
+    line-height: 1.4;
+    margin-top: 4rpx;
+}
+.nav_list .iconfont {
+    font-size: 40rpx;
+}
+.nav_name {
+    font-size: 24rpx;
+    color: #7d7d7d;
+}
+.goods_buy {
+    width: 29%;
+    text-align: center;
+    height: 96rpx;
+    line-height: 96rpx;
+    color: white;
+    font-size: 30rpx;
+}
+.add_cart {
+    background: #222222;
+}
+.now_buy {
+    background: #ad0e12;
+}
+
+
+
