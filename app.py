@@ -90,6 +90,33 @@ def customer_recommend():
 def customer_records():
     return render_template('customer/customer_records.html')
 
+@app.route('/cashier')
+def cashier():
+    return "cashier main page"
+
+@app.route('/cashier_add_goods')
+def cashier_add_goods():
+    return render_template('cashier/cashier_add_goods.html')
+
+@app.route('/cashier_goods_details')
+def cashier_goods_details():
+    return render_template('cashier/cashier_goods_details.html')
+
+@app.route('/cashier_goods_details/change', methods=['GET', 'POST'])
+def cashier_goods_change():
+    form = request.form
+    if form['submit']:
+        #保存商品信息修改
+        pass
+    else:
+        #提示是否保存修改
+        pass
+
+@app.route('/cashier_management')
+def cashier_management():
+    return render_template('cashier/cashier_management.html')
+
+
 if __name__ == '__main__':
 
     app.run()
