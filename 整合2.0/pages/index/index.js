@@ -10,6 +10,10 @@ Page({
   onLoad: function () {
 
   },
+  // 方法名/类名：login（）
+  // 创建时间：8/20
+  // 作者：李若涵
+  // 简要说明：登陆功能实现
 
   login: function () {
     var that = this
@@ -28,7 +32,7 @@ Page({
         });
         wx.uploadFile({
           //上传照片和脸集中的照片对比并得出结果
-          url: 'http://10.203.228.34:8001/face_upload', //对比人脸接口
+          url: 'https://facego.chinaeast.cloudapp.chinacloudapi.cn/face_upload', //对比人脸接口
           filePath: that.data.src,//上传相机拍照得到照片的地址
           name: 'file_obj',
           header: {
@@ -98,7 +102,7 @@ Page({
                       //进入下一个界面
                       wx.uploadFile({
                         //上传照片和脸集中的照片对比并得出结果
-                        url: 'http://10.203.228.34:8001/register', //对比人脸接口
+                        url: 'https://facego.chinaeast.cloudapp.chinacloudapi.cn/register', //对比人脸接口
 
                         filePath: that.data.src,//上传相机拍照得到照片的地址
                         name: 'file_obj',

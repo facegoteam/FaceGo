@@ -8,64 +8,10 @@ Page({
 
   },
 
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-      
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
+  // 方法名/类名：aboutUs（）
+  // 创建时间：8/21
+  // 作者：李若涵
+  // 简要说明：关于我们
   aboutUs: function () {
     wx.showModal({
       title: '关于我们',
@@ -74,6 +20,10 @@ Page({
     })
   },
 
+  // 方法名/类名：loginOut（）
+  // 创建时间：8/21
+  // 作者：李若涵
+  // 简要说明：退出登录
   loginOut: function () {
     wx.redirectTo({
       url: '../index/index',

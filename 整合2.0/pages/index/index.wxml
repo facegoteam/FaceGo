@@ -1,4 +1,9 @@
-<!--index.wxml-->
+<!--
+文件名：index.wxml
+创建时间：8/20
+作者：李若涵
+简要说明：人脸识别登陆主页
+-->
 <view class="container">
 <camera device-position="front" flash="off" binderror="error" style="width: 100%; height: 300px;"></camera>
 <view class="test">

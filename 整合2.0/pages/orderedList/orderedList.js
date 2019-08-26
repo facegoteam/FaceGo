@@ -10,6 +10,10 @@ Page({
 
   onLoad: function () {
 
+    // 方法名/类名：wx.request()
+    // 创建时间：8/22
+    // 作者：李若涵
+    // 简要说明：向服务器请求获取购买记录
     wx.request({
       url: '服务器接口',//接口
       method: 'post',

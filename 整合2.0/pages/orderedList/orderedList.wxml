@@ -1,5 +1,9 @@
-<!--pages/orderedList/orderedList.wxml-->
-
+<!--
+文件名：orderedList.wxml
+创建时间：8/22
+作者：李若涵
+简要说明：购买记录主页
+-->
 <view class="table">
   <view class="tr bg-w">
     <view class="thwide">商品名称</view>

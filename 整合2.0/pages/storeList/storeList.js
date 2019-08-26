@@ -9,7 +9,10 @@ Page({
   },
 
   onLoad: function () {
-
+    // 方法名/类名：wx.request（）
+    // 创建时间：8/21
+    // 作者：李若涵
+    // 简要说明：请求获取商店列表
     wx.request({
       url: '服务器接口',//接口
       method: 'post',

@@ -1,5 +1,9 @@
-<!--pages/orderedList/orderedList.wxml-->
-
+<!--
+文件名：storeList.wxml
+创建时间：8/21
+作者：李若涵
+简要说明：商店列表
+-->
 <view class="table">
   <view class="tr bg-w">
     <view class="th">门店名称</view>
