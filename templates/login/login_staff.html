@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 
-姜子玥 2019/8/25 17:11:48
 <!--
 文件名：login_staff
 创建时间：2019-08-23
@@ -23,11 +22,12 @@
         <div class="p-5 col-lg-6">
           <h1 ><font face="黑体"><strong>Staff&nbsp; &nbsp; Login</strong></font></h1>
           <p class="mb-3">please&nbsp; input&nbsp; your&nbsp; staff&nbsp; id&nbsp; and&nbsp; password&nbsp; before&nbsp; login&nbsp;</p>
-          <form>
+          <form id="form">
             <div class="form-group"> <input type="text" class="form-control" placeholder="staff id" id="id"> </div>
             <div class="form-group"> <input type="password" class="form-control" placeholder="Password" id="pwd"> <small class="form-text text-muted text-right">
-              </small> </div> <button type="submit" class="btn btn-primary">login</button>
+              </small> </div>
           </form>
+            <button type="button" class="btn btn-primary" onclick="submitForm()">login</button>
         </div>
       </div>
     </div>
@@ -67,5 +67,32 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
  </body>
-
+    <script src="/static/js/jquery.js"></script>
+    <script>
+        function submitForm() {
+            var form = document.getElementById("form");
+            var id = document.getElementById('id').value;
+            var pwd = document.getElementById('pwd').value;
+            console.log(id);
+            console.log(pwd);
+            $.ajax({
+                url: '/staff_login',
+                data: {'id': id, 'pwd': pwd},
+                type: 'post',
+                success: function (data) {
+                    console.log(data);
+                    console.log(typeof(data))
+                    if(data == "fail"){
+                        alert('登录失败');
+                    }else {
+                        alert('登录成功');
+                        location.assign('/' + data);
+                    }
+                },
+                error: function () {
+                    alert('登录失败')
+                }
+            });
+        }
+    </script>
 </html>
