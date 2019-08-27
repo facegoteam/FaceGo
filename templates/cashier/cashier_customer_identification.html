@@ -1,0 +1,63 @@
+<!--
+文件名：customer_identification
+创建时间：2019-08-27
+作者：陈雨琦
+说明：收银员进行用户识别
+修改日期：2019-08-2
+-->
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
+</head>
+
+<body>
+  <div class="py-5 text-center align-items-center d-flex text-white" style="background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(&quot;https://static.pingendo.com/cover-bubble-dark.svg&quot;); background-position: center center, center center; background-size: cover, cover; background-repeat: repeat, repeat;">
+    <div class="container py-5">
+      <div class="row pb-5">
+        <div class="mx-auto col-lg-8 col-md-10">
+          <h1>Face&nbsp; the&nbsp; camera&nbsp; and&nbsp; click the button</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="mx-auto col-lg-8 col-md-10">
+          <div id="contentHolder" align="center">
+            <video id="video" width="600" height="600" autoplay="">
+              <ideo>
+                <canvas style="display:none;" id="canvas" width="300" height="300"></canvas>
+              </ideo>
+            </video></div>
+        </div>
+        <div class="row pt-0">
+          <div class="mx-auto col-lg-8 col-md-10" id="btn_snap">
+            <a href="#" class="btn btn-lg mx-1 btn-light">
+              <font face="黑体">OK</font>
+            </a>
+          </div>
+        </div>
+        <div class="row pt-0">
+          <div class="mx-auto col-lg-8 col-md-10" id="btn_snap">
+            <a href="javascript:history.go(-1)" class="btn btn-lg mx-1 btn-light">
+              <font face="黑体">BACK</font>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous" style=""></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
+    <script src="/static/js/jquery.js"></script>
+    <script type="text/javascript">
+
+    </script>
+  </div>
+</body>
+
+</html>

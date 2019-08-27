@@ -1,9 +1,9 @@
 <!--
-文件名：cashier_goods_details
-创建时间：2019-08-24
+文件名：order
+创建时间：2019-08-2
 作者：陈雨琦
-说明：web管理员/收银员页面的商品管理商品列表，可以点击操作来跳转到changeMessage页面，可以点击增加跳转到addGoods页面
-修改日期：2019-08-25
+说明：收银员查看订单列表
+修改日期：2019-08-27
 -->
 
 <!DOCTYPE html>
@@ -22,10 +22,10 @@
       <div class="row">
         <div class="col-md-12">
           <div class="btn-group">
-            <a href="/cashier" class="btn btn-dark"><i class="fa fa-database" aria-hidden="true"></i>&nbsp;商品管理</a>
+            <a href="/cashier" class="btn btn-outline-dark"><i class="fa fa-database" aria-hidden="true"></i>&nbsp;商品管理</a>
             <a href="/cashier_customer_identification" class="btn btn-outline-dark" style=""><i class="fa fa-id-badge" aria-hidden="true"></i> 识别用户</a>
-            <a href="/cashier_order" class="btn btn-outline-dark" ><i class="fa fa-commenting-o" aria-hidden="true"></i> 查看订单</a>
-            <a href="/staff_logout" class="btn btn-outline-dark"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; 登出&nbsp; &nbsp;</a>
+              <a href="/cashier_order" class="btn btn-dark"><i class="fa fa-commenting-o" aria-hidden="true"></i> 查看订单</a>
+              <a href="/staff_logout" class="btn btn-outline-dark"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; 登出&nbsp; &nbsp;</a>
           </div>
         </div>
       </div>
@@ -40,11 +40,9 @@
               <thead class="thead-dark">
                 <tr>
                   <th>#</th>
-                  <th>图片</th>
-                  <th>商品名称</th>
-                  <th>价格</th>
-                  <th>商品类别</th>
-                  <th contenteditable="true">库存</th>
+                  <th>单号</th>
+                  <th>下单时间</th>
+                  <th>备注</th>
                   <th contenteditable="true">操作&nbsp;</th>
                 </tr>
               </thead>
@@ -53,50 +51,40 @@
                   <th>1</th>
                   <td>Mark</td>
                   <td>Otto</td>
-                  <td>Otto</td>
-                  <td>Otto</td>
                   <td class="">Otto</td>
-                  <td><a class="btn btn-link" href="/staff_goods_details">Link</a></td>
+                  <td><a class="btn btn-link" href="#">查看</a></td>
                 </tr>
                 <tr>
                   <th>2</th>
                   <td>Jacob</td>
                   <td>Thornton</td>
                   <td>Thornton</td>
-                  <td>Thornton</td>
-                  <td>Thornton</td>
-                  <td><a class="btn btn-link" href="/staff_goods_details">Link</a></td>
+                  <td><a class="btn btn-link" href="#">Link</a></td>
                 </tr>
                 <tr>
                   <th scope="row">3</th>
                   <td style="">Larry</td>
                   <td>the Bird</td>
                   <td>the Bird</td>
-                  <td>the Bird</td>
-                  <td>the Bird</td>
-                  <td><a class="btn btn-link" href="/staff_goods_details">Link</a></td>
+                  <td><a class="btn btn-link" href="#">Link</a></td>
                 </tr>
                 <tr>
                   <th scope="row">4</th>
                   <td style="">Larry</td>
                   <td>the Bird</td>
                   <td>the Bird</td>
-                  <td>the Bird</td>
-                  <td>the Bird</td>
-                  <td><a class="btn btn-link" href="/staff_goods_details">Link</a></td>
+                  <td><a class="btn btn-link" href="#">Link</a></td>
                 </tr>
                 <tr>
                   <th scope="row">5</th>
                   <td style="">Larry</td>
                   <td>the Bird</td>
                   <td>the Bird</td>
-                  <td>the Bird</td>
-                  <td>the Bird</td>
-                  <td><a class="btn btn-link" href="/staff_goods_details">Link</a></td>
+                  <td><a class="btn btn-link" href="#">Link</a></td>
                 </tr>
               </tbody>
             </table>
-          </div><a class="btn btn-link text-primary" href="/staff_add_goods"><i class="fa fa-plus" aria-hidden="true"></i> 添加商品</a>
+          </div>
         </div>
       </div>
     </div>
@@ -118,7 +106,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </div>
-  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
 </body>
 
 </html>

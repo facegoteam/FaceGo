@@ -301,6 +301,7 @@ def customer_recommend():
 def customer_records():
     return render_template('customer/customer_records.html')
 
+
 '''
 方法名称：login_staff_test
 作者：姜子玥
@@ -351,82 +352,6 @@ def staff_logout():
 
 
 '''
-函数名：cashier_add_goods
-创建时间：2019-08-25
-作者：黄文政
-说明：收银员增加商品页面
-修改日期：2019-08-25
-'''
-@app.route('/cashier_add_goods')
-@login_required
-def cashier_add_goods():
-    return render_template('cashier/cashier_add_goods.html')
-
-
-'''
-函数名：cashier_goods_details
-创建时间：2019-08-25
-作者：黄文政
-说明：收银员修改商品详情页面
-修改日期：2019-08-25
-'''
-@app.route('/cashier_goods_details')
-@login_required
-def cashier_goods_details():
-    return render_template('cashier/cashier_goods_details.html')
-
-
-'''
-函数名：cashier_goods_add
-创建时间：2019-08-25
-作者：黄文政
-说明：收银员增加商品页面
-修改日期：2019-08-25
-'''
-@app.route('/cashier_goods_details_add', methods=['GET', 'POST'])
-@login_required
-def cashier_goods_add():
-    form = request.form
-    print(form)
-    try:
-        if form['add']:
-            #保存商品信息修改
-            return render_template('cashier/cashier_management.html', result="success")
-        else:
-            #提示是否保存修改
-            return render_template('cashier/cashier_management.html')
-    except:
-        return render_template('cashier/cashier_management.html')
-    finally:
-        return render_template('cashier/cashier_management.html')
-
-
-'''
-函数名：cashier_goods_change
-创建时间：2019-08-25
-作者：黄文政
-说明：收银员增加商品请求
-修改日期：2019-08-25
-'''
-@app.route('/cashier_goods_details_change', methods=['GET', 'POST'])
-@login_required
-def cashier_goods_change():
-    form = request.form
-    print(form)
-    try:
-        if form['add']:
-            #保存商品信息修改
-            return render_template('cashier/cashier_management.html', result="success")
-        else:
-            #提示是否保存修改
-            return render_template('cashier/cashier_management.html')
-    except:
-        return render_template('cashier/cashier_management.html')
-    finally:
-        render_template('cashier/cashier_management.html')
-
-
-'''
 函数名：cashier_management
 创建时间：2019-08-25
 作者：黄文政
@@ -437,6 +362,97 @@ def cashier_goods_change():
 @login_required
 def cashier_management():
     return render_template('cashier/cashier_management.html')
+
+
+'''
+函数名：cashier_order
+创建时间：2019-08-27
+作者：黄文政
+说明：收银员查看订单界面
+修改日期：2019-08-27
+'''
+@app.route('/cashier_order')
+@login_required
+def cashier_order():
+    return render_template('cashier/cashier_order.html')
+
+
+'''
+函数名：cashier_order_details
+创建时间：2019-08-27
+作者：黄文政
+说明：收银员查看某具体订单界面
+修改日期：2019-08-27
+'''
+@app.route('/cashier_order_details')
+@login_required
+def cashier_order_details():
+    return render_template('cashier/cashier_order_details.html')
+
+
+'''
+函数名：cashier_customer_identification
+创建时间：2019-08-27
+作者：黄文政
+说明：收银员查看某具体订单界面
+修改日期：2019-08-27
+'''
+@app.route('/cashier_customer_identification')
+@login_required
+def cashier_customer_identification():
+    return render_template('cashier/cashier_customer_identification.html')
+
+
+'''
+函数名：staff_add_goods
+创建时间：2019-08-25
+作者：黄文政
+说明：staff增加商品页面
+修改日期：2019-08-27
+'''
+@app.route('/staff_add_goods')
+@login_required
+def staff_add_goods():
+    return render_template('cashier/staff_add_goods.html')
+
+
+'''
+函数名：staff_goods_details
+创建时间：2019-08-25
+作者：黄文政
+说明：staff修改商品详情页面
+修改日期：2019-08-27
+'''
+@app.route('/staff_goods_details')
+@login_required
+def staff_goods_details():
+    return render_template('cashier/staff_goods_details.html')
+
+
+# '''
+# 函数名：cashier_goods_add
+# 创建时间：2019-08-25
+# 作者：黄文政
+# 说明：收银员增加商品页面
+# 修改日期：2019-08-25
+# '''
+# @app.route('/cashier_goods_details_add', methods=['GET', 'POST'])
+# @login_required
+# def cashier_goods_add():
+#     form = request.form
+#     print(form)
+#     try:
+#         if form['add']:
+#             #保存商品信息修改
+#             return render_template('cashier/cashier_management.html', result="success")
+#         else:
+#             #提示是否保存修改
+#             return render_template('cashier/cashier_management.html')
+#     except:
+#         return render_template('cashier/cashier_management.html')
+#     finally:
+#         return render_template('cashier/cashier_management.html')
+
 
 
 '''
@@ -466,6 +482,19 @@ def admin_record():
 
 
 '''
+函数名：admin_shop_management
+创建时间：2019-08-27
+作者：黄文政
+说明：管理员-门店管理a
+修改日期：2019-08-27
+'''
+@app.route('/admin_shop_management')
+@login_required
+def admin_shop_management():
+    return render_template('admin/admin_shop_management.html')
+
+
+'''
 函数名：admin_staff_management
 创建时间：2019-08-27
 作者：黄文政
@@ -478,7 +507,30 @@ def admin_staff_management():
     return render_template('admin/admin_staff_management.html')
 
 
+'''
+函数名：consumption_statics
+创建时间：2019-08-27
+作者：黄文政
+说明：管理员-收银员管理
+修改日期：2019-08-27
+'''
+@app.route('/consumption_statics')
+@login_required
+def consumption_statics():
+    return render_template('admin/consumption_statics.html')
 
+
+'''
+函数名：shop_details
+创建时间：2019-08-27
+作者：黄文政
+说明：管理员-查看某具体商店详情
+修改日期：2019-08-27
+'''
+@app.route('/shop_details')
+@login_required
+def shop_details():
+    return render_template('admin/shop_details.html')
 
 
 
