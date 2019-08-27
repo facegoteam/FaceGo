@@ -43,7 +43,7 @@ class Goods(db.Model):
     #字段
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, unique=True)
     goods_name = db.Column(db.String(50), unique=True)
-    goods_type = db.Column(db.String(50), unique=True)
+    goods_type = db.Column(db.String(50))
     goods_count = db.Column(db.Integer)
     goods_price = db.Column(db.Float)
     goods_imag = db.Column(db.String(50))
@@ -75,10 +75,8 @@ class Records(db.Model):
     __tablename__ = 'records'
     #字段
     id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
-
     record_goods_count = db.Column(db.Integer())
     record_goods_time = db.Column(db.DateTime)
-    record_goods_price = db.Column(db.Float)
     face_token = db.Column(db.String(50))
     shop_id = db.Column(db.Integer)
     record_goods_id = db.Column(db.Integer)
@@ -95,7 +93,7 @@ class Cart(db.Model):
 
     #字段
     id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
-    goods_id = db.Column(db.Integer, db.ForeignKey('goods.id'))
+    goods_id = db.Column(db.Integer)
     goods_count = db.Column(db.Integer)
     face_token = db.Column(db.String(50))
 
@@ -107,9 +105,11 @@ class Orders(db.Model):
     __tablename__ = 'orders'
 
     id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
-    goods_id = db.Column(db.Integer, db.ForeignKey('goods.id'))
+    goods_id = db.Column(db.Integer)
     shop_id = db.Column(db.String(50))
     goods_count = db.Column(db.Integer)
     record_time = db.Column(db.DateTime)
     face_token = db.Column(db.String(50))
+
+db.create_all()
 

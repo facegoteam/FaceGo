@@ -69,14 +69,16 @@
     <div class="container">
       <div class="row">
         <div class="mx-auto col-lg-12 p-0">
-          <form action="/cashier_goods_details_add">
+          <form>
             <div class="form-row">
               <div class="form-group col-md-4"> </div>
               <div class="form-group col-md-4"> </div>
               <div class="form-group col-md-4"> </div>
             </div>
             <div class="form-group"> </div>
-            <div class="form-group"> </div> <button type="submit" class="btn btn-primary mx-3" value="add">add</button><button type="submit" class="btn btn-primary mx-3" value="back">back</button>
+            <div class="form-group"> </div> 
+              <button type="submit" class="btn btn-primary mx-3" value="add" onclick="add()">add</button>
+              <button type="submit" class="btn btn-primary mx-3" value="back" onclick="back()">back</button>
           </form>
         </div>
       </div>
@@ -87,5 +89,17 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
   <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
 </body>
+    <script>
+        function add() {
+            
+        }
+        function back() {
+            if (confirm('确定不保存吗？')){
+                location.assign('/cashier')
+            } else {
+                
+            }
+        }
+    </script>
 
 </html>

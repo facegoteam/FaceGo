@@ -22,12 +22,13 @@ def login_required(func):
     def inner(*args, **kwargs):
         # 从session获取用户信息，如果有，则用户已登录，否则没有登录
         face_token = session.get('face_token')
+        print('修饰器函数：')
         print("session face_token:", face_token)
         staff_id = session.get('staff_id')
         print("staff_id:", staff_id)
         if (not face_token) and (not staff_id):
             # WITHOUT_LOGIN是一个常量
-            print(url_for('login', _external=True))
+            # print(url_for('login', _external=True))
             return redirect(url_for('login', _external=True))
         else:
             return func(*args, **kwargs)
@@ -44,6 +45,12 @@ def login_required(func):
 '''
 @app.route('/login_customer')
 def login_customer():
+    # 如果有'staff_id'的session，则删除
+    keys = session.keys()
+    for k in keys:
+        if k == 'face_token':
+            session.pop('face_token')
+            break
     return render_template('login/login_customer.html')
 
 
@@ -72,12 +79,13 @@ def face_upload():
     # print(request.json)
     if request.method == 'POST':
         img = request.files.get('file_obj')
-        # path = './1.jpg'
+        path = './1.jpg'
+        # img.save(path)
         # # django 提供的chunks方法
-        # from django.core.files.uploadedfile import InMemoryUploadedFile
+        # # from django.core.files.uploadedfile import InMemoryUploadedFile
         # with open(path, 'wb') as f:
-        #     for chunk in img.chunks():
-        #         f.write(chunk)
+        #     f.write(img)
+
         url = 'https://api-cn.faceplusplus.com/facepp/v3/search'
         data = {
             'api_key': '7ryNXfh6Oa9uUjQnx5DxFChpua57NDCv',
@@ -89,16 +97,17 @@ def face_upload():
         print('faceupload:' + res_str)
         data = response.json()
         if len(data['faces']) != 0:
-            print('confidence:' + str(data['results'][0]['confidence']))
+            # print('confidence:' + str(data['results'][0]['confidence']))
             if data['results'][0]['confidence'] > 80:
-                session['face_token'] = data['faces'][0]['face_token']
+                session['face_token'] = data['results'][0]['face_token']
+                print(session['face_token'])
                 # 如果有'staff_id'的session，则删除
                 keys = session.keys()
                 for k in keys:
                     if k == 'staff_id':
                         session.pop('staff_id')
                         break
-        print('search:'+res_str)
+        # print('search:'+res_str)
         return res_str
     else:
         return "无图片"
@@ -168,6 +177,106 @@ def customer_logout():
 
 
 '''
+函数名：customer_ask_for_record
+创建时间：2019-08-27
+作者：黄文政
+说明：顾客查看消费记录
+修改日期：2019-08-27
+'''
+@app.route('/customer_ask_for_record', methods=['POST', 'GET'])
+def customer_ask_for_record():
+    face_token = ""
+    if request.method == 'POST':
+        identity = request.form['identity']
+        # print(identity)
+        if identity == 'web':
+            face_token = session['face_token']
+        elif identity == 'wx':
+            face_token = request.form['face_token']
+        # face_token = '29f2e2a4a2c61f8c5f2abec835b96e4b'
+        # 返回图片，名称，单价，数量，购买日期
+    else:
+        face_token = '0ae83ffd1cabed5275dc437ab851f91d'
+    print(face_token)
+    result = []
+    for each in Records.query.filter(Records.face_token == face_token).all():
+        goods_id = each.record_goods_id
+        good = Goods.query.filter(Goods.id == goods_id).first()
+        img = good.goods_imag
+        name = good.goods_name
+        price = good.goods_price
+        count = each.record_goods_count
+        time = each.record_goods_time
+
+        item = {}
+        item['img'] = img
+        item['name'] = name
+        item['price'] = price
+        item['count'] = count
+        item['time'] = time.strftime('%Y-%m-%d %H:%M:%S')
+        result.append(item)
+
+    return json.dumps(result, ensure_ascii=False)
+
+
+
+'''
+函数名：customer_ask_for_good
+创建时间：2019-08-27
+作者：黄文政
+说明：顾客查看商品列表
+修改日期：2019-08-27
+'''
+@app.route('/customer_ask_for_good', methods=['GET', 'POST'])
+def customer_ask_for_good():
+    # 返回商品名称，商品价格，商品图片url
+    good_type = ""
+    if request.method == 'POST':
+        good_type = request.form['type']
+        print(good_type)
+    else:
+        good_type = '酒水饮乳'
+    result = []
+    for each in Goods.query.filter(Goods.goods_type == good_type).all():
+        name = each.goods_name
+        price = each.goods_price
+        img = each.goods_imag
+
+        item = {}
+        item['name'] = name
+        item['price'] = price
+        item['img'] = img
+
+        result.append(item)
+
+    # print(result)
+    return json.dumps(result, ensure_ascii=False)
+
+
+
+'''
+函数名：customer_ask_for_shop
+创建时间：2019-08-27
+作者：黄文政
+说明：顾客查看门店列表
+修改日期：2019-08-27
+'''
+@app.route('/customer_ask_for_shop', methods=['GET', 'POST'])
+def customer_ask_for_shop():
+    # 返回名称，地址，电话
+    result = []
+    for each in Shop.query.all():
+        name = each.shop_name
+        address = each.shop_address
+        phone = each.shop_phone
+
+        result.append({'name': name, 'address': address, 'phone': phone})
+
+    return json.dumps(result, ensure_ascii=False)
+
+
+
+'''
 函数名：customer_recommend
 创建时间：2019-08-25
 作者：黄文政
@@ -185,7 +294,7 @@ def customer_recommend():
 创建时间：2019-08-25
 作者：黄文政
 说明：顾客商品推荐界面
-修改日期：2019-08-25
+修改日期：2019-08-27
 '''
 @app.route('/customer_records')
 @login_required
@@ -205,7 +314,7 @@ def staff_login():
     user_pwd = request.form['pwd']
     # print(user_id)
     # print(user_pwd)
-    user = Staff.query.filter_by(staff_id=user_id).first()
+    user = Staff.query.filter(Staff.staff_id==user_id).first()
     # print(user)
     pwd = user.pwd
     if user is None:
@@ -367,6 +476,10 @@ def admin_record():
 @login_required
 def admin_staff_management():
     return render_template('admin/admin_staff_management.html')
+
+
+
+
 
 
 @app.route('/test/<test_id>')
