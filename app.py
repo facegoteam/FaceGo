@@ -92,8 +92,12 @@ def face_upload():
             print('confidence:' + str(data['results'][0]['confidence']))
             if data['results'][0]['confidence'] > 80:
                 session['face_token'] = data['faces'][0]['face_token']
-                if session['staff_id']:
-                    session.pop('staff_id')
+                # 如果有'staff_id'的session，则删除
+                keys = session.keys()
+                for k in keys:
+                    if k == 'staff_id':
+                        session.pop('staff_id')
+                        break
         print('search:'+res_str)
         return res_str
     else:
@@ -131,8 +135,12 @@ def register():
         }
         response = requests.post(url=url_addface, data=data_addface)
         session['face_token'] = face_token
-        if session['staff_id']:
-            session.pop('staff_id')
+        # 如果有'staff_id'的session，则删除
+        keys = session.keys()
+        for k in keys:
+            if k == 'staff_id':
+                session.pop('staff_id')
+                break
 
         return face_token
     else:
@@ -155,7 +163,7 @@ def customer():
 @app.route('/customer_logout')
 @login_required
 def customer_logout():
-    session['face_token'] = None
+    session.pop('face_token')
     return redirect(url_for('login'))
 
 
@@ -210,9 +218,27 @@ def staff_login():
         print("last")
         role = user.identity
         session['staff_id'] = user.staff_id
-        # if session['face_token']:
-        #     session.pop('face_token')
+
+        # 如果有'face_token'的session，则删除
+        keys = session.keys()
+        for k in keys:
+            if k == 'face_token':
+                session.pop('face_token')
+                break
         return role
+
+
+'''
+函数名：staff_logout
+创建时间：2019-08-27
+作者：黄文政
+说明：收银员或管理员退出，清除session
+修改日期：2019-08-27
+'''
+@app.route('/staff_logout')
+def staff_logout():
+    session.pop('staff_id')
+    return redirect(url_for('login'))
 
 
 '''
@@ -302,6 +328,46 @@ def cashier_goods_change():
 @login_required
 def cashier_management():
     return render_template('cashier/cashier_management.html')
+
+
+'''
+函数名：admin_goods_manage
+创建时间：2019-08-27
+作者：黄文政
+说明：管理员-商品管理界面
+修改日期：2019-08-27
+'''
+@app.route('/admin')
+@login_required
+def admin_goods_management():
+    return render_template('admin/admin_goods_management.html')
+
+
+'''
+函数名：admin_record
+创建时间：2019-08-27
+作者：黄文政
+说明：管理员-购买记录
+修改日期：2019-08-27
+'''
+@app.route('/admin_record')
+@login_required
+def admin_record():
+    return render_template('admin/admin_record.html')
+
+
+'''
+函数名：admin_staff_management
+创建时间：2019-08-27
+作者：黄文政
+说明：管理员-收银员管理
+修改日期：2019-08-27
+'''
+@app.route('/admin_staff_management')
+@login_required
+def admin_staff_management():
+    return render_template('admin/admin_staff_management.html')
+
 
 @app.route('/test/<test_id>')
 def test(test_id):
