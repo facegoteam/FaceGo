@@ -84,7 +84,7 @@
                             var goods_price=obj[i]['price'];
                             var goods_count=obj[i]['count'];
                             var time=obj[i]['time'];
-                            var link="/customer_ask_for_goods_info/"+goods_name;
+                            var link="/goods_info?name="+goods_name;
                             str+="<tr><th>"+(i+1).toString()+"</th><td><img src="+img_url+" style=\"height:30px\"></td><td>"+goods_name+"</td><td>"+goods_price+
                                 "</td><td>"+goods_count+"</td><td class=\"time\">"+time+"</td><td><a class=\"btn btn-link\" href="
                              +link+">查看详情</a></td></tr>";
