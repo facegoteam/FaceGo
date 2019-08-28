@@ -60,10 +60,15 @@
 -->
 <script src="/static/js/jquery.js"></script>
 <script>
+	function get_name(){
+		var url=document.location.toString();
+		var name = url.split('?')[1].split('=')[0];
+		return name;
+	}
 	function get_info(){
 		$ajax(
 		{
-		        url: '',
+		        url:"/customer_ask_for_goods_info/"+get_name(),
 		        data: {"identity":"web"},
 		        type: 'post',
 		        success: function (data) {
@@ -88,9 +93,8 @@
 		            alert("error!!!");
 		        }
 		    });
-			get_info();
 	}
-
+			get_info();
 
 </script>
 
