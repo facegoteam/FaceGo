@@ -29,6 +29,7 @@ def login_required(func):
         if (not face_token) and (not staff_id):
             # WITHOUT_LOGIN是一个常量
             # print(url_for('login', _external=True))
+            # return func(*args, **kwargs)
             return redirect(url_for('login', _external=True))
         else:
             return func(*args, **kwargs)
@@ -179,7 +180,12 @@ def customer():
 @app.route('/customer_logout')
 @login_required
 def customer_logout():
-    session.pop('face_token')
+    # 如果有'staff_id'的session，则删除
+    keys = session.keys()
+    for k in keys:
+        if k == 'staff_id':
+            session.pop('face_token')
+            break
     return redirect(url_for('login'))
 
 
@@ -242,7 +248,7 @@ def customer_ask_for_good():
         good_type = request.form['type']
         print(good_type)
     else:
-        good_type = '酒水饮乳'
+        good_type = '食品'
     result = []
     for each in Goods.query.filter(Goods.goods_type == good_type).all():
         name = each.goods_name
@@ -279,6 +285,31 @@ def customer_ask_for_shop():
 
         result.append({'name': name, 'address': address, 'phone': phone})
 
+    return json.dumps(result, ensure_ascii=False)
+
+
+'''
+函数名：customer_ask_for_goods_info
+创建时间：2019-08-27
+作者：黄文政
+说明：小程序顾客查看具体商品详情
+修改日期：2019-08-27
+'''
+@app.route('/customer_ask_for_goods_info/<name>', methods=['GET', 'POST'])
+def customer_ask_for_goods_info(name):
+    # 返回名称，价格，详情，库存
+    result = {}
+    good = Goods.query.filter( Goods.goods_name == name ).first()
+    price = good.goods_price
+    info = good.goods_info
+    stock = good.goods_count
+    img = good.goods_imag
+
+    result['name'] = name
+    result['price'] = price
+    result['info'] = info
+    result['stock'] = stock
+    result['img'] = img
     return json.dumps(result, ensure_ascii=False)
 
 
@@ -367,7 +398,11 @@ def staff_login():
 '''
 @app.route('/staff_logout')
 def staff_logout():
-    session.pop('staff_id')
+    # 如果有'staff_id'的session，则删除
+    keys = session.keys()
+    for k in keys:
+        if k == 'staff_id':
+            session.pop('staff_id')
     return redirect(url_for('login'))
 
 
