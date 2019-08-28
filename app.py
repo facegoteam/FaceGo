@@ -169,6 +169,13 @@ def customer():
     return render_template('customer/customer.html')
 
 
+'''
+函数名：customer
+创建时间：2019-08-25
+作者：黄文政
+说明：顾客登出
+修改日期：2019-08-25
+'''
 @app.route('/customer_logout')
 @login_required
 def customer_logout():
@@ -275,6 +282,19 @@ def customer_ask_for_shop():
     return json.dumps(result, ensure_ascii=False)
 
 
+'''
+函数名：goods_info
+创建时间：2019-08-27
+作者：黄文政
+说明：顾客查看商品详情
+修改日期：2019-08-27
+'''
+@app.route('/goods_info')
+@login_required
+def goods_info():
+    return render_template('customer/goods_info.html')
+
+
 
 '''
 函数名：customer_recommend
@@ -293,7 +313,7 @@ def customer_recommend():
 函数名：customer_records
 创建时间：2019-08-25
 作者：黄文政
-说明：顾客商品推荐界面
+说明：顾客购买记录
 修改日期：2019-08-27
 '''
 @app.route('/customer_records')
@@ -303,7 +323,7 @@ def customer_records():
 
 
 '''
-方法名称：login_staff_test
+方法名称：staff_login
 作者：姜子玥
 创建时间：2019-08-25
 说明：检测员工输入的密码与id是否符合,符合跳转到员工首页面，不符合弹出提示
