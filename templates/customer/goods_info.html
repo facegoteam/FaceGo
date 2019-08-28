@@ -18,8 +18,8 @@
   <div class="py-5" style="">
     <div class="container">
       <div class="row">
-        <div class="col-md-6">
-			<img class="img-fluid d-block" src="02.jpg" id="img" >
+        <div class="col-md-6" id = "img">
+			
 		</div>
         <div class="col-md-6" draggable="true" >
           <div class="row">
@@ -72,9 +72,10 @@
 		        data: {"identity":"web"},
 		        type: 'post',
 		        success: function (data) {
-					#接受前端数据
+					//接受前端数据
 					var str="";
 					var st='';
+					var img_str="";
 					var obj = eval("("+data+")");
 					var goods_url=obj['img'];
 					var goods_name=obj['name'];
@@ -82,10 +83,11 @@
 					var goods_count=obj['stock'];
 					var info=obj['info'];
 					var goods_img=document.getElementById("img");
-					#显示界面
-					goods_img.src=goods_url;
+					//显示界面
+					img_str+="<img class=\"img-fluid d-block\" src=\""+goods_url+"\"  >";
 					str+="<h2 class=\"pb-5\"><font face=\"仿宋\"><font size=\"6\">商品名称："+goods_name+"</font></h2><h2 class=\"pb-5\"><font face=\"仿宋\"><font size=\"6\">商品价格："+goods_price+"</font></h2><h2 class=\"pb-5\"><font face=\"仿宋\"><font size=\"6\">商品库存："+goods_count+"</font></h2>";
 					st+="<h1 class=\"\">具体信息:"+info+"</h1>";
+					img.innerHTML=img_str;
 					info.innerHTML=str;
 					detail.innerHTML=st;
 		        },
@@ -94,7 +96,7 @@
 		        }
 		    });
 	}
-			get_info();
+	get_info();
 
 </script>
 
