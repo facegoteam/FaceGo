@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!--
+文件名：goods_info
+作者：姜子玥
+时间：2019-08-22
+说明：显示商品详情界面
+-->
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
+</head>
+
+<body>
+  <div class="py-5" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+			<img class="img-fluid d-block" src="02.jpg" id="img" >
+		</div>
+        <div class="col-md-6" draggable="true" >
+          <div class="row">
+            <div class="col-md-12" id='info'>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4" id='detail'>
+
+        </div>
+        <div class="col-md-8"></div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12"></div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+<!--
+方法名：get_info
+作者：姜子玥
+创建时间：2019-08-27
+说明：动态渲染商品详情界面
+-->
+<script src="/static/js/jquery.js"></script>
+<script>
+	function get_info(){
+		$ajax(
+		{
+		        url: '',
+		        data: {"identity":"web"},
+		        type: 'post',
+		        success: function (data) {
+					#接受前端数据
+					var str="";
+					var st='';
+					var obj = eval("("+data+")");
+					var goods_url=obj['img'];
+					var goods_name=obj['goods_name'];
+					var goods_price=obj['goods_price'];
+					var goods_count=obj['goods_count'];
+					var info=obj['info'];
+					var goods_img=document.getElementById("img");
+					#显示界面
+					goods_img.src=goods_img;
+					str+="<h2 class=\"pb-5\"><font face=\"仿宋\"><font size=\"6\">商品名称："+goods_name+"</font></h2><h2 class=\"pb-5\"><font face=\"仿宋\"><font size=\"6\">商品价格："+goods_price+"</font></h2><h2 class=\"pb-5\"><font face=\"仿宋\"><font size=\"6\">商品库存："+goods_count+"</font></h2>";
+					st+="<h1 class=\"\">具体信息:"+info+"</h1>";
+					info.innerHTML=str;
+					detail.innerHTML=st;
+		        },
+		        error: function () {
+		            alert("error!!!");
+		        }
+		    });
+			get_info();
+	}
+
+
+</script>
+
+</html>
