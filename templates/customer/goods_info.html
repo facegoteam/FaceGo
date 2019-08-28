@@ -72,13 +72,13 @@
 					var st='';
 					var obj = eval("("+data+")");
 					var goods_url=obj['img'];
-					var goods_name=obj['goods_name'];
-					var goods_price=obj['goods_price'];
-					var goods_count=obj['goods_count'];
+					var goods_name=obj['name'];
+					var goods_price=obj['price'];
+					var goods_count=obj['stock'];
 					var info=obj['info'];
 					var goods_img=document.getElementById("img");
 					#显示界面
-					goods_img.src=goods_img;
+					goods_img.src=goods_url;
 					str+="<h2 class=\"pb-5\"><font face=\"仿宋\"><font size=\"6\">商品名称："+goods_name+"</font></h2><h2 class=\"pb-5\"><font face=\"仿宋\"><font size=\"6\">商品价格："+goods_price+"</font></h2><h2 class=\"pb-5\"><font face=\"仿宋\"><font size=\"6\">商品库存："+goods_count+"</font></h2>";
 					st+="<h1 class=\"\">具体信息:"+info+"</h1>";
 					info.innerHTML=str;
