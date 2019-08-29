@@ -1,0 +1,37 @@
+ <van-search value="{{ value }}" placeholder="请输入搜索关键词" />
+<view class="VerticalBox">
+  <!-- 左栏滑动 -->
+  <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" >
+    <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{list}}" wx:key bindtap='tabSelect' data-id="{{index}}">
+      {{item.name}}
+    </view>
+  </scroll-view>
+
+  <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 0rpx)" scroll-into-view="main-{{MainCur}}" bindscroll="VerticalMain">
+    <view class="padding-top padding-lr" wx:for="{{list}}" wx:key id="main-{{index}}">
+      <view class='cu-bar solid-bottom bg-white'>
+        <view class='action'>
+          <text class='cuIcon-title text-green'></text> {{item.name}} </view>
+      </view>
+      <view class="cu-list menu-avatar">
+
+      <block wx:for="{{item.listdata}}" wx:for-item="listitem" wx:key="id">
+        <view class="cu-item cur">
+          <view class="cu-avatar radius lg" style="background-image:url(http://10.203.220.224:8001{{listitem.img}});">
+          </view>
+          <view class="content">
+            <view>
+              <text class="text-cut">{{listitem.name}}</text>
+            </view>
+          </view>
+          <view class="action">
+            <view class="text-grey text-df">{{listitem.price}}元</view>
+          </view>
+        </view>
+      </block> 
+      </view>
+
+
+    </view>
+  </scroll-view>
+</view>

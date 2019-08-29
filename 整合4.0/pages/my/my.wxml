@@ -1,0 +1,35 @@
+<!--
+文件名：my.wxml
+创建时间：8/21
+作者：李若涵
+简要说明：我的 主页
+-->
+  <view class="container1">
+    <view style="height:10rpx;background: #eee;width:100%;"></view>
+    
+    <view class="my-item111">
+      <navigator url="/pages/orderedList/orderedList" hover-class="navigator-hover">购买记录</navigator>
+    </view>
+    <view class="my-item111">
+      <navigator url="/pages/analysis/analysis" hover-class="navigator-hover">消费分析</navigator>
+    </view>  
+    <!-- <view class="my-item">
+      <navigator url="/pages/favorites/favorites" hover-class="navigator-hover">收藏夹</navigator>
+    </view> -->
+    <view class="my-item111">
+      <navigator url="/pages/storeList/storeList" hover-class="navigator-hover">门店列表</navigator>
+    </view>
+
+
+    <view style="height:20rpx;background: #eee;width:100%;"></view>
+    <view class="my-item111" bindtap="aboutUs">
+      关于我们
+    </view>
+    <view class="my-item111" bindtap="loginOut" style="color:red;font-weight:bold;">
+      退出登录
+    </view>
+
+    <view style="height:20rpx;background: #eee;width:100%;"></view>
+    <view class="version1">Powered by Facego Team v1.0</view>
+    <view style="height:20rpx;background: #eee;width:100%;"></view>
+  </view>

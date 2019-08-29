@@ -1,0 +1,37 @@
+
+<!--要是够车内没有数据，就行显示没有数据-->
+<view class="cart" hidden="{{iscart}}">
+    <image src="/images/cart.png"/>
+    <view>购物车什么都没有，赶快去购物吧</view>
+</view>
+<!--要是有数据，就显示数据-->
+ <block wx:for-items="{{goodsItem}}" wx:key="name">
+<van-card data-typeid="{{item.id}}"
+  num="{{item.number}}"
+  tag="{{item.tagg}}"
+  price="{{item.price1}}"
+  desc="{{item.info}}"
+  title="{{item.title1}}"
+  thumb="{{item.imageURL}}"
+>  
+  <view slot="footer">
+   <van-dialog id="van-dialog" />
+   <van-button icon="arrow-up" type="default" size="mini" bind:click="click1" id="{{item.id}}"></van-button>
+   <van-button icon="arrow-down" type="default" size="mini" bind:click="click2" id="{{item.id}}"></van-button>
+    <van-button icon="star-o" type="primary" size="mini" bind:click="order" id="{{item.id}}">下单</van-button>
+    <van-button size="mini" bind:click="delete" id="{{item.id}}">删除</van-button>
+  </view>
+</van-card>
+</block>
+
+<van-submit-bar
+  price="{{ pirceAll }}"
+  button-text="提交订单"
+  bind:submit="onClickButton"
+  tip="{{ true }}"
+>
+  <van-tag type="primary">标签</van-tag>
+  <view slot="tip">
+    您的收货地址不支持同城送, <text>修改地址</text>
+  </view>
+</van-submit-bar>

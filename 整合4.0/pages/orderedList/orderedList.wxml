@@ -1,0 +1,28 @@
+<!--
+文件名：orderedList.wxml
+创建时间：8/22
+作者：李若涵
+简要说明：购买记录主页
+-->
+<view class="table">
+  <view class="tr bg-w">
+    <view class="thwide">商品名称</view>
+    <view class="th">数量</view>
+    <view class="th ">单价</view>
+    <view class="th ">购买日期</view>
+  </view>
+  <block wx:for="{{listData}}" wx:key="{{code}}">
+    <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+      <view class="tdwide">{{item.name}}</view>
+      <view class="td">{{item.number}}</view>
+      <view class="td">{{item.price}}</view>
+      <view class="td">{{item.date}}</view>
+    </view>
+    <view class="tr" wx:else>
+      <view class="tdwide">{{item.name}}</view>
+      <view class="td">{{item.number}}</view>
+      <view class="td">{{item.price}}</view>
+      <view class="td">{{item.date}}</view>
+    </view>
+  </block>
+</view>

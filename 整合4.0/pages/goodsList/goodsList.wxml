@@ -1,0 +1,32 @@
+<!--主盒子-->
+<view class="container">
+  <!--head-->
+  <view class="tit">
+    <view class="title_val">商品列表</view>
+    <view class="more">更多</view>
+  </view>
+  <!--list-->
+  <view class="goodslist">
+    <!--item-->
+    <block wx:for="{{goodslist}}">
+      <view class="goods">
+        <!--左侧图片盒子-->
+        <view>
+          <image src="{{item.imgUrl}}" class="good-img" />
+        </view>
+        <!--右侧说明部分-->
+        <view class="good-cont">
+          <!--上--文字说明-->
+          <view class="goods-navigator">
+            <text class="good-name">{{item.name}}</text>
+          </view>
+          <!--下--价格部分-->
+          <view class="good-price">
+            <text>￥{{item.price}}</text>
+            <image id="{{item.id}}" class="cart" src="/images/new_73.jpg" bindtap="addcart" />
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
