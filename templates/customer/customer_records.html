@@ -3,7 +3,7 @@
 创建时间：2019-08-23
 作者：陈雨琦
 说明：web端用户的购买记录
-修改日期：2019-08-25
+修改日期：2019-09-1  修改人：姜子玥
 -->
 
 <!DOCTYPE html>
@@ -11,9 +11,10 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+		<link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
 </head>
 
 <body>
@@ -32,7 +33,7 @@
       </div>
     </div>
     <div class="pt-5" style="">
-      <div class="container">
+      <div class="container" id="record">
         <div class="row">
           <div class="col-md-12">
             <div class="table-responsive">
@@ -49,6 +50,15 @@
                   </tr>
                 </thead>
                   <tbody id="tbody">
+                  	<tr v-for="(item,index) in cloneTableDatas">
+										<td>{[ item.id ]}</td>
+										<td><img :src="item.img" style="height:30px"></td>
+										<td>{[ item.name ]}</td>
+										<td>{[ item.price]}</td>
+										<td>{[ item.count ]}</td>
+										<td>{[ item.time ]}</td>
+										<td><a class="btn btn-link" :href="item.link">查看详情</a></td>
+									  </tr>
                   </tbody>
               </table>
             </div>
@@ -56,47 +66,57 @@
         </div>
       </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script> &nbsp;&nbsp; <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
   </div>
 </body>
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
+	<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
 <!--	
 方法名：get_records
 作者：姜子玥
 创建时间：2019-08-27
 说明：动态渲染消费记录页面
+修改日期：2019-09-01
 -->
-  <script src="/static/js/jquery.js"></script>
-    <script>
-        function get_records(){
-            $.ajax({
-                    url: '/customer_ask_for_record',
-                    data: {"identity":"web"},
-                    type: 'post',
-                    success: function (data) {
-                        str="";
-                        var obj = eval("("+data+")");
-                        console.log(obj);
-                        for(var i=0;i<obj.length;i++){
-                            var img_url=obj[i]['img'];
-                            var goods_name = obj[i]['name'];
-                            var goods_price=obj[i]['price'];
-                            var goods_count=obj[i]['count'];
-                            var time=obj[i]['time'];
-                            var link="/goods_info?name="+goods_name;
-                            str+="<tr><th>"+(i+1).toString()+"</th><td><img src="+img_url+" style=\"height:30px\"></td><td>"+goods_name+"</td><td>"+goods_price+
-                                "</td><td>"+goods_count+"</td><td class=\"time\">"+time+"</td><td><a class=\"btn btn-link\" href="
-                             +link+">查看详情</a></td></tr>";
-                        }
-                        tbody.innerHTML=str;
-                    },
-                    error: function () {
-                        alert("no such records")
-                    }
-                });
-            }
-        get_records();
+  <script>
+    	var app=new Vue({
+    		delimiters: ['{[', ']}'],
+    		el: "#record",
+    		data:{
+    			records:[],
+    			cloneTableDatas:[],
+    			
+    		},
+    		created:function(){
+    			var _self=this;
+    			$.ajax({
+    				type:"get",
+    				url:"/customer_ask_for_record",
+    				async: false,
+    				dataType: "jsonp",
+					jsonp: "callback",
+					jsonpCallback: "successCallback",
+					success:function(data){
+						for(var i=0;i<data.length;i++){
+							_self.records[i]=data[i];
+							_self.records[i]["id"]=i+1;
+							_self.records[i]["img"]= 'http://' + document.location.host + data[i]["img"];
+							{#console.log(_self.records[i]["img"]);#}
+							_self.records[i]["link"]='http://'+ document.location.host +"/goods_info?name="+data[i]["name"];
+						}
+						_self.getShowData(_self.records);
+					},
+					error:function(){
+						alert("查询出错");
+					}
+    			});
+    		},
+    		methods:{
+    			getShowData:function(arr){
+    				this.cloneTableDatas=JSON.parse(JSON.stringify(arr));
+    			},
+    		}
+    	});
     </script>
 
 </html>

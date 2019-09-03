@@ -13,124 +13,458 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
 </head>
 
 <body>
-  <div class="py-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="btn-group">
-            <a href="/admin_staff_management" class="btn btn-outline-dark">
-              <i class="fa fa-id-card-o" aria-hidden="true"></i>
-              <font face="FontAwesome">&nbsp;员工管理</font>
-            </a>
-            <a href="/admin" class="btn btn-dark" style="">
-              <i class="fa fa-cube" aria-hidden="true"></i>
-              <font face="FontAwesome"> 商品管理</font>
-            </a><a href="/admin_shop_management" class="btn btn-outline-dark" style="">
-              <i class="fa fa-cube" aria-hidden="true"></i>
-              <font face="FontAwesome"> 门店管理</font>
-            </a>
-            <a href="/admin_record" class="btn btn-outline-dark"><i class="fa fa-database" aria-hidden="true"></i> 销售记录 </a>
-            <a href="/staff_logout" class="btn btn-outline-dark"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; 登出&nbsp;&nbsp;</a> </div>
-        </div>
-      </div>
-    </div>
-    <div class="pt-5" style="">
-      <div class="container">
-        <div class="" style="">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="table-responsive">
-                  <table class="table table-bordered ">
-                    <thead class="thead-dark">
-                      <tr>
-                        <th>#</th>
-                        <th>图片</th>
-                        <th>商品名称</th>
-                        <th>价格</th>
-                        <th>商品类别</th>
-                        <th contenteditable="true">库存</th>
-                        <th contenteditable="true">操作&nbsp;</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th>1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>Otto</td>
-                        <td>Otto</td>
-                        <td class="">Otto</td>
-                        <td><a class="btn btn-link" href="/staff_goods_details">Link</a></td>
-                      </tr>
-                      <tr>
-                        <th>2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>Thornton</td>
-                        <td>Thornton</td>
-                        <td>Thornton</td>
-                        <td><a class="btn btn-link" href="/staff_goods_details">Link</a></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td style="">Larry</td>
-                        <td>the Bird</td>
-                        <td>the Bird</td>
-                        <td>the Bird</td>
-                        <td>the Bird</td>
-                        <td><a class="btn btn-link" href="/staff_goods_details">Link</a></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">4</th>
-                        <td style="">Larry</td>
-                        <td>the Bird</td>
-                        <td>the Bird</td>
-                        <td>the Bird</td>
-                        <td>the Bird</td>
-                        <td><a class="btn btn-link" href="/staff_goods_details">Link</a></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">5</th>
-                        <td style="">Larry</td>
-                        <td>the Bird</td>
-                        <td>the Bird</td>
-                        <td>the Bird</td>
-                        <td>the Bird</td>
-                        <td><a class="btn btn-link" href="/staff_goods_details">Link</a></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div><a class="btn btn-link text-primary" href="/staff_add_goods"><i class="fa fa-plus" aria-hidden="true"></i> 添加商品</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row p-5">
-          <div class="col-md-4"></div>
-          <div class="col-md-4">
-            <ul class="pagination pagination-lg my-1 mx-2">
-              <li class="page-item"> <a class="page-link text-dark" href="#"> <span>«</span></a> </li>
-              <li class="page-item active border-dark"> <a class="page-link text-dark" href="#">1</a> </li>
-              <li class="page-item"> <a class="page-link text-dark" href="#">2</a> </li>
-              <li class="page-item"> <a class="page-link text-dark" href="#">3</a> </li>
-              <li class="page-item"> <a class="page-link text-dark" href="#">4</a> </li>
-              <li class="page-item"> <a class="page-link text-dark" href="#"> <span>»</span></a> </li>
-            </ul>
-          </div>
-          <div class="col-md-4"></div>
-        </div>
-      </div>
-     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
-     </div>
+		<div class="py-5">
+			<div class="container">
+                <div class="row">
+					<div class="col-md-12">
+						<div class="btn-group">
+							<a href="/admin_staff_management" class="btn btn-outline-dark">
+								<i class="fa fa-id-card-o" aria-hidden="true"></i>
+								<font face="FontAwesome">&nbsp;员工管理</font>
+							</a>
+							<a href="/admin" class="btn btn-dark" style="">
+								<i class="fa fa-cube" aria-hidden="true"></i>
+								<font face="FontAwesome"> 商品管理</font>
+							</a><a href="/admin_shop_management" class="btn btn-outline-dark" style="">
+								<i class="fa fa-cube" aria-hidden="true"></i>
+								<font face="FontAwesome"> 门店管理</font>
+							</a>
+							<a href="/admin_record" class="btn btn-outline-dark"><i class="fa fa-database" aria-hidden="true"></i> 销售记录 </a>
+							<a href="/staff_logout" class="btn btn-outline-dark"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;
+								登出&nbsp;&nbsp;</a>
+							</div>
+					</div>
+				</div>
+			</div>
+			<div class="pt-3" style="">
+				<div class="container" id="table">
+                    <div class="row">
+					</div>
+					<div class="col-md-12 my-3">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-outline-danger" v-on:click="add()"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;添加商品</button>
+                                        </div>
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-2 pb-5"></div>
+                                        <div class="col-md-2">
+                                    <!--选择分类选择框 -->
+                                    <select class="form-control" id="stype" v-on:change="chooseType">
+                                          <option value ="">全部</option>
+                                          <option value ="饮品">饮品</option>
+                                          <option value ="食品">食品</option>
+                                          <option value="日用品">日用品</option>
+                                          <option value="书籍杂志">书籍杂志</option>
+                                        </select>
+
+                                        </div>
+                                        <div class="col-md-2">
+                                          <form class="form-inline">
+                                            <div class="input-group">
+                                              <input type="text" class="form-control" id="inlineFormInputGroup" v-on:input="searchFn" placeholder="Search">
+                                              <div class="input-group-append"><button class="btn btn-dark" type="button"><i class="fa fa-search"></i></button></div>
+                                            </div>
+                                          </form>
+                                        </div>
+                                      </div>
+									<table class="table table-bordered ">
+										<thead class="thead-dark">
+											<tr>
+												<th>No</th>
+												<th>图片</th>
+												<th>商品名称</th>
+												<th>单价</th>
+												<th>商品类别</th>
+												<th>库存</th>
+												<th>操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											<!--显示table的内容部分-->
+											<tr v-for="(item,index) in cloneTableDatas">
+												<td>{[ item.id ]}</td>
+												<td><img :src="item.img" style="height:30px;"></td>
+												<td>{[ item.name ]}</td>
+												<td>{[ item.price ]}</td>
+												<td>{[item.type]}</td>
+												<td>{[item.stock]}</td>
+												<td>
+													<button type="button" class="btn btn-outline-primary" v-on:click="edit(index)">编辑</button>
+													<button type="button" class="btn btn-outline-danger" v-on:click="del(index)">删除</button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<!--
+                                      名称：
+                                      作者：姜子玥
+                                      时间：2019-08-28
+                                      说明：模态框录入新增商品信息
+                                      -->
+									<!--新增商品信息-->
+									<div class="modal fade" tabindex="-1" role="dialog" id="addModal">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+                                                    <h4 class="modal-title" style="-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none">
+														<font face="FontAwesome">新增信息</font>
+													</h4>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												</div>
+												<div class="modal-body">
+													<font face="FontAwesome"></font>
+													<form>
+														<div class="form-group">
+															<label>商品名称</label>
+															<input type="text" name="name" class="form-control" v-model="tableData.name">
+														</div>
+														<div class="form-group">
+															<label>库存</label>
+															<input type="text" name="num" class="form-control" v-model="tableData.stock">
+														</div>
+														<div class="form-group">
+															<label>单价</label>
+															<input type="text" name="price" class="form-control" v-model="tableData.price">
+														</div>
+														<div class="form-group">
+															<label>类型</label>
+															<input type="text" name="number" class="form-control" v-model="tableData.type">
+														</div>
+														<div class="form-group">
+															<label>详细信息</label>
+															<input type="text" name="type" class="form-control" v-model="tableData.info">
+														</div>
+														<div class="form-group">
+															<label>商品图片</label>
+															<input type="file" name="file" id="file" multiple="multiple" onchange="filechange(event)" /></br>
+													        <img src=" " id="img"  style="width: 200px;height: 200px;">
+														</div>
+													</form>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-outline-dark" data-dismiss="modal">取消</button>
+													<button type="button" class="btn btn-outline-dark" v-on:click="addSubForm">提交</button>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<!--
+                                      名称：editModal
+                                      作者：姜子玥
+                                      时间：2019-08-28
+                                      说明：模态框编辑商品信息
+                                      -->
+									<!--编辑-->
+									<div class="modal fade" tabindex="-1" role="dialog" id="editModal">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+                                                    <h4 class="modal-title" style="-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none">编辑商品信息</h4>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                </div>
+												<div class="modal-body">
+													<form>
+														<div class="form-group">
+															<label>商品ID</label>
+															<input readonly type="text" name="id" class="form-control" v-model="selectedlist.id">
+														</div>
+														<div class="form-group">
+															<label>商品名称</label>
+															<input type="text" name="name" class="form-control" v-model="selectedlist.name">
+														</div>
+														<div class="form-group">
+															<label>库存</label>
+															<input type="text" name="num" class="form-control" v-model="selectedlist.stock">
+														</div>
+														<div class="form-group">
+															<label>单价</label>
+															<input type="text" name="price" class="form-control" v-model="selectedlist.price">
+														</div>
+														<div class="form-group">
+															<label>类型</label>
+															<input type="text" name="type" class="form-control" v-model="selectedlist.type">
+														</div>
+														<div class="form-group">
+															<label>详细信息</label>
+															<input type="text" name="info" class="form-control" v-model="selectedlist.info">
+														</div>
+
+
+													</form>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-outline-danger" data-dismiss="modal">取消</button>
+													<button type="button" class="btn btn-outline-primary" v-on:click="editSubForm">提交</button>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+  </div>
   </div>
 </body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
+<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+<script>
+    var img_file;
+    var filechange=function(event){
+    	var files=event.target.files, file;
+    	if(files&&files.length>0){
+    		file=files[0];
+    		if(file.size>1024*1024*2){
+    			alert("图片大小不能超过2MB!");
+    			return false;
+    		}
+    		var url=window.URL||window.webkitURL;
+    		var imgurl=URL.createObjectURL(file);
+    		$("#img").attr("src",imgurl);
+    	}
+    };
+    var obj = [];
+    var app = new Vue({
+        delimiters:['{[', ']}'],
+        el: "#table",
+        data: {
+            selected: -1,
+            selectedlist: {},
+            tableData: {
+                "id": "",
+                "name": "",
+                "stock": "",
+                "price": "",
+                "sold": "",
+                "type": "",
+                "img": "",
+                "good_id": "",
+            },
+            tableDatas: [
+                // {
+                // 	"img": "img_ok",
+                // 	"name": "bread",
+                // 	"price": "2.5",
+                // 	"type": "食物",
+                // 	"count": "50",
+                // 	"id": 1
+                // },
+                // {
+                // 	"id": 2,
+                // 	"img": "img_2ok",
+                // 	"name": "water",
+                // 	"price": "555",
+                // 	"type": "酒水饮乳",
+                // 	"count": "20"
+                // },
+            ],
+            cloneTableDatas: [],
+            search: "",
+        },
+        //实例创建后显示数据库相关信息
+        created: function() {
+            var _self = this;
+            $.ajax({
+                url: '/staff_ask_for_goods_list',
+                data: {
+                    "identity": "web"
+                },
+                type: 'post',
+                async: false,
+                dataType: "jsonp",
+                jsonp: "callback",
+                jsonpCallback: "successCallback",
+                success: function(data) {
+                    _self.tableDatas = data;
+                    for(var i=0;i<_self.tableDatas.length;i++){
+                        _self.tableDatas[i].id = i+1;
+                        _self.tableDatas[i].price = _self.tableDatas[i].price.toFixed(2);
+                        _self.tableDatas[i]["img"] = 'http://' + document.location.host + _self.tableDatas[i]["img"];
+                    }
+                    console.log(_self.tableDatas);
+                    _self.getShowData(_self.tableDatas);
+                },
+                error: function() {
+                    alert("查询出错");
+                }
+            })
 
+        },
+        methods: {
+            // 获取需要渲染到页面中的数据
+            getShowData: function(arr) {
+                this.cloneTableDatas = JSON.parse(JSON.stringify(arr));
+            },
+            //新增
+            add: function() {
+                console.log('add');
+                console.log(typeof(this.tableData));
+                console.log(this.tableDatas[this.tableDatas.length-1]);
+                $('#addModal').modal('show');
+            },
+            //提交新增
+            addSubForm: function() {
+                console.log('addsubform');
+    		    var file = document.getElementById("file").files[0];
+    		    //console.log(file);
+                this.tableData.id = this.tableDatas.length + 1;
+                this.tableData.price = parseFloat(this.tableData.price).toFixed(2);
+                //向数据库发送，并获得id
+                var formdata = new FormData();
+                var _self = this;
+                //上传图片和其他信息
+                formdata.append('file', file);
+                formdata.append('img_name', file['name']);
+                formdata.append('name', this.tableData.name);
+                formdata.append('stock', this.tableData.stock);
+                formdata.append('price', this.tableData.price);
+                formdata.append('type', this.tableData.type);
+                formdata.append('info', this.tableData.info);
+                var id;
+                $.ajax({
+                    url: "/staff_add_goods_details",
+                    type: "post",
+                    data: formdata,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        id = parseInt(data);
+                        _self.tableData['good_id'] = id;
+                        //console.log(id);
+                        console.log('新增成功')
+                    },
+                    error: function () {
+                        console.log('新增失败');
+                    }
+                });
+                this.tableData.img = 'http://' + document.location.host + '/static/img/' +file['name'];
+                this.tableDatas.push(this.tableData);
+                this.getShowData(this.tableDatas);
+                this.tableData = {};
+                $('#addModal').modal('hide');
+                //清空图片，file
+                $("#file").val("");
+                $("#img").attr("src"," ");
+            },
+            //编辑
+            edit: function(index) {
+                console.log('edit');
+                $('#editModal').modal('show');
+                this.selected = index;
+                this.selectedlist = JSON.parse(JSON.stringify(this.cloneTableDatas))[index];
+            },
+             //选择种类
+		  chooseType: function(){
+			  var myselect = document.getElementById("stype");
+			  var index = myselect.selectedIndex;
+			  var kind = myselect.options[index].value;
+			  console.log("choosetype");
+			  //查询type列
+			  if(kind){
+				  var searchArray = [];
+				  this.tableDatas.forEach(function(item){
+					  if(item.type == kind){
+						  searchArray.push(item);
+					  }
+				  });
+				  this.getShowData(searchArray);
+				} else{
+				  this.getShowData(this.tableDatas);
+				}
+		  },
+            //提交编辑
+            editSubForm: function() {
+                var result = confirm("是否保存所做改动"); //在页面上弹出确认对话框
+                if (result == true) {
+                    Vue.set(this.tableDatas, this.selected, this.selectedlist);
+                    // 保留两位小数
+                    this.tableDatas[this.selected].price = parseFloat(this.tableDatas[this.selected].price).toFixed(2);
+                    this.getShowData(this.tableDatas);
+                    this.selectedlist.price = parseFloat(this.selectedlist.price).toFixed(2);
+                    $.ajax({
+                        url:"/staff_change_goods_details",
+                        data:{
+                            'name': this.selectedlist.name,
+                            'price': this.selectedlist.price,
+                            'stock': this.selectedlist.stock,
+                            'type': this.selectedlist.type,
+                            'info': this.selectedlist.info,
+                            'good_id': this.tableDatas[this.selected]['good_id'],
+                        },
+                        type: 'post',
+                        success: function(obj){
+                            $('#editModal').modal('hide');
+                        },
+                        error: function (obj) {
+                            alert('保存失败，请检查网络！')
+                        }
+                    })
+                } else {
+
+                }
+
+            },
+            //删除
+            del: function(index) {
+                var result = confirm("确定是否删除该商品条目"); //在页面上弹出确认对话框
+                // console.log(result);
+                if (result == true) {
+                    $.ajax({
+                        url:"/staff_delete_details",
+                        data:{
+                            'good_id': this.tableDatas[index]['good_id'],
+                        },
+                        type: 'post',
+                        success: function(obj){
+                            console.log(obj);
+                        },
+                        error: function (obj) {
+                            alert('删除失败，请检查网络！')
+                        }
+                    });
+                    this.tableDatas.splice(index, 1);
+                    this.getShowData(this.tableDatas);
+                } else {
+
+                }
+            },
+            //查询
+            searchFn: function(e) {
+                var key = e.target.value;
+                //查询firstName列
+                if (key) {
+                    var searchArray = [];
+                    this.tableDatas.forEach(function(item) {
+                        if (item.name.indexOf(key) > -1) {
+                            searchArray.push(item);
+                        }
+                        if (item.type.indexOf(key) > -1) {
+                            searchArray.push(item);
+                        }
+                    });
+                    this.getShowData(searchArray);
+                } else {
+                    this.getShowData(this.tableDatas);
+                }
+            }
+
+        }
+    })
+</script>
 </html>

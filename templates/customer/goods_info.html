@@ -10,6 +10,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
 </head>
@@ -42,7 +43,7 @@
             <div class="col-md-4">
               <div class="row">
                 <div class="col-md-4"></div>
-                <div class="col-md-4"><a class="btn btn-outline-dark btn-block" href="#" onclick="javascrip:history.back(-1)" >Dark</a></div>
+                <div class="col-md-4"><a class="btn btn-outline-dark btn-block" href="#" onclick="history.back(-1)" >Back</a></div>
                 <div class="col-md-4"></div>
               </div>
             </div>
@@ -65,43 +66,42 @@
 <script src="/static/js/jquery.js"></script>
 <script>
 	function get_name(){
-			var url=document.location.toString();
-			var name = url.split('?')[1].split('=')[1];
-			return name;
-		}
-		function get_info(){
-			$.ajax(
-			{
-			        url:"/customer_ask_for_goods_info/"+get_name(),
-			        data: {"identity":"web"},
-			        type: 'post',
-			        success: function (data) {
-						//接受前端数据
-						var str="";
-						var img_str="";
-						var obj = eval("("+data+")");
-						var goods_url=obj['img'];
-						var goods_name=obj['name'];
-						var goods_price=obj['price'];
-						var goods_count=obj['stock'];
-						var info=obj['info'];
-						var goods_img=document.getElementById("img");
-						//显示界面
-						img_str+="<img class=\"img-fluid d-block\" src=\""+goods_url+"\"  >";
-						str+="<h2 class=\"pb-5\"><font face=\"仿宋\"><font size=\"6\">商品名称："+goods_name+
-	                        "</font></h2><h2 class=\"pb-5\"><font face=\"仿宋\"><font size=\"6\">商品价格："+goods_price+
-	                        "</font></h2><h2 class=\"pb-5\"><font face=\"仿宋\"><font size=\"6\">商品库存："+goods_count+
-	                        "</font></h2><h2 class=\"pb-5\"><font face=\"仿宋\"><font size=\"6\">具体信息：<p>"+info+
-	                        "</p></font></h2>";
-						img.innerHTML=img_str;
-						information.innerHTML=str;
-			        },
-			        error: function () {
-			            alert("error!!!");
-			        }
-			    });
-		}
-		get_info();
+        var url=document.location.toString();
+        var name = url.split('?')[1].split('=')[1];
+        return name;
+    }
+    function get_info(){
+        $.ajax({
+            url:"/customer_ask_for_goods_info/"+get_name(),
+            data: {"identity":"web"},
+            type: 'post',
+            success: function (data) {
+                //接受前端数据
+                var str="";
+                var img_str="";
+                var obj = eval("("+data+")");
+                var goods_url=obj['img'];
+                var goods_name=obj['name'];
+                var goods_price=obj['price'].toFixed(2);
+                var goods_count=obj['stock'];
+                var info=obj['info'];
+                var goods_img=document.getElementById("img");
+                //显示界面
+                img_str+="<img class=\"img-fluid d-block\" src=\""+goods_url+"\"  >";
+                str+="<h2 class=\"pb-5\"><font face=\"仿宋\"><font size=\"6\">商品名称："+goods_name+
+                    "</font></h2><h2 class=\"pb-5\"><font face=\"仿宋\"><font size=\"6\">商品价格："+goods_price+
+                    "</font></h2><h2 class=\"pb-5\"><font face=\"仿宋\"><font size=\"6\">商品库存："+goods_count+
+                    "</font></h2><h2 class=\"pb-5\"><font face=\"仿宋\"><font size=\"6\">具体信息：<p>"+info+
+                    "</p></font></h2>";
+                img.innerHTML=img_str;
+                information.innerHTML=str;
+            },
+            error: function () {
+                alert("error!!!");
+            }
+        });
+    }
+    get_info();
 
 </script>
 

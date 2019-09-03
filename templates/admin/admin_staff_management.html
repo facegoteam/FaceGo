@@ -1,118 +1,464 @@
+<!--
+	名称：admin_staff_management.html
+	作者：姜子玥
+	时间：2019-08-29
+	说明：管理员管理员工信息，增加，编辑，删除
+	
+-->
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
-</head>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+		<link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
+	</head>
 
-<body>
-  <div class="py-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="btn-group">
-            <a href="/admin_staff_management" class="btn btn-dark">
-              <i class="fa fa-id-card-o" aria-hidden="true"></i>
-              <font face="FontAwesome">&nbsp;员工管理</font>
-            </a>
-            <a href="/admin" class="btn btn-outline-dark" style="">
-              <i class="fa fa-cube" aria-hidden="true"></i>
-              <font face="FontAwesome"> 商品管理</font>
-            </a><a href="/admin_shop_management" class="btn btn-outline-dark" style="">
-              <i class="fa fa-cube" aria-hidden="true"></i>
-              <font face="FontAwesome"> 门店管理</font>
-            </a>
-            <a href="/admin_record" class="btn btn-outline-dark"><i class="fa fa-database" aria-hidden="true"></i> 销售记录 </a>
-            <a href="/staff_logout" class="btn btn-outline-dark"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; 登出&nbsp;&nbsp;</a> </div>
-        </div>
-      </div>
-    </div>
-    <div class="pt-5" style="">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="table-responsive">
-              <table class="table table-bordered ">
-                <thead class="thead-dark">
-                  <tr>
-                    <th>#</th>
-                    <th>姓名</th>
-                    <th>所在门店</th>
-                    <th>账号</th>
-                    <th>密码</th>
-                    <th>操作</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th>1</th>
-                    <td contenteditable="true"></td>
-                    <td></td>
-                    <td></td>
-                    <td class=""></td>
-                    <td><a class="btn btn-link" href="#">删除</a></td>
-                  </tr>
-                  <tr>
-                    <th>2</th>
-                    <td contenteditable="true"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><a class="btn btn-link" href="#">删除</a></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td contenteditable="true"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><a class="btn btn-link" href="#">删除</a></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td contenteditable="true"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><a class="btn btn-link" href="#">删除</a></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">5</th>
-                    <td contenteditable="true"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><a class="btn btn-link" href="#">删除</a></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div><a class="btn btn-link" href="#"><i class="fa fa-plus" aria-hidden="true"></i> 添加员工</a>
-          </div>
-        </div>
-      </div>
-      <div class="row p-5">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-          <ul class="pagination pagination-lg my-1 mx-2">
-            <li class="page-item"> <a class="page-link text-dark" href="#"> <span>«</span></a> </li>
-            <li class="page-item active border-dark"> <a class="page-link text-dark" href="#">1</a> </li>
-            <li class="page-item"> <a class="page-link text-dark" href="#">2</a> </li>
-            <li class="page-item"> <a class="page-link text-dark" href="#">3</a> </li>
-            <li class="page-item"> <a class="page-link text-dark" href="#">4</a> </li>
-            <li class="page-item"> <a class="page-link text-dark" href="#"> <span>»</span></a> </li>
-          </ul>
-        </div>
-        <div class="col-md-4"></div>
-      </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
-  </div>
-  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
-</body>
+	<body>
+		<div class="py-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="btn-group">
+							<a href="/admin_staff_management" class="btn btn-dark">
+								<i class="fa fa-id-card-o" aria-hidden="true"></i>
+								<font face="FontAwesome">&nbsp;员工管理</font>
+							</a>
+							<a href="/admin" class="btn btn-outline-dark" style="">
+								<i class="fa fa-cube" aria-hidden="true"></i>
+								<font face="FontAwesome"> 商品管理</font>
+							</a>
+							<a href="/admin_shop_management" class="btn btn-outline-dark" style="">
+								<i class="fa fa-cube" aria-hidden="true"></i>
+								<font face="FontAwesome"> 门店管理</font>
+							</a>
+							<a href="/admin_record" class="btn btn-outline-dark"><i class="fa fa-database" aria-hidden="true"></i> 销售记录 </a>
+							<a href="/staff_logout" class="btn btn-outline-dark"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; 登出&nbsp;&nbsp;</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="pt-3" style="">
+				<div class="container">
+					<div class="row">
+					</div>
+					<div class="col-md-12 my-3">
+						<div class="col-md-12" id="staff">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="row">
+										<!--新增员工btn 跳转到add函数-->
+										<div class="col-md-2">
+											<button type="button" class="btn btn-outline-dark" v-on:click="add()">新增员工</button>
+										</div>
+										<div class="col-md-2"></div>
+										<div class="col-md-2"></div>
+										<div class="col-md-2"></div>
+										<div class="col-md-2 pb-5"></div>
+										<div class="col-md-2">
+											<form class="form-inline">
+												<div class="input-group">
+													<input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search" v-on:input="searchFn">
+													<div class="input-group-append"><button class="btn btn-dark" type="button"><i class="fa fa-search"></i></button></div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<table class="table table-bordered ">
+								<thead class="thead-dark">
+									<tr>
+										<th>No</th>
+										<th>姓名</th>
+										<th>身份</th>
+										<th>管理门店</th>
+										<th>账号</th>
+										<th>密码</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!--显示table的内容部分-->
+									<tr v-for="(item,index) in cloneTableDatas">
+										<td>{[ item.id ]}</td>
+										<td>{[ item.staff_name ]}</td>
+										<td>{[ item.identity]}</td>
+										<td>{[ item.shop_name ]}</td>
+										<td>{[ item.staff_id ]}</td>
+										<td>{[ item.pwd ]}</td>
+										<td>
+											<button type="button" class="btn btn-outline-primary" v-on:click="edit(index)">编辑</button>
+											<button type="button" class="btn btn-outline-danger" v-on:click="del(index)">删除</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<!--新增员工信息模态框-->
+							<div class="modal fade" tabindex="-1" role="dialog" id="addStaff">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title">
+												<font face="FontAwesome">新增员工</font>
+											</h4>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+										</div>
+										<div class="modal-body">
+											<font face="FontAwesome"></font>
+											<form>
+												<div class="form-group">
+													<label>员工姓名</label>
+													<input type="text" name="name" class="form-control" v-model="addStaff.staff_name">
+												</div>
+												<div class="form-group">
+													<label>员工身份</label>
+													<select class="custom-select" id="selectIdentity" v-on:change="getAddIdentity" style="width: 150px">
+														<option>选择身份</option>
+														<option value="cashier">收银员</option>
+														<option value="admin">管理员</option>
+													</select>
+													<input type="text" readonly="true" name="shop" class="form-control" v-model="addStaff.identity" id="add_identity">
+												</div>
+												<div class="form-group">
+													<label>工作商店</label>
+													<select class="custom-select" id="selectShop" v-on:change="getAddShop" style="width: 170px">
+														<option>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选择商店&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+														<option value="全部">全部</option>
+													</select>
+													<input type="text" name="shop" readonly="true" class="form-control" v-model="addStaff.shop_name" id="add_shop_name">
+												</div>
+												<div class="form-group">
+													<label>员工账户</label>
+													<input type="text" name="account" class="form-control" v-model="addStaff.staff_id">
+												</div>
+												<div class="form-group">
+													<label>账户密码</label>
+													<input type="text" name="pwd" class="form-control" v-model="addStaff.pwd" id="pwd">
+												</div>
+											</form>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-outline-green" data-dismiss="modal">取消</button>
+											<button type="button" class="btn btn-outline-danger" v-on:click="addSubmit">提交</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!--编辑信息模态框-->
+							<div class="modal fade" tabindex="-1" role="dialog" id="editStaff">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title">
+											<font face="FontAwesome">编辑员工信息</font>
+											</h4>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										</div>
+										<div class="modal-body">
+											<font face="FontAwesome"></font>
+											<form>
+												<div class="form-group">
+													<label>员工姓名</label>
+													<input type="text" name="name" class="form-control" v-model="selectedlist.staff_name">
+												</div>
+												<div class="form-group">
+													<label>员工身份</label>
+													<select class="custom-select" id="editIdentity" v-on:change="getEditIdentity" style="width: 150px">
+                                                        <option>选择身份</option>
+                                                        <option value="cashier">收银员</option>
+														<option value="admin">管理员</option>
+													</select>
+													<input type="text" name="name" readonly="true" class="form-control" v-model="selectedlist.identity" id="edit_identity">
+												</div>
+												<div class="form-group">
+													<label>工作商店</label>
+													<select class="custom-select" id="editSelectShop" v-on:change="getEditShop" style="width: 170px">
+														<option>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选择商店&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+														<option value="全部">全部</option>
+													</select>
+													<input type="text" name="shop" readonly="true" class="form-control" v-model="selectedlist.shop_name" id="edit_shop_name">
+												</div>
+												<div class="form-group">
+													<label>登陆账户</label>
+													<input readonly="true" type="text" name="account" class="form-control" v-model="selectedlist.staff_id">
+												</div>
+												<div class="form-group">
+													<label>账户密码</label>
+													<input type="text" name="pwd" class="form-control" v-model="selectedlist.pwd" id="pwd">
+												</div>
+											</form>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-outline-green" data-dismiss="modal">取消</button>
+											<button type="button" class="btn btn-outline-danger" v-on:click="editSubmit">提交</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
+	<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+	<script>
+		var app = new Vue({
+			delimiters: ['{[', ']}'],
+			el: "#staff",
+			data: {
+				shoplist: [],
+				selected: -1,
+				selectedlist: {
+					"identity": "", //员工身份
+					"staff_name": "", //人的姓名
+					"shop_name": "",
+					"staff_id": "",
+					"pwd": "",
+				},
+				addStaff: {
+					"id":"",
+					"identity": "", //员工身份
+					"staff_name": "", //人的姓名
+					"shop_name": "",
+					"staff_id": "",
+					"pwd": "",
+				},
+				//用于在界面上显示的数据
+				staffDatas: [],
+				cloneTableDatas: [],
+				search: "",
+			},
+			//实例创建后显示数据库相关信息
+			created: function() {
+				var _self = this;
+				//获取数据库显示员工信息
+				$.ajax({
+					url: '/admin_ask_for_staff',
+					data: {
+						"identity": "web"
+					},
+					type: 'get',
+					async: true,
+					dataType: "jsonp",
+					jsonp: "callback",
+					jsonpCallback: "successCallback",
+					success: function(data) {
+						for(var i=0;i<data.length;i++){
+							_self.staffDatas[i]=data[i];
+							_self.staffDatas[i]['id']=i+1;
+                        }
+                        _self.getShowData(_self.staffDatas);
+						console.log(_self.staffDatas);
+					},
+					error: function() {
+						alert("查询出错");
+
+					},
+					complete: function() {
+						//获取门店列表数据
+						$.ajax({
+							type: "post",
+							url: "/admin_ask_for_shop",
+							async: false,
+							dataType: "jsonp",
+							jsonp: "callback",
+							jsonpCallback: "successCallback",
+							data: {
+								"identity": "web"
+							},
+							success: function(data) {
+								_self.shoplist = data;
+								var shop_list = _self.shoplist;
+								for(var i=0;i<shop_list.length;i++){
+                                    $('#editSelectShop').append("<option value='" + shop_list[i]["name"] + "'>" + shop_list[i]["name"] + "</option>");
+                                    $('#selectShop').append("<option value='" + shop_list[i]["name"] + "'>" + shop_list[i]["name"] + "</option>");
+                                }
+							},
+							error: function() {
+								console.log("shop fail");
+								alert("获取商店列表失败");
+							}
+						});
+					}
+				});
+			},
+			methods: {
+				// 获取需要渲染到页面中的数据
+				getShowData: function(arr) {
+					this.cloneTableDatas = JSON.parse(JSON.stringify(arr));
+				},
+				//新增
+				add: function() {
+					$('#addStaff').modal('show');
+					//var shop_list = this.shoplist;
+					//for(var i = 0; i < shop_list.length; i++) {
+					//	$('#selectShop').append("<option value='" + shop_list[i]["name"] + "'>" + shop_list[i]["name"] + "</option>");
+					//};
+				},
+				//获取新增的身份信息
+				getAddIdentity: function() {
+					this.addStaff.identity = document.getElementById("selectIdentity").value;
+				},
+				//获取新增员工所属的商店名称
+				getAddShop: function() {
+					this.addStaff.shop_name = document.getElementById("selectShop").value;
+				},
+				//提交新增
+				addSubmit: function() {
+					var _self=this;
+					this.addStaff.identity = document.getElementById("add_identity").value;
+					$.ajax({
+						type: "get",
+						url: "/admin_add_staff",
+						async: false,
+						data: {
+							"identity":_self.addStaff.identity, //员工身份
+							"staff_name": _self.addStaff.staff_name, //人的姓名
+							"shop_name": _self.addStaff.shop_name,
+							"staff_id": _self.addStaff.staff_id,
+							"pwd": _self.addStaff.pwd,
+						},
+						dataType: "jsonp",
+						jsonp: "callback",
+						jsonpCallback: "successCallback",
+						success: function(data) { 
+							//获取数据库添加信息
+							alert("添加成功！");
+							_self.addStaff.id=_self.staffDatas.length+1;
+							_self.staffDatas.push(_self.addStaff);
+							_self.getShowData(_self.staffDatas);
+							_self.addStaff = {};
+							$('#addStaff').modal('hide');
+						},
+						error: function() {
+							alert("添加出错");
+						}
+					});
+
+				},
+
+				//编辑
+				edit: function(index) {
+					$('#editStaff').modal('show');
+					this.selected = index;
+					this.selectedlist = JSON.parse(JSON.stringify(this.staffDatas))[index];
+					//var shop_list=this.shoplist;
+					//for(var i=0;i<shop_list.length;i++){
+					//	$('#editSelectShop').append("<option value='" + shop_list[i]["name"] + "'>" + shop_list[i]["name"] + "</option>");
+					//}
+				},
+				editSubmit: function() {
+					var _self=this;
+					var result = confirm("是否保存所做改动"); //在页面上弹出确认对话框
+					if(result == true) {
+						this.selectedlist.identity = document.getElementById("edit_identity").value;
+						//发送数据给数据库 并显示在当前界面
+						$.ajax({
+							type: "get",
+							url: " /admin_change_staff",
+							async: false,
+							dataType: "jsonp",
+							jsonp: "callback",
+							jsonpCallback: "successCallback",
+							data: {
+								"identity": _self.selectedlist.identity, //员工身份
+								"staff_name": _self.selectedlist.staff_name,
+								"shop_name": _self.selectedlist.shop_name,
+								"staff_id": _self.selectedlist.staff_id,
+								"pwd": _self.selectedlist.pwd,
+							},
+							success: function(data) {
+								alert("修改成功!");
+							},
+							error: function() {
+								alert("修改失败！");
+								_self.getShowData(_self.staffDatas);
+								$('#editStaff').modal('hide');
+							}
+						});
+						        Vue.set(_self.staffDatas, _self.selected, _self.selectedlist);
+								_self.getShowData(_self.staffDatas);
+								$('#editStaff').modal('hide');
+					} else {
+
+					}
+				},
+				//获取编辑的身份信息
+				getEditIdentity: function() {
+					this.selectedlist.identity = document.getElementById("editIdentity").value;
+				},
+				//获取编辑的商店名称
+				getEditShop: function() {
+					this.selectedlist.shop_name = document.getElementById("editSelectShop").value;
+				},
+				//删除
+				del: function(index) {
+					var result = confirm("确定是否删除该员工"); //在页面上弹出确认对话框
+					if(result == true) {
+						this.selected = index;
+						this.selectedlist = JSON.parse(JSON.stringify(this.staffDatas))[index];
+						var del_name = this.selectedlist.staff_id;
+						$.ajax({
+							type: "get",
+							url: "/admin_delete_staff",
+							async: false,
+							dataType: "jsonp",
+							jsonp: "callback",
+							jsonpCallback: "successCallback",
+							data: {
+								"staff_id": del_name
+							},
+							success: function(data) {
+								alert("删除成功");
+							},
+							error: function() {
+								alert("删除失败");
+							}
+						});
+						this.staffDatas.splice(index, 1);
+						this.getShowData(this.staffDatas);
+					} else {
+
+					}
+				},
+
+				//搜索
+				searchFn: function(e) {
+					var key = e.target.value;
+					//查询firstName列
+					if(key) {
+						var searchArray = [];
+						this.staffDatas.forEach(function(item) {
+							if(item.staff_name.indexOf(key) > -1) {
+								searchArray.push(item);
+							}
+							if(item.identity.indexOf(key) > -1) {
+								searchArray.push(item);
+							}
+							if(item.shop_name.indexOf(key) > -1) {
+								searchArray.push(item);
+							}
+							if(item.staff_id.indexOf(key) > -1) {
+								searchArray.push(item);
+							}
+						});
+						this.getShowData(searchArray);
+					} else {
+						this.getShowData(this.staffDatas);
+					}
+				}
+			}
+
+		})
+	</script>
 
 </html>
