@@ -1,0 +1,105 @@
+
+<!--
+文件名：start.wxml
+创建时间：8/24
+作者：黄少豪
+简要说明：小程序商城首页
+-->
+
+ <!--搜索框  -->
+<view class="weui-search-bar">
+  <view class="weui-search-bar__form">
+    <!--点击之后，出现input框  -->
+    <view class="weui-search-bar__box">
+      <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+      <input type="text" class="weui-search-bar__input" placeholder="请输入搜索关键词" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm="search"/>
+      <!--输入款字数大于0，则显示清除按钮  -->
+      <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+        <icon type="clear" size="14"></icon>
+      </view>
+    </view>
+    <!--没点击之前，只是一些文字和图标  -->
+    <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+      <icon class="weui-icon-search" type="search" size="14"></icon>
+      <view class="weui-search-bar__text">搜索</view>
+    </label>
+  </view>
+  <!--动态出现的“取消”键  -->
+  <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+</view>
+
+<!--轮播图-->
+<view class="recommend" >
+  <view class="swiper-container">
+    <swiper autoplay="auto" interval="5000" duration="500" current="{{swiperCurrent}}" bindchange="swiperChange" class="swiper">
+      <block wx:for="{{slider}}" wx:key="unique">
+        <swiper-item data-id="{{item.id}}" data-url="{{item.linkUrl}}">
+          <image src="{{item.picUrl}}" class="img"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="dots">
+      <block wx:for="{{slider}}" wx:key="unique">
+        <view class="dot{{index == swiperCurrent ? ' active' : ''}}" bindtap="chuangEvent" id="{{index}}">{{index+1}}</view>
+      </block>
+    </view>
+  </view>
+</view>
+
+<!--实时热销榜 start-->
+<view class="hots-container"> 
+  <view class="category-title">
+    <text class="title">实时热销榜</text>
+    <view class="line_name">
+      <text>看看大家都喜欢买什么</text>
+    </view>
+  </view>  
+  <scroll-view scroll-x="true">
+      <view class="goods">
+         <block wx:for-items="{{goodsHotItems}}" wx:key="name">
+          <view class="goods-item" bindtap="catchTapCategory" data-type="{{item.name}}" >
+          <!-- data-typeid="{{item.typeId}}">  -->
+              <image    src="http://{{ip}}:8001{{item.img}}" class="goods-image" />   
+            <text>{{item.name}}</text>
+            <text>销量：{{item.count}}</text>
+            <p>￥{{item.price}}</p>  
+          </view>
+        </block> 
+      </view>
+    </scroll-view>   
+</view> 
+<!--实时热销榜 end-->
+
+<!--推荐商品 start-->
+<view class="welfare-container"> 
+  <view class="category-title">
+    <text class="title">推荐商品</text>
+    <view class="line_name">
+      <text>猜你喜欢</text>
+    </view>
+  </view>  
+  <scroll-view scroll-y="true">
+      <view class="welfares">
+         <block wx:for-items="{{goodsRecommendItems}}" wx:key="name">
+          <view class="welfares-good" catchtap="catchTapCategory" data-type="{{item.name}}">
+            <view>
+              <image src="http://{{ip}}:8001{{item.img}}" class="welfares-image" mode="widthFix"/> 
+            </view>
+            <view class="product-name">
+              {{item.name}}
+            </view>
+            <view class="product-price-wrap">
+              <p class="product-price-new">￥{{item.price}}</p>   
+            </view>
+            
+          </view>
+        </block> 
+      </view>
+  </scroll-view>  
+</view> 
+<!--福利专场 end-->
+
+<!-- <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">努力加载中</view>
+</view>  -->

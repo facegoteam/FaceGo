@@ -1,0 +1,26 @@
+/* pages/my/my.wxss */
+.container1{
+  min-height: 100%;
+  overflow: hidden;
+  overflow-y: hidden;
+}
+
+.my-item111{
+    width: 100%;
+    background: url(https://cdn.it120.cc/images/weappshop/arrow-right.png) no-repeat 750rpx center;
+    background-size: 16rpx auto,750rpx auto;
+    border-bottom: 1px solid #eee;
+    height: 80rpx;
+    line-height: 80rpx;
+    padding-left: 100rpx;
+    font-size:14px;
+}
+
+.version1 {
+  width:100%;
+  height: 40rpx;
+	line-height: 40rpx;
+	font-size: 24rpx;
+	text-align: center;  
+  padding: 40rpx;
+}

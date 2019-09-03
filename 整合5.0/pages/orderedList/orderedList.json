@@ -1,0 +1,9 @@
+
+{
+  "navigationBarTitleText": "订单记录",
+  "usingComponents": {
+    "wux-prompt": "../dist1/prompt/index",
+      "wux-card": "../dist1/card/index",
+      "wux-wing-blank": "../dist1/wing-blank/index"
+  }
+}
