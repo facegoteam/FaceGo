@@ -101,7 +101,6 @@
 							_self.records[i]=data[i];
 							_self.records[i]["id"]=i+1;
 							_self.records[i]["img"]= 'http://' + document.location.host + data[i]["img"];
-							{#console.log(_self.records[i]["img"]);#}
 							_self.records[i]["link"]='http://'+ document.location.host +"/goods_info?name="+data[i]["name"];
 						}
 						_self.getShowData(_self.records);

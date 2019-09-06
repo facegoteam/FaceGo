@@ -3,6 +3,7 @@ import random
 from functools import wraps
 from flask import render_template, request, session, url_for, redirect, send_from_directory
 import os
+from pandas import DataFrame
 import requests
 import json
 from models import *
@@ -200,6 +201,7 @@ def customer_logout():
 @app.route('/customer_ask_for_record', methods=['POST', 'GET'])
 def customer_ask_for_record():
     face_token = ""
+    # 小程序
     if request.method == 'POST':
         identity = request.form['identity']
         # print(identity)
@@ -220,6 +222,8 @@ def customer_ask_for_record():
             price = good.goods_price
             count = each.record_goods_count
             time = each.record_goods_time
+            token = each.token
+            rated = each.rated
 
             item = {}
             item['img'] = img
@@ -227,10 +231,13 @@ def customer_ask_for_record():
             item['price'] = price
             item['count'] = count
             item['time'] = time.strftime('%Y-%m-%d %H:%M:%S')
+            item['token'] = token
+            item['rated'] = rated
             result.append(item)
 
-        return json.dumps(result, ensure_ascii=False)
+        return json.dumps(result.reverse(), ensure_ascii=False)
 
+    # web
     else:
         # face_token = '0ae83ffd1cabed5275dc437ab851f91d'
         face_token = session['face_token']
@@ -673,6 +680,70 @@ def customer_ask_for_shop():
 
 
 '''
+函数名：customer_ask_for_goods_rate
+创建时间：2019-09-05
+作者：黄文政
+说明：小程序顾客查看某商品评分
+修改日期：2019-09-05
+'''
+@app.route('/customer_ask_for_goods_rate', methods=['GET', 'POST'])
+def customer_ask_for_goods_rate():
+    if request.method == "POST":
+        good_name = request.form['name']
+        good_id = Goods.query.filter(Goods.goods_name == good_name).first().id
+
+        rate_record = Rate.query.filter(Rate.good_id == good_id).first()
+        result = {}
+        if not rate_record:
+            result['value'] = '暂无评分'
+        else:
+            result['value'] = "%.1f" % rate_record.rate
+
+        return json.dumps(result)
+
+    else:
+        return "get is not welcomed!"
+
+
+'''
+函数名：customer_set_goods_rate
+创建时间：2019-09-05
+作者：黄文政
+说明：小程序顾客添加某商品评分
+修改日期：2019-09-05
+'''
+@app.route('/customer_set_goods_rate', methods=['GET', 'POST'])
+def customer_set_goods_rate():
+    if request.method == "POST":
+        good_name = request.form['name']
+        value = request.form['value']
+
+        good_id = Goods.query.filter(Goods.goods_name == good_name).first().id
+
+        rate_record = Rate.query.filter(Rate.good_id == good_id).first()
+
+        if not rate_record:
+            rate = Rate()
+            rate.good_id = good_id
+            rate.rate = value
+            rate.count = 1
+            rate.total = value
+
+            db.session.add(rate)
+            db.session.commit()
+        else:
+            rate_record.total = rate_record.total + float(value)
+            rate_record.count = rate_record.count + 1
+            rate_record.rate = rate_record.total / rate_record.count
+
+            db.session.add(rate_record)
+            db.session.commit()
+        return json.dumps(["评分成功"], ensure_ascii=False)
+    else:
+        return "get is not welcomed!"
+
+
+'''
 函数名：customer_ask_for_goods_info
 创建时间：2019-08-27
 作者：黄文政
@@ -719,7 +790,41 @@ def customer_ask_for_goods_info():
         result['sales'] = sales
         return json.dumps(result, ensure_ascii=False)
     else:
-        return 'get is not welcomed!'
+        # 返回名称，价格，详情，库存，销量
+        name = request.args.get('name')
+        face_token = session['face_token']
+
+        result = {}
+        good = Goods.query.filter(Goods.goods_name == name).first()
+        price = good.goods_price
+        info = good.goods_info
+        stock = good.goods_count
+        img = good.goods_imag
+        id = good.id
+
+        # 更新顾客行为表
+        behaviour = Behaviour.query.filter(
+            and_(Behaviour.face_token == face_token, Behaviour.good_id == id)).first()
+        if not behaviour:
+            behaviour = Behaviour()
+            behaviour.face_token = face_token
+            behaviour.action = 'browse'
+            behaviour.good_id = id
+
+            db.session.add(behaviour)
+            db.session.commit()
+
+        sales = 0
+        for each in Records.query.filter(Records.record_goods_id == id).all():
+            sales = sales + each.record_goods_count
+
+        result['name'] = name
+        result['price'] = price
+        result['info'] = info
+        result['stock'] = stock
+        result['img'] = img
+        result['sales'] = sales
+        return json.dumps(result, ensure_ascii=False)
 
 
 '''
@@ -746,6 +851,62 @@ def goods_info():
 @login_required
 def customer_recommend():
     return render_template('customer/customer_recommend.html')
+
+
+'''
+函数名：customer_ask_for_recommend
+创建时间：2019-09-05
+作者：黄文政
+说明：web上顾客查看商品推荐
+修改日期：2019-09-05
+'''
+@app.route('/customer_ask_for_recommend', methods=["POST", "GET"])
+@login_required
+def customer_ask_for_recommend():
+    if request.method == 'GET':
+        # 获取推荐数据，从10个中每次随机选6个作为推荐
+        user_ids = []
+        good_ids = []
+        rate = []
+        item_id = []
+        for each in Behaviour.query.all():
+            user_ids.append(each.face_token)
+            good_ids.append(each.good_id)
+            if each.action == 'buy':
+                rate.append(5)
+            elif each.action == 'addcart':
+                rate.append(3)
+            elif each.action == 'browse':
+                rate.append(1)
+
+        # 若为老顾客，使用协同过滤推荐
+        if session['face_token'] in user_ids:
+            behaviour_data = {'user_id': user_ids, 'goods_id': good_ids, 'rate': rate}
+            behaviours = DataFrame(behaviour_data)
+            behaviours.to_csv('behaviour.csv', index=None, encoding='gbk')
+
+            from cf import run
+            item_id = run(session['face_token'])
+        # 若为新顾客，则推荐评分高的商品
+        else:
+            pass
+
+        rand_id = random.sample(item_id, 6)
+
+        # print(rand_id)
+        result = []
+        for i in rand_id:
+            good = Goods.query.filter(Goods.id == i[0]).first()
+            name = good.goods_name
+            price = good.goods_price
+            img = good.goods_imag
+            result.append({'name': name, 'price': price, 'img': img})
+        print(result)
+        return "successCallback" + "(" + json.dumps(result) + ")"
+
+    else:
+        return "post is not welcomed!"
+
 
 
 '''
@@ -864,7 +1025,9 @@ def cashier_ask_for_order():
     if request.method == "GET":
         result = []
         tokens = []
-        for each in Orders.query.all():
+        staff_id = session['staff_id']
+        shop_id = Staff.query.filter(Staff.staff_id == staff_id).first().shop_id
+        for each in Orders.query.filter(Orders.shop_id == shop_id).all():
             token = each.token
             time = each.record_time.strftime('%Y-%m-%d %H:%m:%S')
             if token in tokens:
@@ -1144,14 +1307,44 @@ def cashier_ask_for_customer_recommend():
         return "successCallback" + "(" + json.dumps(['post is not welcomed']) + ")"
     else:
         # 随机推荐
+        # item_id = []
+        # for each in Goods.query.all():
+        #     item_id.append(each.id)
+
+        # 获取推荐数据，从10个中每次随机选6个作为推荐
+        user_ids = []
+        good_ids = []
+        rate = []
         item_id = []
-        for each in Goods.query.all():
-            item_id.append(each.id)
+        for each in Behaviour.query.all():
+            user_ids.append(each.face_token)
+            good_ids.append(each.good_id)
+            if each.action == 'buy':
+                rate.append(5)
+            elif each.action == 'addcart':
+                rate.append(3)
+            elif each.action == 'browse':
+                rate.append(1)
+
+        # 若为老顾客，使用协同过滤推荐
+        if session['order_face_token'] in user_ids:
+            behaviour_data = {'user_id': user_ids, 'goods_id': good_ids, 'rate': rate}
+            behaviours = DataFrame(behaviour_data)
+            behaviours.to_csv('behaviour.csv', index=None, encoding='gbk')
+
+            from cf import run
+            item_id = run(session['order_face_token'])
+        # 若为新顾客，则推荐评分高的商品
+        else:
+
+            pass
 
         rand_id = random.sample(item_id, 6)
 
+        print(rand_id)
+
         for i in rand_id:
-            good = Goods.query.filter(Goods.id == i).first()
+            good = Goods.query.filter(Goods.id == i[0]).first()
             name = good.goods_name
             price = good.goods_price
             result.append({'recommend_name': name, 'recommend_price': price})
@@ -1178,6 +1371,7 @@ def cashier_finish_specific_order():
             record.shop_id = each.shop_id
             record.record_goods_id = each.goods_id
             record.token = token
+            record.rated = 0
 
             db.session.add(record)
             db.session.delete(each)
@@ -1905,38 +2099,68 @@ def shop_details():
 
 @app.route('/test')
 def test():
-    data = request.args.get('data')
-    print(json.loads(data))
 
-    print(type(data))
-    # face_token = data[0]['face_token']
-    # shop_name = data[0]['shop']
-    # time = datetime.datetime.now()
-    # shop_id = Shop.query.filter(Shop.shop_name == shop_name).first().id
+    # good_id_list = []
+    # good_name_list = []
+    # good_type_list = []
     #
-    # # 生成订单号 mmddhhmmss + 两位随机号 + 一位流水号
-    # token = time.strftime('%m%d%H%m%S')
-    # token = token + str(random.randint(0,100))
-    # sum = 0
-    # for each in Records.query.filter(Records.token.contains(token)).all():
-    #     sum = sum + 1
-    # token = token + str(sum)
-    # # print(token)
+    # for each in Goods.query.all():
+    #     good_id_list.append(each.id)
+    #     good_name_list.append(each.goods_name)
+    #     good_type_list.append(each.goods_type)
     #
-    # for each in data[1:]:
-    #     good_name = each['good_name']
-    #     count = each['count']
-    #     good_id = Goods.query.filter(Goods.goods_name == good_name).first().id
-    #     order = Orders()
-    #     order.goods_id = good_id
-    #     order.shop_id = shop_id
-    #     order.goods_count = count
-    #     order.record_time = time
-    #     order.face_token = face_token
-    #     order.token = token
     #
-    #     db.session.add(order)
-    #     db.session.commit()
+    # good_data = {'goods_id':good_id_list, 'goods_name': good_name_list, 'goods_type': good_type_list}
+    # good_df = DataFrame(good_data)
+    # good_df.to_csv("good_dataframe.csv", index=None, encoding="gbk")
+
+    # 获取推荐数据
+    # from pandas import DataFrame
+    # user_ids = []
+    # good_ids = []
+    # rate = []
+    # for each in Behaviour.query.all():
+    #     user_ids.append(each.face_token)
+    #     good_ids.append(each.good_id)
+    #     if each.action == 'buy':
+    #         rate.append(5)
+    #     elif each.action == 'addcart':
+    #         rate.append(3)
+    #     elif each.action == 'browse':
+    #         rate.append(1)
+    #
+    # behaviour_data = {'user_id': user_ids, 'goods_id': good_ids, 'rate': rate}
+    # behaviours = DataFrame(behaviour_data)
+    # behaviours.to_csv('behaviour.csv', index=None, encoding='gbk')
+    #
+    # from cf import run
+    # goods = run('0ae83ffd1cabed5275dc437ab851f91d')
+
+    # records转购买行为
+    # for each in Records.query.all():
+    #     face_token = each.face_token
+    #     good_id = each.record_goods_id
+    #
+    #     exist = False
+    #     for behaviour in Behaviour.query.all():
+    #         if face_token == behaviour.face_token and good_id == behaviour.good_id:
+    #             exist = True
+    #             break
+    #
+    #     if not exist:
+    #         behaviour = Behaviour()
+    #         behaviour.face_token = face_token
+    #         behaviour.action = 'buy'
+    #         behaviour.good_id = good_id
+    #
+    #         db.session.add(behaviour)
+    #         db.session.commit()
+
+    for each in Records.query.all():
+        each.rated = 0
+        db.session.add(each)
+        db.session.commit()
+
 
     return 'ok'
 

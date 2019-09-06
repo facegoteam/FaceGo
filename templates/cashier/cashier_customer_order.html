@@ -203,6 +203,7 @@
         </div>
       </div>
     </div>
+   </div>
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
     <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
@@ -306,7 +307,6 @@
                     success: function(data) {
                         //清空datalist
                         $("#data").empty();
-                        data.innerHTML = "";
                         for(var i=0; i<data.length; i++){
                             $("#data").append('<option value="' + data[i] + '">');
                         }
@@ -436,7 +436,7 @@
         } //end methods
       })
     </script>
-  </div>
+
 </body>
 
 </html>

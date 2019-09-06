@@ -12,6 +12,20 @@ app.config['SQLALCHEMY_TRABACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
+# 模型rate
+# 创建时间：2019-09-05
+# 作者：黄文政
+# 简要说明：存储顾客对商品的评分
+class Rate(db.Model):
+    __tablename__ = 'rate'  #表名rate
+    #字段
+    id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
+    good_id = db.Column(db.Integer)
+    total = db.Column(db.Float)
+    count = db.Column(db.Integer)
+    rate = db.Column(db.Float)
+
+
 # 模型Behaviour
 # 创建时间：2019-09-03
 # 作者：黄文政
@@ -98,6 +112,7 @@ class Records(db.Model):
     shop_id = db.Column(db.Integer)
     record_goods_id = db.Column(db.Integer)
     token = db.Column(db.String(50))
+    rated = db.Column(db.Integer)
 
 
 

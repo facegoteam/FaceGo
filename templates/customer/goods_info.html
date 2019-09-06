@@ -72,9 +72,9 @@
     }
     function get_info(){
         $.ajax({
-            url:"/customer_ask_for_goods_info/"+get_name(),
+            url:"/customer_ask_for_goods_info?name="+get_name(),
             data: {"identity":"web"},
-            type: 'post',
+            type: 'get',
             success: function (data) {
                 //接受前端数据
                 var str="";
