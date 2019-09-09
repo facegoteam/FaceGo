@@ -7,7 +7,7 @@ pymysql.install_as_MySQLdb()
 app = Flask(__name__)
 app.secret_key = 'super secret key'
 #配置数据库地址
-app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:8008208820@localhost/facego'
+app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:qian520XX@localhost/facego'
 app.config['SQLALCHEMY_TRABACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 

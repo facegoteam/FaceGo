@@ -93,6 +93,7 @@
 									</tr>
 								</tbody>
 							</table>
+
 							<!--新增门店信息模态框-->
 							<div class="modal fade" tabindex="-1" role="dialog" id="addShop">
 								<div class="modal-dialog" role="document">
@@ -209,6 +210,10 @@
 				cloneTableDatas: [],
 
 			},
+				//方法名：created
+				//创建时间：2019-08-30
+				//作者：姜子玥
+				//说明：获取数据库数据并显示在表格界面中
 			created: function() {
 				var _self = this;
 				$.ajax({
@@ -233,11 +238,17 @@
 				_self.getShowData(_self.shopDatas);
 			},
 			methods: {
-				// 获取需要渲染到页面中的数据
+				//方法名：getShowData
+				//创建时间：2019-08-30
+				//作者：姜子玥
+				//说明：获取需要渲染到页面中的数据
 				getShowData: function(arr) {
 					this.cloneTableDatas = JSON.parse(JSON.stringify(arr));
 				},
-				//新增门店信息
+				//方法名：add
+				//创建时间：2019-08-30
+				//作者：姜子玥
+				//说明：弹出新增门店信息模态框
 				add: function() {
 				    this.addShop = {
                         "shop_id":"",
@@ -248,7 +259,10 @@
                     };
 					$('#addShop').modal('show');
 				},
-				//提交新增门店信息
+				//方法名：addSubmit
+				//创建时间：2019-08-30
+				//作者：姜子玥
+				//说明：提交新增门店信息
 				addSubmit:function(){
 					var _self=this;
 
@@ -295,14 +309,19 @@
 						}
 					});
 			},
-                
-                //显示编辑信息
+                //方法名：edit
+				//创建时间：2019-08-30
+				//作者：姜子玥
+				//说明：显示编辑信息
                 edit:function(index){
                 	$("#editShop").modal('show');
                 	this.selected=index;
                 	this.selectedlist=JSON.parse(JSON.stringify(this.shopDatas))[index];
                 },
-                //提交编辑
+				//方法名：editSubmit
+				//创建时间：2019-08-30
+				//作者：姜子玥
+				//说明：提交编辑
                 editSubmit:function(){
                 	var _self=this;
 
@@ -354,8 +373,10 @@
                 	}
                 	else{}
                 },
-                
-               //删除信息
+                //方法名：del
+				//创建时间：2019-08-30
+				//作者：姜子玥
+				//说明：弹出删除信息模态框 并将删除门店提交给后台删除门店
                del:function(index){
                	var result=confirm("确定是否删除该门店");
                	if(result==true){
@@ -385,6 +406,10 @@
                	}
                	else{}
                },
+				//方法名：searchFn
+				//创建时间：2019-08-30
+				//作者：姜子玥
+				//说明：在表格中搜索门店
                searchFn:function (e) {
                	var key=e.target.value;
                 

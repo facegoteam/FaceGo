@@ -1,3 +1,10 @@
+<!--
+文件名：admin_record
+创建时间：2019-09-09
+作者：姜子玥
+说明：管理员显示销售记录并生成图表
+修改日期：2019-09-09
+-->
 <!DOCTYPE html>
 <html>
 
@@ -212,6 +219,10 @@
 					}, //搜索
 					cloneTableDatas: [], //显示用
 				},
+				//方法名：created
+				//创建时间：2019-09-04
+				//作者：姜子玥
+				//说明：获取数据库的销售数据显示在界面 以及所有商店名称
 				created: function() {
 					var _self = this;
 					var date = new Date();
@@ -274,11 +285,17 @@
 					});
 				},
 				methods: {
-					//渲染数据
+				//方法名：getShowData
+				//创建时间：2019-09-04
+				//作者：姜子玥
+				//说明：渲染数据
 					getShowData: function(arr) {
 						this.cloneTableDatas = JSON.parse(JSON.stringify(arr));
 					},
-					//显示查询
+					//方法名：search
+					//创建时间：2019-09-04
+					//作者：姜子玥
+					//说明：显示查询
 					search: function() {
 						var _self = this;
 						_self.searchRecord.year = document.getElementById("year").value;
@@ -330,21 +347,26 @@
 						});
 					},
 
-					//弹出模态框显示销量-时间图
+					//方法名：getTimeShow
+					//创建时间：2019-09-04
+					//作者：姜子玥
+					//说明：弹出模态框显示销量-时间图
 					getTimeShow: function() {
 						$("#type").modal('hide');
 						$("#time").modal("show");
 					},
-					//在模态框中显示图
+
+					//方法名：showTime
+					//创建时间：2019-09-04
+					//作者：姜子玥，黄文政
+					//说明：在模态框中显示时间-销售额图
 					showTime: function() {
                         var search_year = document.getElementById("selectYear").value;
-
 						//判断输入错误
 						if(search_year == "选择年份"){
 						    alert("请选择年份");
 						    return;
                         }
-
 						this.showShoplist = [];
 						this.timeSeries = [];
 						for(var i=0; i<this.shoplist.length; i++){
@@ -434,12 +456,21 @@
 							}
 						});
 					},
-					//弹出模态框
+
+
+					//方法名：getTypeShow
+					//创建时间：2019-09-04
+					//作者：姜子玥
+					//说明：弹出商品种类-销售额模态框
 					getTypeShow: function() {
 						$("#time").modal('hide');
 						$("#type").modal('show');
 					},
-					//在模态框中显示图
+
+					//方法名：showType
+					//创建时间：2019-09-04
+					//作者：姜子玥，黄文政
+					//说明：在模态框中显示商品种类-销售额图
 					showType: function() {
 					    var type_year = document.getElementById("selectTypeYear").value;
 						var search_month = document.getElementById("selectMonth").value;

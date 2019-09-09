@@ -2,7 +2,7 @@
 文件名：cashier_goods_details
 创建时间：2019-08-24
 作者：陈雨琦
-说明：web管理员/收银员页面的商品管理商品列表，可以点击操作来跳转到changeMessage页面，可以点击增加跳转到addGoods页面
+说明：web收银员页面的商品管理商品列表
 修改日期：2019-08-25
 -->
 
@@ -65,6 +65,7 @@
                                           </form>
                                         </div>
                                       </div>
+									<!--商品信息表格-->
 									<table class="table table-bordered " style="background:rgba(255,255,255,0.2);filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000,endcolorstr=#7F000000)">
 										<thead class="thead-dark">
 											<tr>
@@ -244,24 +245,7 @@
                 "img": "",
                 "good_id": "",
             },
-            tableDatas: [
-                // {
-                // 	"img": "img_ok",
-                // 	"name": "bread",
-                // 	"price": "2.5",
-                // 	"type": "食物",
-                // 	"count": "50",
-                // 	"id": 1
-                // },
-                // {
-                // 	"id": 2,
-                // 	"img": "img_2ok",
-                // 	"name": "water",
-                // 	"price": "555",
-                // 	"type": "酒水饮乳",
-                // 	"count": "20"
-                // },
-            ],
+            tableDatas: [],
             cloneTableDatas: [],
             search: "",
         },
@@ -295,11 +279,21 @@
 
         },
         methods: {
-            // 获取需要渲染到页面中的数据
+            <!--
+			名称：getShowData
+			作者：陈雨琦
+			时间：2019-08-29
+			说明：获取显示到页面上的信息
+			-->
             getShowData: function(arr) {
                 this.cloneTableDatas = JSON.parse(JSON.stringify(arr));
             },
-            //新增
+            <!--
+			名称：add
+			作者：陈雨琦
+			时间：2019-08-29
+			说明：显示新增商品模态框
+			-->
             add: function() {
                 console.log('add');
                 {#console.log(typeof(this.tableData));#}
@@ -316,13 +310,23 @@
                 };
                 $('#addModal').modal('show');
             },
-            //提交新增
+            <!--
+			名称：addSubForm
+			作者：陈雨琦
+			时间：2019-08-29
+			说明：提交新增商品信息
+			-->
             addSubForm: function() {
                 console.log('addsubform');
                 var file = document.getElementById("file").files[0];
     		    {#console.log(file==undefined);#}
 
-                //判断输入是否合法
+				<!--
+				名称：
+				作者：黄文政
+				时间：2019-08-29
+				说明：判断输入是否合法
+				-->
                 var isInteger = /^\d+$/;
                 var isValidPrice = /(^[1-9](\d+)?(\.\d{1,2})?$)|(^0$)|(^\d\.\d{1,2}$)/;
                 var isValidType = /^(饮品)|(食品)|(日用品)|(书籍杂志)$/;
@@ -393,14 +397,24 @@
                 $("#file").val("");
                 $("#img").attr("src"," ");
             },
-            //编辑
+            <!--
+			名称：edit
+			作者：陈雨琦
+			时间：2019-08-29
+			说明：显示编辑商品信息模态框
+			-->
             edit: function(index) {
                 console.log('edit');
                 $('#editModal').modal('show');
                 this.selected = index;
                 this.selectedlist = JSON.parse(JSON.stringify(this.cloneTableDatas))[index];
             },
-             //选择种类
+			<!--
+			名称：chooseType
+			作者：陈雨琦
+			时间：2019-08-29
+			说明：选择商品种类
+			-->
 		  chooseType: function(){
 			  var myselect = document.getElementById("stype");
 			  var index = myselect.selectedIndex;
@@ -419,7 +433,12 @@
 				  this.getShowData(this.tableDatas);
 				}
 		  },
-            //提交编辑
+            <!--
+			名称：editSubForm
+			作者：陈雨琦，黄文政
+			时间：2019-08-29
+			说明：提交编辑
+			-->
             editSubForm: function() {
                 var result = confirm("是否保存所做改动"); //在页面上弹出确认对话框
                 if (result == true) {
@@ -478,7 +497,13 @@
                     })
                 }
             },
-            //删除
+
+			<!--
+			名称：del
+			作者：陈雨琦
+			时间：2019-08-29
+			说明：删除商品
+			-->
             del: function(index) {
                 var result = confirm("确定是否删除该商品条目"); //在页面上弹出确认对话框
                 // console.log(result);
@@ -504,7 +529,12 @@
 
                 }
             },
-            //查询
+            <!--
+			名称：editSubForm
+			作者：陈雨琦，黄文政
+			时间：2019-08-29
+			说明：通过商品名称查询商品
+			-->
             searchFn: function(e) {
                 var key = e.target.value;
                 //查询firstName列

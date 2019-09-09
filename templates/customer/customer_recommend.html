@@ -342,6 +342,11 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
 	<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
 	<script type="text/javascript">
+
+		//方法名：initialize
+		//创建时间：2019-09-08
+		//作者：姜子玥
+		//说明：获取推荐的商品并显示在界面上
 		function initialize() {
 			$.ajax({
 				type: "get",
@@ -377,6 +382,10 @@
 		}
 		initialize();
 
+		//方法名：detail
+		//创建时间：2019-09-08
+		//作者：姜子玥
+		//说明：点击商品显示商品详情模态框
 		function detail(obj) {
 		    console.log(obj);
 			$("#goods_detail").modal('show');

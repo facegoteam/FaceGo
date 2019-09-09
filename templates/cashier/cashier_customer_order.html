@@ -1,3 +1,10 @@
+<!--
+文件名：cashier_customer_order
+创建时间：2019-08-24
+作者：陈雨琦，黄文政
+说明：web收银员页面的用户识别后页面，显示用户的推荐商品以及用户未完成的订单，可以新增订单以及完成订单
+修改日期：2019-09-07
+-->
 <!DOCTYPE html>
 <html>
 
@@ -43,6 +50,7 @@
           </div>
         </div>
         <div class="col-md-6 pr-3">
+          <!--显示用户推荐商品-->
           <table class="table"  style="background:rgba(255,255,255,0.2);filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000,endcolorstr=#7F000000)">
             <thead>
               <tr>
@@ -61,6 +69,7 @@
           </table>
         </div>
         <div class="col-md-6 pl-3">
+          <!--显示用户已下的未完成的订单-->
           <div class="table-responsive">
             <table class="table" style="background:rgba(255,255,255,0.2);filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000,endcolorstr=#7F000000)">
               <thead>
@@ -85,7 +94,7 @@
               </tbody>
             </table>
             <!--
-			名称：
+			名称：detailModal
 			作者：陈雨琦
 			时间：2019-08-29
 			说明：模态框查看订单详情
@@ -127,7 +136,7 @@
               </div>
             </div>
              <!--
-			名称：
+			名称：addModal
 			作者：陈雨琦
 			时间：2019-9-2
 			说明：模态框增加订单
@@ -225,10 +234,12 @@
             "good_count": "",
             "good_price": ""
           },
+          //添加新订单条目信息
           addOrder: {
             "good_name": "",
             "good_count": "",
           },
+          //推荐商品信息
           recommendDatas: [],
           orderDatas: [],
           detailDatas: [],
@@ -240,6 +251,7 @@
         //实例创建后显示数据库相关信息
         created: function() {
           var _self = this;
+          //获取推荐商品信息
           $.ajax({
             url: '/cashier_ask_for_customer_recommend',
             data: {
@@ -291,6 +303,12 @@
           // console.log(typeof(this.tableDatas));
         }, //end create
         methods: {
+           <!--
+			名称：onInput
+			作者：黄文政
+			时间：2019-9-7
+			说明：获取商品列表
+			-->
           onInput: function(){
             var value = $("#add_name").val();
             //console.log(value);
@@ -318,17 +336,40 @@
                 });
             }
           },
-          // 获取需要渲染到页面中的数据
+           <!--
+			名称：getShowDataR
+			作者：陈雨琦
+			时间：2019-9-2
+			说明：获取需要渲染到推荐表格中的数据
+			-->
           getShowDataR: function(arr) {
             this.cloneRecommendDatas = JSON.parse(JSON.stringify(arr));
           },
+          <!--
+			名称：getShowDataO
+			作者：陈雨琦
+			时间：2019-9-2
+			说明：获取需要渲染到未完成订单表格中的数据
+			-->
           getShowDataO: function(arr) {
             this.cloneOrderDatas = JSON.parse(JSON.stringify(arr));
           },
+          <!--
+			名称：getDetailData
+			作者：陈雨琦
+			时间：2019-9-2
+			说明：获取订单详情的数据（商品名称和数量）
+			-->
           getDetailData: function(arr) {
             console.log(arr);
             this.cloneDetailTableDatas = JSON.parse(JSON.stringify(arr));
           },
+          <!--
+			名称：detail
+			作者：陈雨琦
+			时间：2019-9-2
+			说明：显示订单详情模态框
+			-->
           detail: function(index) {
             console.log("detail");
             $('#detailModal').modal('show');
@@ -369,13 +410,23 @@
               }
             });
           },
-          //添加购买记录
+           <!--
+			名称：add
+			作者：陈雨琦
+			时间：2019-9-2
+			说明：显示添加购买记录模态框
+			-->
           add: function() {
 			var _self = this;
 			_self.newOrder=[];
             $('#addModal').modal('show');
           },
-		  //添加新增订单中的商品,显示在表格中
+          <!--
+			名称：addGoods
+			作者：陈雨琦，黄文政
+			时间：2019-9-2
+			说明：添加新增订单中的商品,判断输入是否正确，显示在表格中
+			-->
 		  addGoods:function(){
               var _self = this;
               //判断输入是否合法
@@ -417,18 +468,27 @@
                     return;
                 }
 
-
                 var name = _self.addOrder.good_name;
                 var count = _self.addOrder.good_count;
                 _self.newOrder.push({name,count});
                 console.log(_self.newOrder);
 		    },
-		  //删除新增订单的条目
+          <!--
+			名称：delTip
+			作者：陈雨琦
+			时间：2019-9-2
+			说明：删除新增订单的条目
+			-->
 		  delTip:function(index){
 			  var _self =this;
 			  _self.newOrder.splice(index,1);
 		  },
-          //提交新增购买记录
+          <!--
+			名称：addSubmit
+			作者：陈雨琦
+			时间：2019-9-2
+			说明：提交新增购买记录
+			-->
           addSubmit: function() {
             var _self = this;
             $.ajax({
@@ -455,7 +515,12 @@
               }
             });
           },
-          //完成订单
+          <!--
+			名称：finish
+			作者：黄文政
+			时间：2019-9-2
+			说明：完成订单
+			-->
           finish: function(index) {
             var _self = this;
             token = _self.orderDatas[index]['token'];

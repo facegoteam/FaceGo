@@ -1,3 +1,10 @@
+<!--
+文件名：cashier_order
+创建时间：2019-08-24
+作者：陈雨琦
+说明：web收银员页面的订单查看列表
+修改日期：2019-08-25
+-->
 <!DOCTYPE html>
 <html>
 
@@ -52,7 +59,7 @@
 										</form>
 									</div>
 								</div>
-						
+							<!--显示订单信息-->
 							<table class="table table-bordered " id="table"  style="background:rgba(255,255,255,0.2);filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000,endcolorstr=#7F000000)">
 								<thead class="thead-dark">
 									<tr>
@@ -75,11 +82,11 @@
 								</tbody>
 							</table>
 							<!--
-			名称：
-			作者：陈雨琦
-			时间：2019-08-29
-			说明：模态框查看订单详情
-			-->
+							名称：
+							作者：陈雨琦
+							时间：2019-08-29
+							说明：模态框查看订单详情
+							-->
 							<div class="modal fade" tabindex="-1" role="dialog" id="detailModal">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
@@ -145,7 +152,12 @@
 						cloneDetailTableDatas: [],
 						search: "",
 					}, //end data
-					//实例创建后显示数据库相关信息
+					<!--
+					名称：created
+					作者：陈雨琦
+					时间：2019-09-05
+					说明：实例创建后显示数据库相关信息
+					-->
 					created: function() {
 						var _self = this;
 						$.ajax({
@@ -173,17 +185,34 @@
 						}); //end ajax
 						console.log(_self.orderDatas);
 					}, //end created
+
 					methods: {
-						// 获取需要渲染到页面中的数据
+						<!--
+						名称：getShowData
+						作者：陈雨琦
+						时间：2019-09-05
+						说明：获取需要渲染到订单列表中的数据
+						-->
 						getShowData: function(arr) {
 							this.cloneTableDatas = JSON.parse(JSON.stringify(arr));
 							// console.log(this.cloneTableDatas);
 						},
+						<!--
+						名称：getDetailData
+						作者：陈雨琦
+						时间：2019-09-05
+						说明：获取需要渲染到订单详情中的数据
+						-->
 						getDetailData: function(arr) {
 							console.log(arr);
 							this.cloneDetailTableDatas = JSON.parse(JSON.stringify(arr));
 						},
-						//详情
+						<!--
+						名称：detail
+						作者：陈雨琦
+						时间：2019-09-05
+						说明：显示订单详情模态框，显示订单详情内容
+						-->
 						detail: function(index) {
 							console.log("detail");
 							$('#detailModal').modal('show');
@@ -223,15 +252,13 @@
 									alert("查询出错");
 								}
 							});
-							//          this.selected = index;
-							// this.selectedlist = JSON.parse(JSON.stringify(this.detailDatas))[index];
-							// var detailList = this.selectedlist;
-							// for (var i=0;i<detailList;i++){
-							// 	this.detailDatas[i]=detailList[i];
-							// 	this.detailDatas[i]['id'] = i+1;
-							// }
 						},
-						//查询
+						<!--
+						名称：searchFn
+						作者：陈雨琦
+						时间：2019-09-05
+						说明：通过订单号查询订单
+						-->
 						searchFn: function(e) {
 							var key = e.target.value;
 							console.log(key);

@@ -1,7 +1,7 @@
 <!--
 文件名：admin_goods_manage
 创建时间：2019-08-26
-作者：陈雨琦
+作者：姜子玥，陈雨琦
 说明：管理员管理商品列表，可以增加删除和修改
 修改日期：2019-08-26
 -->
@@ -257,28 +257,14 @@
                 "img": "",
                 "good_id": "",
             },
-            tableDatas: [
-                // {
-                // 	"img": "img_ok",
-                // 	"name": "bread",
-                // 	"price": "2.5",
-                // 	"type": "食物",
-                // 	"count": "50",
-                // 	"id": 1
-                // },
-                // {
-                // 	"id": 2,
-                // 	"img": "img_2ok",
-                // 	"name": "water",
-                // 	"price": "555",
-                // 	"type": "酒水饮乳",
-                // 	"count": "20"
-                // },
-            ],
+            tableDatas: [],
             cloneTableDatas: [],
             search: "",
         },
-        //实例创建后显示数据库相关信息
+		//方法名：created
+		//创建时间：2019-08-28
+		//作者：姜子玥
+        //说明：实例创建后显示数据库相关信息
         created: function() {
             var _self = this;
             $.ajax({
@@ -308,11 +294,17 @@
 
         },
         methods: {
-            // 获取需要渲染到页面中的数据
+        	//方法名：getShowData
+			//创建时间：2019-08-28
+			//作者：姜子玥
+        	//说明：获取需要渲染到页面中的数据
             getShowData: function(arr) {
                 this.cloneTableDatas = JSON.parse(JSON.stringify(arr));
             },
-            //新增
+        	//方法名：add
+			//创建时间：2019-08-28
+			//作者：姜子玥
+        	//说明：显示新增模态框
             add: function() {
                 console.log('add');
                 this.tableData = {
@@ -327,7 +319,11 @@
                 };
                 $('#addModal').modal('show');
             },
-            //提交新增
+			 //方法名：addSubForm
+			//创建时间：2019-08-28
+			//作者：姜子玥
+        	//说明：提交新增数据给数据库
+			//修改：2019-09-09
             addSubForm: function() {
                 console.log('addsubform');
     		    var file = document.getElementById("file").files[0];
@@ -356,7 +352,6 @@
                     alert("请上传商品图片");
                     return;
                 }
-                //商品名称查重
                 for(var i=0; i<this.tableDatas.length; i++){
                     if(this.tableData.name == this.tableDatas[i].name){
                         alert("商品名重复！请重新输入商品名");
@@ -404,7 +399,11 @@
                 $("#file").val("");
                 $("#img").attr("src"," ");
             },
-            //编辑
+            //方法名：edit
+			//创建时间：2019-08-28
+			//作者：姜子玥
+        	//说明：显示编辑模态框
+			//修改：2019-09-09
             edit: function(index) {
                 console.log('edit');
                 $('#editModal').modal('show');
@@ -430,7 +429,11 @@
 				  this.getShowData(this.tableDatas);
 				}
 		  },
-            //提交编辑
+			//方法名：editSubForm
+			//创建时间：2019-08-28
+			//作者：姜子玥
+        	//说明：提交编辑数据给数据库
+			//修改：2019-09-09
             editSubForm: function() {
                 var result = confirm("是否保存所做改动"); //在页面上弹出确认对话框
                 if (result == true) {
@@ -489,7 +492,10 @@
                 }
 
             },
-            //删除
+			//方法名：del
+			//创建时间：2019-08-28
+			//作者：姜子玥
+        	//说明：显示删除信息模态框 并提交给后台数据库
             del: function(index) {
                 var result = confirm("确定是否删除该商品条目"); //在页面上弹出确认对话框
                 // console.log(result);
@@ -513,7 +519,10 @@
 
                 }
             },
-            //查询
+			//方法名：searchFn
+			//创建时间：2019-08-28
+			//作者：姜子玥
+        	//说明：查询
             searchFn: function(e) {
                 var key = e.target.value;
                 //查询firstName列

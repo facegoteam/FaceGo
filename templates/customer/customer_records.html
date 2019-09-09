@@ -1,7 +1,7 @@
 <!--
 文件名：customer_records
 创建时间：2019-08-23
-作者：陈雨琦
+作者：姜子玥
 说明：web端用户的购买记录
 修改日期：2019-09-1  修改人：姜子玥
 修改时间：2019-09-06 修改人：姜子玥
@@ -113,13 +113,6 @@
 	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
 	<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
-	<!--	
-方法名：get_records
-作者：姜子玥
-创建时间：2019-08-27
-说明：动态渲染消费记录页面
-修改日期：2019-09-01
--->
 	<script>
 		var app = new Vue({
 			delimiters: ['{[', ']}'],
@@ -131,6 +124,10 @@
 				selectedlist: {}
 
 			},
+			//方法名：created
+            //创建时间：2019-09-08
+            //作者：姜子玥
+            //说明：获取数据库数据显示在消费记录表格中
 			created: function() {
 				var _self = this;
 				$.ajax({
@@ -155,9 +152,18 @@
 				});
 			},
 			methods: {
+				//方法名：getShowData
+            	//创建时间：2019-09-08
+            	//作者：姜子玥
+            	//说明：渲染数据
 				getShowData: function(arr) {
 					this.cloneTableDatas = JSON.parse(JSON.stringify(arr));
 				},
+
+				//方法名：detail
+            	//创建时间：2019-09-08
+            	//作者：姜子玥
+            	//说明：显示商品详情信息模态框
 				detail: function(index) {
 					$("#goods").modal('show');
 					this.selected = index;
