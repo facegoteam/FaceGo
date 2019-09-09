@@ -4,118 +4,204 @@
 作者：陈雨琦
 说明：web端用户的购买记录
 修改日期：2019-09-1  修改人：姜子玥
+修改时间：2019-09-06 修改人：姜子玥
 -->
 
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset="utf-8">
+	<head>
+		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
+		<link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
+        <link rel="stylesheet" href="/static/css/bg.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
 		<link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
-</head>
+	</head>
 
-<body>
-  <div class="py-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="btn-group"> <a href="/customer_records" class="btn btn-dark">
-              <i class="fa fa-shopping-bag" aria-hidden="true" onclick="get_records()"></i> 购买记录</a>
-              <a href="/customer_recommend" class="btn btn-outline-dark" style="">
-                  <i class="fa fa-diamond" aria-hidden="true"></i> 推荐商品</a>
-              <a href="/customer_logout" class="btn btn-outline-dark">
-                  <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; 登出&nbsp; &nbsp;</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="pt-5" style="">
-      <div class="container" id="record">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="table-responsive">
-              <table class="table table-bordered ">
-                <thead class="thead-dark">
-                  <tr>
-                    <th>NO.</th>
-                    <th>图片</th>
-                    <th>商品名称</th>
-                    <th>价格</th>
-                    <th>数量</th>
-                    <th>购买日期</th>
-                    <th contenteditable="true">操作&nbsp;</th>
-                  </tr>
-                </thead>
-                  <tbody id="tbody">
-                  	<tr v-for="(item,index) in cloneTableDatas">
-										<td>{[ item.id ]}</td>
-										<td><img :src="item.img" style="height:30px"></td>
-										<td>{[ item.name ]}</td>
-										<td>{[ item.price]}</td>
-										<td>{[ item.count ]}</td>
-										<td>{[ item.time ]}</td>
-										<td><a class="btn btn-link" :href="item.link">查看详情</a></td>
-									  </tr>
-                  </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</body>
+	<body>
+		<div class="py-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="btn-group">
+							<a href="/customer_records" class="btn btn-dark">
+								<i class="fa fa-shopping-bag" aria-hidden="true" onclick="get_records()"></i> 购买记录</a>
+							<a href="/customer_recommend" class="btn btn-outline-dark" style="">
+								<i class="fa fa-diamond" aria-hidden="true"></i> 推荐商品</a>
+							<a href="/customer_logout" class="btn btn-outline-dark">
+								<i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; 登出&nbsp; &nbsp;</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="pt-5" style="">
+				<div class="container" id="record">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-responsive">
+								<table class="table table-bordered " style="background:rgba(255,255,255,0.2);filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000,endcolorstr=#7F000000)">
+									<thead class="thead-dark">
+										<tr>
+											<th>NO.</th>
+											<th>图片</th>
+											<th>商品名称</th>
+											<th>价格</th>
+											<th>数量</th>
+											<th>购买日期</th>
+											<th contenteditable="true">操作&nbsp;</th>
+										</tr>
+									</thead>
+									<tbody id="tbody">
+										<tr v-for="(item,index) in cloneTableDatas">
+											<td>{[ item.id ]}</td>
+											<td><img :src="item.img" style="height:30px"></td>
+											<td>{[ item.name ]}</td>
+											<td>{[ item.price]}</td>
+											<td>{[ item.count ]}</td>
+											<td>{[ item.time ]}</td>
+											<td>
+												<button type="button" class="btn btn-outline-green" v-on:click="detail(index)">商品详情</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+
+								<!--商品详情模态框-->
+								<div class="modal fade" tabindex="-1" role="dialog" id="goods">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title">
+												<font face="FontAwesome">商品详情</font>
+											</h4>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+											</div>
+											<div class="modal-body">
+												<font face="FontAwesome"></font>
+												<div class="py-5" style="">
+													<div class="container">
+														<div class="row">
+															<div class="col-md-6" id="img">
+															</div>
+															<div class="col-md-6" draggable="true">
+																<div class="row">
+																	<div class="col-md-12" id="information">
+																		<h2 class="pb-5"><font face="仿宋"><font size="6">商品名称：</font></h2>
+																		<h2 class="pb-5"><font face="仿宋"><font size="6">商品价格：</font></h2>
+																		<h2 class="pb-5"><font face="仿宋"><font size="6">商品库存：</font></h2>
+																		<h2 class="pb-5"><font face="仿宋"><font size="6">具体信息:</p></font></h2>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
 	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
 	<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
-<!--	
+	<!--	
 方法名：get_records
 作者：姜子玥
 创建时间：2019-08-27
 说明：动态渲染消费记录页面
 修改日期：2019-09-01
 -->
-  <script>
-    	var app=new Vue({
-    		delimiters: ['{[', ']}'],
-    		el: "#record",
-    		data:{
-    			records:[],
-    			cloneTableDatas:[],
-    			
-    		},
-    		created:function(){
-    			var _self=this;
-    			$.ajax({
-    				type:"get",
-    				url:"/customer_ask_for_record",
-    				async: false,
-    				dataType: "jsonp",
+	<script>
+		var app = new Vue({
+			delimiters: ['{[', ']}'],
+			el: "#record",
+			data: {
+				selected: -1,
+				records: [],
+				cloneTableDatas: [],
+				selectedlist: {}
+
+			},
+			created: function() {
+				var _self = this;
+				$.ajax({
+					type: "get",
+					url: "/customer_ask_for_record",
+					async: false,
+					dataType: "jsonp",
 					jsonp: "callback",
 					jsonpCallback: "successCallback",
-					success:function(data){
-						for(var i=0;i<data.length;i++){
-							_self.records[i]=data[i];
-							_self.records[i]["id"]=i+1;
-							_self.records[i]["img"]= 'http://' + document.location.host + data[i]["img"];
-							_self.records[i]["link"]='http://'+ document.location.host +"/goods_info?name="+data[i]["name"];
+					success: function(data) {
+						for(var i = 0; i < data.length; i++) {
+							_self.records[i] = data[i];
+							_self.records[i]["id"] = i + 1;
+							_self.records[i]["price"] = _self.records[i]["price"].toFixed(2);
+							_self.records[i]["img"] = "http://" + document.location.host + data[i]["img"];
 						}
 						_self.getShowData(_self.records);
 					},
-					error:function(){
+					error: function() {
 						alert("查询出错");
 					}
-    			});
-    		},
-    		methods:{
-    			getShowData:function(arr){
-    				this.cloneTableDatas=JSON.parse(JSON.stringify(arr));
-    			},
-    		}
-    	});
-    </script>
+				});
+			},
+			methods: {
+				getShowData: function(arr) {
+					this.cloneTableDatas = JSON.parse(JSON.stringify(arr));
+				},
+				detail: function(index) {
+					$("#goods").modal('show');
+					this.selected = index;
+					this.selectedlist = JSON.parse(JSON.stringify(this.records))[index];
+					var _self = this;
+					var ask_name = _self.selectedlist['name'];
+					$.ajax({
+						url: "/customer_ask_for_goods_info?name=" + ask_name,
+						data: {
+							"identity": "web"
+						},
+						type: 'get',
+						async: false,
+						dataType: "jsonp",
+						jsonp: "callback",
+						jsonpCallback: "successCallback",
+						success: function(data) {
+							//接受前端数据
+							var str = "";
+							var img_str = "";
+							var goods_url = data['img'];
+							var goods_name = data['name'];
+							var goods_price = data['price'];
+							var goods_count = data['stock'];
+							var info = data['info'];
+							console.log(data);
+							//显示界面
+							img_str += "<img class=\"img-fluid d-block\" src=\"" + "http://" + document.location.host + goods_url + "\"  >";
+							str += "<h2 class=\"pb-1\"><font face=\"微软雅黑\"><font size=\"4\">商品名称：" + goods_name +
+								"</font></h2><h2 class=\"pb-1\"><font face=\"微软雅黑\"><font size=\"4\">商品价格：" + goods_price +
+								"</font></h2><h2 class=\"pb-1\"><font face=\"微软雅黑\"><font size=\"4\">商品库存：" + goods_count +
+								"</font></h2><h2 class=\"pb-1\"><font face=\"微软雅黑\"><font size=\"4\">具体信息：<p>" + info +
+								"</p></font></h2>";
+							img.innerHTML = img_str;
+							information.innerHTML = str;
+						},
+						error: function() {
+							alert("查看商品详情失败!");
+						}
+					});
+				}
+
+			}
+		});
+	</script>
 
 </html>

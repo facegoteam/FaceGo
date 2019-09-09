@@ -1,0 +1,104 @@
+/*
+ * 文件名：style
+ * 作者：姜子玥
+ * 创建时间：2019-09-08
+ * 说明：设置网页格式
+ */
+ @import url(https://fonts.lug.ustc.edu.cn/css?family=Playfair+Display);
+/* ---------------------------------------------------------------------------- */
+/* ------------------------------------Html-Body------------------------------- */
+/* ---------------------------------------------------------------------------- */
+html, body {width:100%; padding:0; margin:0;}
+body {background:  #D0E9C6 !important; color: #333333;font-size: 20px; font-family: "微软雅黑";}
+
+/* ---------------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------------- */
+html { -webkit-text-size-adjust:none;}
+.video embed,.video object,.video iframe { width: 10%;  height: auto;}
+img{max-width:100%;	height: auto;width: auto\9; /* ie8 */}
+
+/* ---------------------------------------------------------------------------- */
+/* -------------------------------------Header--------------------------------- */
+/* ---------------------------------------------------------------------------- */
+.top-header{padding: 40px 0 20px;}
+.top-header ul.top-social{float:right !important;}
+.top-header ul.top-social li{margin-right: 10px;}
+.top-header ul.top-social i.fa{font-size: 24px;}
+.top-header ul.top-social a{color: #fff;}
+.top-header ul.top-social a:hover{color: #23B6B6;}
+
+@media only screen and (max-width: 767px){
+	.top-header ul.top-social{float:none !important; text-align: center;}
+}
+
+header{}
+
+.site-header {position: relative;margin-bottom: 45px;z-index:2;background: url("/static/img/customer_recommend/header.jpg") no-repeat;background-position: 0 0;background-attachment: fixed;background-size: cover;}
+.site-branding {padding-top: 120px;text-align: center;}
+.site-logo{}
+.overlay {position: absolute;height: 100%;width: 100%;top: 0;background-color: #000;opacity: 0.4;z-index: -1;}
+/* ---------------------------------------------------------------------------- */
+/* -------------------------------------Content-------------------------------- */
+/* ---------------------------------------------------------------------------- */
+#page-content{}
+#page-content.index-page {}
+#page-content.sub-page {padding: 80px 20;}
+
+/* ---HomePage--- */
+.box-content {padding: 50px 0;}
+
+.box-content.box-5 {}
+.box-content.box-5 .box-item{background-color: #fff;margin: 0 auto 30px;max-width: 500px;} 
+.box-content.box-5 .box-item .content{padding: 10px 30px 30px;} 
+.box-content.box-5 .box-item img {width: 100%;}
+.box-content.box-5 .box-item .content h3.entry-title{font-weight: 500;font-size: 28px;margin-bottom: 20px;}
+.box-content.box-5 .box-item .content h3.entry-title a{color:#111;} 
+.box-content.box-5 .box-item .content h3.entry-title a:hover{color:#23B6B6;} 
+.box-content.box-5 .box-item .content span{color: #aaa;font-size: 20px;}
+
+.entry-title{font-weight: 500;font-size: 28px;margin-bottom: 20px;}
+.entry-title a{color:#111;} 
+.entry-title a:hover{color:#23B6B6;} 
+
+.entry-thumb {position: relative;z-index: 2;text-align: center;}
+.entry-thumb:after {position: absolute;content: '';height: 0;width: 100%;left: 0;bottom: 0;background-color: rgba(35, 182, 182, 0.4);transition: height 0.4s;-webkit-transition: height 0.4s;}
+.entry-thumb:hover:after {height: 100%;}
+.single-thumb{text-align: center !important; margin-bottom: 30px;}
+.thumb-link {opacity: 0;position: absolute;top: 40%;left: 45%;color: #fff;font-size: 38px;-webkit-transition: all 0.4s 0.3s;transition: all 0.4s 0.3s;z-index: 99;}
+.entry-thumb:hover .thumb-link {opacity: 1;}
+.read-more {background-color: #23B6B6;padding: 15px 30px 30px;-webkit-transition: background-color 0.3s;transition: background-color 0.3s;}
+.read-more:hover {background-color: #17191B;}
+.read-more a {color: #fff;position: relative;z-index: 99;}
+
+
+.post {padding: 50px;background: #fff;}
+.post:after, .post:before{clear: both; content: '\0020'; display: block; visibility: hidden; width: 0; height: 0;}
+.post .entry-title {margin: 0 0 20px;text-align: center;}
+.post  h1.entry-title{line-height: 1.2;font-size: 38px;}
+.post h2{line-height: 1.1;font-size: 20px;margin: 0;}
+.post .info a{ color: #BE0A0A;}
+.post .info a:hover{ text-decoration: underline;}
+
+
+
+
+/* ---------------------------------------------------------------------------- */
+/* -----------------------------------SVG Effect------------------------------- */
+/* ---------------------------------------------------------------------------- */
+svg {position: absolute;top: 0;left: 0;}
+.svg-container {width: 100%;height: 0;padding-top: 7.93650794%;position: absolute;bottom: 0;position: relative;z-index: 3;}
+.nav-svg {position: relative;z-index: 3;margin-bottom: -7.81%;}
+.header-svg {margin-bottom: -2px;}
+.svg-block {fill: #D0E9C6;stroke: none;}
+.single-post-svg {fill: #fff !important;position: relative;margin-bottom: -1px;}
+.single-svg-bottom {margin-top: -2px;margin-bottom: 60px;}
+.footer-svg {position: relative;margin-bottom: -2px;}
+.footer-svg.svg-block {fill: #17191B;}
+.post-svg {margin-bottom: -7.74%;}
+.post-bottom-svg {margin-top: -7.78%;}
+
+
+
+
+

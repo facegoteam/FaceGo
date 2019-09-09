@@ -12,17 +12,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
+  <link rel="stylesheet" href="/static/css/bg.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
 </head>
 
-<body class="">
-  <div class="py-5" style="background-image: url('https://static.pingendo.com/cover-stripes.svg'); background-position:left center; background-size: cover;">
+<body>
+  <div class="py-5" style="background-image: url('/static/img/login_staff/staff_login.jpg'); background-position:left center; background-size: cover;">
     <div class="container">
       <div class="row">
-        <div class="p-5 col-lg-6">
-          <h1 ><font face="黑体"><strong>Staff&nbsp; &nbsp; Login</strong></font></h1>
-          <p class="mb-3">please&nbsp; input&nbsp; your&nbsp; staff&nbsp; id&nbsp; and&nbsp; password&nbsp; before&nbsp; login&nbsp;</p>
+        <div class="p-5 col-md-5">
+          <h1 ><font size="7"><strong>Staff&nbsp;Login</strong></font></h1>
+            <p class="mb-3"><font size="4">please&nbsp; input&nbsp; your&nbsp; staff&nbsp; id&nbsp; and&nbsp; password</font></p>
           <form id="form">
             <div class="form-group"> <input type="text" class="form-control" placeholder="staff id" id="id"> </div>
             <div class="form-group"> <input type="password" class="form-control" placeholder="Password" id="pwd"> <small class="form-text text-muted text-right">
@@ -37,9 +38,9 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12 text-center">
-          <p><font face="仿宋"><font size =4>FaceGo-Nanjing</font></p>
-          <p><font face="仿宋"><font size =4>025-52090271</font></p>
-          <p class="mb-0"><font face="仿宋"><font size =4>facego@seu.edu.cn</font></p>
+          <p><font size=5>FaceGo-Nanjing</font></p>
+          <p><font size=5>025-52090271</font></p>
+          <p class="mb-0"><font size=5>facego@seu.edu.cn</font></p>
         </div>
       </div>
       <div class="row">
@@ -59,7 +60,7 @@
       </div>
       <div class="row">
         <div class="col-md-12 text-center">
-          <p class="mb-0">© 2019-FaceGo. All rights reserved</p>
+            <p class="mb-0"><font size="4">© 2019-FaceGo. All rights reserved</font></p>
         </div>
       </div>
     </div>
@@ -91,7 +92,7 @@
                     }
                 },
                 error: function () {
-                    alert('登录失败')
+                    alert('登录失败，请检查账号密码')
                 }
             });
         }

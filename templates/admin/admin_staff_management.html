@@ -12,6 +12,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
+        <link rel="stylesheet" href="/static/css/bg.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
 		<link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
 	</head>
@@ -68,7 +69,7 @@
 									</div>
 								</div>
 							</div>
-							<table class="table table-bordered ">
+							<table class="table table-bordered " style="background:rgba(255,255,255,0.2);filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000,endcolorstr=#7F000000)">
 								<thead class="thead-dark">
 									<tr>
 										<th>No</th>
@@ -316,6 +317,49 @@
 				addSubmit: function() {
 					var _self=this;
 					this.addStaff.identity = document.getElementById("add_identity").value;
+
+					//判断错误输入
+                    if(this.addStaff.staff_name.length ==0){
+                        alert("请输入员工姓名");
+                        return;
+                    }
+                    if(this.addStaff.identity.length == 0){
+                        alert("请选择身份");
+                        return;
+                    }
+                    if(this.addStaff.shop_name.length == 0){
+                        alert("请选择工作商店");
+                        return;
+                    }
+                    if(!(/^\d+$/.test(this.addStaff.staff_id))){
+                        alert("账号只能包含数字！");
+                        return;
+                    }
+                    if(this.addStaff.pwd.length == 0){
+                        alert("请输入账户密码");
+                        return;
+                    }
+                    if(this.addStaff.identity == "cashier"){
+                        if(this.addStaff.shop_name == "全部"){
+                            alert("收银员只能选一个工作商店");
+                            return;
+                        }
+                    }else{
+                        if(this.addStaff.shop_name != "全部"){
+                            alert("管理员的工作商店只能为\"全部\"");
+                            return;
+                        }
+                    }
+                    //重复用户名
+                    var staff_id_repeat = false;
+                    for(var i=0; i<_self.staffDatas.length; i++){
+                        if(this.addStaff.staff_id == _self.staffDatas[i].staff_id){
+                            alert("账号重复！");
+                            return;
+                        }
+                    }
+
+
 					$.ajax({
 						type: "get",
 						url: "/admin_add_staff",
@@ -330,7 +374,7 @@
 						dataType: "jsonp",
 						jsonp: "callback",
 						jsonpCallback: "successCallback",
-						success: function(data) { 
+						success: function(data) {
 							//获取数据库添加信息
 							alert("添加成功！");
 							_self.addStaff.id=_self.staffDatas.length+1;
@@ -356,11 +400,44 @@
 					//	$('#editSelectShop').append("<option value='" + shop_list[i]["name"] + "'>" + shop_list[i]["name"] + "</option>");
 					//}
 				},
+                //提交编辑
 				editSubmit: function() {
 					var _self=this;
 					var result = confirm("是否保存所做改动"); //在页面上弹出确认对话框
 					if(result == true) {
 						this.selectedlist.identity = document.getElementById("edit_identity").value;
+
+					//判断错误输入
+                    if(this.selectedlist.staff_name.length ==0){
+                        alert("请输入员工姓名");
+                        return;
+                    }
+                    if(this.selectedlist.identity.length == 0){
+                        alert("请选择身份");
+                        return;
+                    }
+                    if(this.selectedlist.shop_name.length == 0){
+                        alert("请选择工作商店");
+                        return;
+                    }
+                    if(this.selectedlist.pwd.length == 0){
+                        alert("请输入账户密码");
+                        return;
+                    }
+                    if(this.selectedlist.identity == "cashier"){
+                        if(this.selectedlist.shop_name == "全部"){
+                            alert("收银员只能选一个工作商店");
+                            return;
+                        }
+                    }else{
+                        if(this.selectedlist.shop_name != "全部"){
+                            alert("管理员的工作商店只能为\"全部\"");
+                            return;
+                        }
+                    }
+
+
+
 						//发送数据给数据库 并显示在当前界面
 						$.ajax({
 							type: "get",
@@ -388,8 +465,6 @@
 						        Vue.set(_self.staffDatas, _self.selected, _self.selectedlist);
 								_self.getShowData(_self.staffDatas);
 								$('#editStaff').modal('hide');
-					} else {
-
 					}
 				},
 				//获取编辑的身份信息

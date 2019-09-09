@@ -14,6 +14,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
+  <link rel="stylesheet" href="/static/css/bg.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
 </head>
@@ -77,7 +78,7 @@
                                           </form>
                                         </div>
                                       </div>
-									<table class="table table-bordered ">
+									<table class="table table-bordered "  style="background:rgba(255,255,255,0.2);filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000,endcolorstr=#7F000000)">
 										<thead class="thead-dark">
 											<tr>
 												<th>No</th>
@@ -314,15 +315,56 @@
             //新增
             add: function() {
                 console.log('add');
-                console.log(typeof(this.tableData));
-                console.log(this.tableDatas[this.tableDatas.length-1]);
+                this.tableData = {
+                    "id": "",
+                    "name": "",
+                    "stock": "",
+                    "price": "",
+                    "sold": "",
+                    "type": "",
+                    "img": "",
+                    "good_id": "",
+                };
                 $('#addModal').modal('show');
             },
             //提交新增
             addSubForm: function() {
                 console.log('addsubform');
     		    var file = document.getElementById("file").files[0];
-    		    //console.log(file);
+
+                //判断输入是否合法
+                var isInteger = /^\d+$/;
+                var isValidPrice = /(^[1-9](\d+)?(\.\d{1,2})?$)|(^0$)|(^\d\.\d{1,2}$)/;
+                var isValidType = /^(饮品)|(食品)|(日用品)|(书籍杂志)$/;
+                if(!isInteger.test(this.tableData.stock.toString()) || this.selectedlist.stock == 0){
+                    alert("请正确输入库存(正整数)");
+                    return;
+                }
+                if(!isValidPrice.test(this.tableData.price.toString()) || this.selectedlist.price == 0){
+                    alert("请输入正确价格(正数，小数最多保留两位)");
+                    return;
+                }
+                if(!isValidType.test(this.tableData.type)){
+                    alert("请输入正确的类别: 食品、饮品、日用品、书籍杂志");
+                    return;
+                }
+                if(this.tableData.name == ""){
+                    alert("商品名不能为空");
+                    return;
+                }
+                if(file == undefined){
+                    alert("请上传商品图片");
+                    return;
+                }
+                //商品名称查重
+                for(var i=0; i<this.tableDatas.length; i++){
+                    if(this.tableData.name == this.tableDatas[i].name){
+                        alert("商品名重复！请重新输入商品名");
+                        return;
+                    }
+                }
+
+
                 this.tableData.id = this.tableDatas.length + 1;
                 this.tableData.price = parseFloat(this.tableData.price).toFixed(2);
                 //向数据库发送，并获得id
@@ -350,7 +392,7 @@
                         console.log('新增成功')
                     },
                     error: function () {
-                        console.log('新增失败');
+                        console.log('新增失败，请检查网络！');
                     }
                 });
                 this.tableData.img = 'http://' + document.location.host + '/static/img/' +file['name'];
@@ -392,10 +434,37 @@
             editSubForm: function() {
                 var result = confirm("是否保存所做改动"); //在页面上弹出确认对话框
                 if (result == true) {
-                    Vue.set(this.tableDatas, this.selected, this.selectedlist);
+                    //判断输入是否合法
+                    var isInteger = /^\d+$/;
+                    var isValidPrice = /(^[1-9](\d+)?(\.\d{1,2})?$)|(^0$)|(^\d\.\d{1,2}$)/;
+                    var isValidType = /^(饮品)|(食品)|(日用品)|(书籍杂志)$/;
+                    if(!isInteger.test(this.selectedlist.stock.toString()) || this.selectedlist.stock == 0){
+                        alert("请正确输入库存(正整数)");
+                        return;
+                    }
+                    if(!isValidPrice.test(this.selectedlist.price.toString()) || this.selectedlist.price == 0){
+                        alert("请输入正确价格(正数，小数最多保留两位)");
+                        return;
+                    }
+                    if(!isValidType.test(this.selectedlist.type)){
+                        alert("请输入正确的类别: 食品、饮品、日用品、书籍杂志");
+                        return;
+                    }
+                    if(this.selectedlist.name == ""){
+                        alert("商品名不能为空");
+                        return;
+                    }
+                    //商品名称查重
+                    for(var i=0; i<this.tableDatas.length; i++){
+                        if(this.selectedlist.name == this.tableDatas[i].name){
+                            alert("商品名重复！请重新输入商品名");
+                            return;
+                        }
+                    }
+
                     // 保留两位小数
                     this.tableDatas[this.selected].price = parseFloat(this.tableDatas[this.selected].price).toFixed(2);
-                    this.getShowData(this.tableDatas);
+                    //this.getShowData(this.tableDatas);
                     this.selectedlist.price = parseFloat(this.selectedlist.price).toFixed(2);
                     $.ajax({
                         url:"/staff_change_goods_details",
@@ -405,18 +474,18 @@
                             'stock': this.selectedlist.stock,
                             'type': this.selectedlist.type,
                             'info': this.selectedlist.info,
-                            'good_id': this.tableDatas[this.selected]['good_id'],
+                            'good_id': this.tableDatas[this.selectedlist.id-1]['good_id'],
                         },
                         type: 'post',
                         success: function(obj){
+                            Vue.set(this.tableDatas, this.selectedlist.id-1, this.selectedlist);
+                            Vue.set(this.cloneTableDatas, this.selected, this.selectedlist);
                             $('#editModal').modal('hide');
                         },
                         error: function (obj) {
-                            alert('保存失败，请检查网络！')
+                            alert('保存失败，请检查商品名是否重复')
                         }
                     })
-                } else {
-
                 }
 
             },

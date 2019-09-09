@@ -12,6 +12,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
+        <link rel="stylesheet" href="/static/css/bg.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
 		<link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
 	</head>
@@ -68,7 +69,7 @@
 									</div>
 								</div>
 							</div>
-							<table class="table table-bordered ">
+							<table class="table table-bordered " style="background:rgba(255,255,255,0.2);filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000,endcolorstr=#7F000000)">
 								<thead class="thead-dark">
 									<tr>
 										<th>No</th>
@@ -238,11 +239,34 @@
 				},
 				//新增门店信息
 				add: function() {
+				    this.addShop = {
+                        "shop_id":"",
+                        "id":"",
+                        "name":"",
+                        "address":"",
+                        "phone":""
+                    };
 					$('#addShop').modal('show');
 				},
 				//提交新增门店信息
 				addSubmit:function(){
 					var _self=this;
+
+					//判断输入错误
+                    var isPhoneNumber = /^\d(0|1|2|3|4|5|6|7|8|9|\-)+$/;
+                    if(!isPhoneNumber.test(_self.addShop.phone)){
+                        alert("请输入正确的电话号码");
+                        return;
+                    }
+                    if(_self.addShop.name.length == 0){
+                        alert("请输入商店名");
+                        return;
+                    }
+                    if(_self.addShop.address.length == 0){
+                        alert("请输入商店地址");
+                        return;
+                    }
+
 					_self.addShop.id=this.shopDatas.length+1;
 					console.log(_self.addShop.address);
 					$.ajax({
@@ -281,6 +305,22 @@
                 //提交编辑
                 editSubmit:function(){
                 	var _self=this;
+
+                	//判断输入错误
+                    var isPhoneNumber = /^\d(0|1|2|3|4|5|6|7|8|9|\-)+$/;
+                    if(!isPhoneNumber.test(_self.selectedlist.phone)){
+                        alert("请输入正确的电话号码");
+                        return;
+                    }
+                    if(_self.selectedlist.name.length == 0){
+                        alert("请输入商店名");
+                        return;
+                    }
+                    if(_self.selectedlist.address.length == 0){
+                        alert("请输入商店地址");
+                        return;
+                    }
+
                 	var result=confirm("是否保存所做改动");
                 	if(result==true){
                 		$.ajax({

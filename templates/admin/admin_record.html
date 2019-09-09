@@ -4,6 +4,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
+        <link rel="stylesheet" href="/static/css/bg.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
 		<link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
 	</head>
@@ -39,18 +41,18 @@
 							<div class="row">
 								<div class="col-md-2">
 									<select id="shop" class="form-control">
-										<option>&nbsp;&nbsp;&nbsp;&nbsp;选择商店&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+										<option>选择商店</option>
 										<option value="all">all</option>
 									</select>
 								</div>
 								<div class="col-md-2">
 									<select id="year" class="form-control">
-										<option>&nbsp;&nbsp;选择查看年份&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+										<option>选择查看年份</option>
 									</select>
 								</div>
 								<div class="col-md-2">
 									<select id="month" class="form-control">
-										<option>&nbsp;&nbsp;选择查看月份&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+										<option>选择查看月份</option>
 										<option value="1月">1</option>
 										<option value="2月">2</option>
 										<option value="3月">3</option>
@@ -76,7 +78,7 @@
 						</div>
 
 						<div class="table-responsive">
-							<table class="table table-bordered ">
+							<table class="table table-bordered "  style="background:rgba(255,255,255,0.2);filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000,endcolorstr=#7F000000)">
 								<thead class="thead-dark">
 									<tr>
 										<th>No</th>
@@ -233,6 +235,7 @@
 							for(var i = 0; i < data.length; i++) {
 								_self.records[i] = data[i];
 								_self.records[i]["no"] = i + 1;
+								_self.records[i]['total'] = _self.records[i]['total'].toFixed(2);
                             }
                             console.log(_self.records);
 							_self.getShowData(_self.records);
@@ -242,7 +245,7 @@
 						},
 						complete: function() {
 							var year = parseInt(current_year.toString());
-							for(var i = year; i > year - 11; i--) {
+							for(var i = year; i > year - 1; i--) {
 								$('#year').append("<option value='" + i + "'>" + i + "</option>");
                             }
                             //获取门店列表数据
@@ -281,6 +284,21 @@
 						_self.searchRecord.year = document.getElementById("year").value;
 						_self.searchRecord.month = document.getElementById("month").value;
 						_self.searchRecord.shop_name = document.getElementById("shop").value;
+
+						//判断输入错误
+						if(_self.searchRecord.year == "选择查看年份"){
+						    alert("请选择年份");
+						    return;
+                        }
+						if(_self.searchRecord.month == "选择查看月份"){
+						    alert("请选择月份");
+						    return;
+                        }
+						if(_self.searchRecord.shop_name == "选择商店"){
+						    alert("请选择商店");
+						    return;
+                        }
+
 						$.ajax({
 							type: "get",
 							url: "/admin_ask_for_record",
@@ -297,6 +315,7 @@
 								for(var i = 0; i < data.length; i++) {
 									_self.records[i] = data[i];
 									_self.records[i]["no"] = i + 1;
+									_self.records[i]['total'] = _self.records[i]['total'].toFixed(2);
                                 }
                                 _self.getShowData(_self.records);
 								_self.searchRecord = {
@@ -318,6 +337,25 @@
 					},
 					//在模态框中显示图
 					showTime: function() {
+                        var search_year = document.getElementById("selectYear").value;
+
+						//判断输入错误
+						if(search_year == "选择年份"){
+						    alert("请选择年份");
+						    return;
+                        }
+
+						this.showShoplist = [];
+						this.timeSeries = [];
+						for(var i=0; i<this.shoplist.length; i++){
+						    this.showShoplist.push(this.shoplist[i].name);
+						    this.timeSeries.push({'name': this.shoplist[i].name, 'type': 'bar', 'data': [],})
+                        }
+						this.showShoplist.push('全部商店');
+						this.timeSeries.push({'name': '全部门店销售金额', 'type': 'line', 'data': [],});
+
+                        var _self = this;
+
 						var yearChart = echarts.init(document.getElementById('year_data_show'));
 						var option = {
 							tooltip: {
@@ -344,7 +382,7 @@
 								}
 							},
 							legend: {
-								data: ['南京九龙湖东大专供', '南京东大四牌楼专供', '全部门店销售金额']
+								data: _self.showShoplist,
 							},
 							xAxis: [{
 								type: 'category',
@@ -360,27 +398,11 @@
 									formatter: '{value} 元'
 								}
 							}],
-							series: [{
-									name: '南京九龙湖东大专供',
-									type: 'bar',
-									data: [],
-
-								},
-								{
-									name: '南京东大四牌楼专供 ',
-									type: 'bar',
-									data: []
-								},
-								{
-									name: '全部门店销售金额',
-									type: 'line',
-									data: []
-								}
-							]
+							series: _self.timeSeries,
 						};
 						yearChart.setOption(option);
 						yearChart.showLoading();
-						var search_year = document.getElementById("selectYear").value;
+
 						$.ajax({
 							type: "get",
 							url: "/admin_ask_for_year_sales",
@@ -393,25 +415,17 @@
 							},
 							success: function(result) {
 								if(result) {
-									yearChart.hideLoading();
+                                    _self.timeSeries = [];
+                                    for(var i=0; i<_self.shoplist.length; i++){
+                                        _self.timeSeries.push({'name': _self.shoplist[i].name, 'type': 'bar', 'data': result[_self.shoplist[i].name],})
+                                    }
+                                    _self.timeSeries.push({'name': '全部商店', 'type': 'line', 'data': result['全部']});
+
+                                    yearChart.hideLoading();
 									yearChart.setOption({
-										series: [{
-												name: '南京九龙湖东大专供',
-												type: 'bar',
-												data: result["南京九龙湖东大专供"],
-											},
-											{
-												name: "南京东大四牌楼专供",
-												type: "bar",
-												data: result["南京东大四牌楼专供"],
-											},
-											{
-												name: "全部商店",
-												type: "line",
-												data: result["全部"],
-											}
-										]
+										series: _self.timeSeries
 									});
+
 								}
 							},
 							error: function(errorMsg) {
@@ -420,7 +434,6 @@
 							}
 						});
 					},
-
 					//弹出模态框
 					getTypeShow: function() {
 						$("#time").modal('hide');
@@ -428,6 +441,29 @@
 					},
 					//在模态框中显示图
 					showType: function() {
+					    var type_year = document.getElementById("selectTypeYear").value;
+						var search_month = document.getElementById("selectMonth").value;
+
+					    //判断输入错误
+						if(type_year == "选择年份"){
+						    alert("请选择年份");
+						    return;
+                        }
+						if(search_month == "选择月份"){
+						    alert("请选择月份");
+						    return;
+                        }
+
+						this.showShoplist = [];
+						this.typeSeries = [];
+						for(var i=0; i<this.shoplist.length; i++){
+						    this.showShoplist.push(this.shoplist[i].name);
+						    this.typeSeries.push({type: 'bar', smooth: true, seriesLayoutBy: 'row'});
+                        }
+						this.typeSeries.push({type: 'line', smooth: true, seriesLayoutBy: 'row'});
+
+                        var _self = this;
+
 						var typeChart = echarts.init(document.getElementById("type_data_show"));
 						var option = {
 							legend: {},
@@ -438,6 +474,20 @@
 									type: 'cross',
 									crossStyle: {
 										color: '#998'
+									}
+								}
+							},
+                            toolbox: {
+								feature: {
+									magicType: {
+										show: true,
+										type: ['line', 'bar']
+									},
+									restore: {
+										show: true
+									},
+									saveAsImage: {
+										show: true
 									}
 								}
 							},
@@ -460,28 +510,11 @@
 									formatter: '{value}元'
 								}
 							},
-//							grid: {
-//								top: '55%'
-//							},
-							series: [{
-									type: 'bar',
-									smooth: true,
-									seriesLayoutBy: 'row'
-								},
-								{
-									type: 'bar',
-									smooth: true,
-									seriesLayoutBy: 'row'
-								},
-								{
-									type: 'line',
-									smooth: true,
-									seriesLayoutBy: 'row'
-								},
-							]
+							series: _self.typeSeries,
 						};
-						var type_year = document.getElementById("selectTypeYear").value;
-						var search_month = document.getElementById("selectMonth").value;
+
+                        var _self = this;
+
 						typeChart.setOption(option);
 						$.ajax({
 							type: "get",
@@ -495,15 +528,18 @@
 								month: search_month
 							},
 							success: function(result) {
+							    _self.typeSource = [];
+							    _self.typeSource.push(['type', '食品', '饮品', '日用品', '书籍杂志']);
+							    var i;
+							    for(i=0; i<_self.showShoplist.length; i++){
+							        _self.typeSource.push([_self.showShoplist[i], result['食品'][i], result['饮品'][i], result['日用品'][i], result['书籍杂志'][i]]);
+                                }
+							    _self.typeSource.push(['全部', result['食品'][i], result['饮品'][i], result['日用品'][i], result['书籍杂志'][i]]);
+
 								typeChart.hideLoading();
 								typeChart.setOption({
 									dataset: {
-										source: [
-											['type', '食品', '饮品', '日用品', '书籍杂志'],
-											['门店一', result['食品'][0], result['饮品'][0], result['日用品'][0], result['书籍杂志'][0]],
-											['门店二', result['食品'][1], result['饮品'][1], result['日用品'][1], result['书籍杂志'][1]],
-											['全部', result['食品'][2], result['饮品'][2], result['日用品'][2], result['书籍杂志'][2]]
-										]
+										source: _self.typeSource,
 									},
 								});
 							},

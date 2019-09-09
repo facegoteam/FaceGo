@@ -1,110 +1,436 @@
 <!--
-文件名：customer_recommend
-创建时间：2019-08-23
-作者：陈雨琦
-说明：web中用户的商品推荐界面
-修改日期：2019-08-24
+	文件名：customer_recommend
+	作者：姜子玥
+	时间：2019-09-08
+	描述：顾客商品详情界面显示
+	
 -->
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
-</head>
+	<head>
+		<meta charset="utf-8">
+		<title>FaceGo</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+		<link href="/static/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="/static/css/bg.css">
+		<link rel="stylesheet" href="/static/css/customer_recommend.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+		<link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
+        <style>
+            body.modal-fade {
+                position: absolute !important;
+            }
+        </style>
+	</head>
 
-<body>
-  <div class="py-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="btn-group">
-              <a href="/customer_records" class="btn btn-outline-dark"><i class="fa fa-shopping-bag" aria-hidden="true"></i> 购买记录</a>
-              <a href="/customer_recommend" class="btn btn-dark" style=""><i class="fa fa-diamond" aria-hidden="true"></i> 推荐商品</a>
-              <a href="/customer_logout" class="btn btn-outline-dark"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; 登出&nbsp; &nbsp;</a> </div>
-        </div>
-      </div>
-    </div>
-    <div class="p-0">
-      <div class="container">
+	<body id="wrapper">
+		<div class="py-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="btn-group">
+							<a href="/customer_records" class="btn btn-outline-dark">
+								<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                购买记录
+							</a>
+							<a href="/customer_recommend" class="btn btn-dark" style="">
+								<i class="fa fa-diamond" aria-hidden="true"></i>
+								推荐商品
+							</a>
+							<a href="/customer_logout" class="btn btn-outline-dark">
+								<i class="fa fa-sign-out" aria-hidden="true"></i>
+								&nbsp; 登出&nbsp; &nbsp;
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="py-2">
+		</div>
+		<!--可点击logo-->
+		<header id="masthead" class="site-header" role="banner">
+			<div class="overlay"></div>
+			<div class="container">
+				<div class="site-branding">
+					<a href="customer_recommend.html" title="FaceGo"><img class="site-logo" src="/static/img/customer_recommend/logo.png" alt="FaceGo"></a>
+				</div>
+			</div>
+		</header>
+
         <div class="row">
-          <div class="col-md-12 pt-2"></div>
-        </div>
-      </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <div class="py-3">
-      <div class="container">
-        <div class="row">
-          <div class="p-3 d-flex align-items-center col-6 col-md-3" style="">
-            <h2 contenteditable="true" class="ml-4">Do you like these?</h2>
-          </div>
-          <div class="col-6 p-3 text-center col-md-7" style="">
-            <div class="row">
-              <div class="col-md-4 p-2"> <img class="img-fluid d-block mb-2 mx-auto" src="https://static.pingendo.com/img-placeholder-3.svg" width="100" height="100" id="img1">
-                <p class="mb-0 lead"> <a href="#" id="ref1">One</a> </p>
-              </div>
-              <div class="col-md-4 p-2"> <img class="img-fluid d-block mb-2 mx-auto" src="https://static.pingendo.com/img-placeholder-2.svg" width="100" height="100" id="img2">
-                <p class="mb-0 lead"> <a href="#" id="ref2">Two</a> </p>
-              </div>
-              <div class="col-4 p-2"> <img class="img-fluid d-block mb-2 mx-auto" src="https://static.pingendo.com/img-placeholder-1.svg" width="100" height="100" id="img3">
-                <p class="mb-0 lead"> <a href="#" id="ref3">Three</a> </p>
-              </div>
-              <div class="col-4 p-2"> <img class="img-fluid d-block mb-2 mx-auto" src="https://static.pingendo.com/img-placeholder-1.svg" width="100" height="100" id="img4">
-                <p class="mb-0 lead"> <a href="#" id="ref4">Four</a> </p>
-              </div>
-              <div class="col-4 p-2"> <img class="img-fluid d-block mb-2 mx-auto" src="https://static.pingendo.com/img-placeholder-4.svg" width="100" height="100" id="img5">
-                <p class="mb-0 lead"> <a href="#" id="ref5">Five</a> </p>
-              </div>
-              <div class="col-4 p-2"> <img class="img-fluid d-block mb-2 mx-auto" src="https://static.pingendo.com/img-placeholder-3.svg" width="100" id="img6">
-                <p class="mb-0 lead"> <a href="#" id="ref6">Six</a> </p>
-              </div>
+            <div class="col-md-9"></div>
+            <div class="col-md-3" style="position:relative;left: 50px;">
+                <a class="btn btn-link btn-sm" href="#" onclick="initialize()">
+                    <i class="fa fa-repeat" aria-hidden="false"></i>
+                    <font size="5">换一换</font>
+                </a>
             </div>
-          </div>
-          <div class="col-md-2" style=""><a class="btn btn-link btn-sm" href="javascript:void(0)" onclick="initialize()">
-              <i class="fa fa-repeat" aria-hidden="false"></i>换一换</a></div>
         </div>
-      </div>
-    </div>
-    <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
-  </div>
-</body>
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script type="text/javascript">
-    function initialize(){
-        $.ajax({
-            type:"get",
-            url:"/customer_ask_for_recommend",
-            async: false,
-            dataType: "jsonp",
-            jsonp: "callback",
-            jsonpCallback: "successCallback",
-            success: function(data){
-                img1.src = data[0]['img'];
-                img2.src = data[1]['img'];
-                img3.src = data[2]['img'];
-                img4.src = data[3]['img'];
-                img5.src = data[4]['img'];
-                img6.src = data[5]['img'];
-                ref1.href = 'http://'+ document.location.host +"/goods_info?name="+data[0]["name"];
-                ref2.href = 'http://'+ document.location.host +"/goods_info?name="+data[1]["name"];
-                ref3.href = 'http://'+ document.location.host +"/goods_info?name="+data[2]["name"];
-                ref4.href = 'http://'+ document.location.host +"/goods_info?name="+data[3]["name"];
-                ref5.href = 'http://'+ document.location.host +"/goods_info?name="+data[4]["name"];
-                ref6.href = 'http://'+ document.location.host +"/goods_info?name="+data[5]["name"];
-            },
-            error: function(){
-                alert("查询出错");
-            },
-        });
-    }
-    initialize();
-</script>
+
+		<!--正文部分-->
+		<div id="page-content" class="index-page">
+			<section class="box-content box-5 box-style-3" id="nav-blog">
+				<div class="container">
+					<div class="row">
+
+						<!--第一件商品信息-->
+						<div class="col-md-4">
+							<div class="box-item">
+								<div class="svg-container post-svg svg-block">
+									<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1950 150">
+										<g transform="translate(0,-902.36218)"></g>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="M 0,150 0,0 1925,0"></path>
+									</svg>
+								</div>
+								<div class="entry-thumb">
+									<img class="img-responsive" src="" id="img1" style="height: 300px;width: 300px;">
+									<a href="javascript:void(0)" class="thumb-link" onclick="detail(this)" id="goods1_info"><i class="fa fa-link"></i></a>
+								</div>
+								<div class="content">
+									<h3 class="entry-title">
+									<a href="javascript:void(0)" id="goods_1" onclick="detail(this)" id="goods1_info">Goods1_Title</a>
+								</h3>
+								</div>
+								<div class="read-more">
+									<a href="javascript:void(0)" onclick="detail(this)" id="goods1_info">
+										<font size="4">商品详情</font>
+									</a>
+								</div>
+								<div class="svg-container post-bottom-svg svg-block">
+									<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1890 150">
+										<g transform="translate(0,-902.36218)"></g>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="m 1925,0 0,150 -1925,0"></path>
+									</svg>
+								</div>
+							</div>
+						</div>
+
+						<!--第二件商品-->
+						<div class="col-md-4">
+							<div class="box-item">
+								<div class="svg-container post-svg svg-block">
+									<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1950 150">
+										<g transform="translate(0,-902.36218)"></g>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="M 0,150 0,0 1925,0"></path>
+									</svg>
+								</div>
+								<div class="entry-thumb">
+									<img class="img-responsive" src="" id="img2" style="height: 300px;width: 300px;">
+									<a href="javascript:void(0)" class="thumb-link" onclick="detail(this)" id="goods2_info"><i class="fa fa-link"></i></a>
+								</div>
+								<div class="content">
+									<h3 class="entry-title">
+									<a href="javascript:void(0)" id="goods_2" onclick="detail(this)" id="goods2_info">Goods2_Title</a>
+								</h3>
+								</div>
+								<div class="read-more">
+									<a href="javascript:void(0)" onclick="detail(this)" id="goods2_info">
+										<font size="4">商品详情</font>
+									</a>
+								</div>
+								<div class="svg-container post-bottom-svg svg-block">
+									<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1890 150">
+										<g transform="translate(0,-902.36218)"></g>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="m 1925,0 0,150 -1925,0"></path>
+									</svg>
+								</div>
+							</div>
+						</div>
+
+						<!--第三件商品-->
+						<div class="col-md-4">
+							<div class="box-item">
+								<div class="svg-container post-svg svg-block">
+									<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1950 150">
+										<g transform="translate(0,-902.36218)"></g>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="M 0,150 0,0 1925,0"></path>
+									</svg>
+								</div>
+								<div class="entry-thumb">
+									<img class="img-responsive" src="" id="img3" style="height: 300px;width: 300px;">
+									<a href="javascript:void(0)" class="thumb-link" onclick="detail(this)" id="goods3_info"><i class="fa fa-link"></i></a>
+								</div>
+								<div class="content">
+									<h3 class="entry-title">
+								<a href="javascript:void(0)" id="goods_3" onclick="detail(this)" id="goods3_info">Goods3_Title</a>
+								</h3>
+								</div>
+								<div class="read-more">
+									<a href="javascript:void(0)" onclick="detail(this)" id="goods3_info">
+										<font size="4">商品详情</font>
+									</a>
+								</div>
+								<div class="svg-container post-bottom-svg svg-block">
+									<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1890 150">
+										<g transform="translate(0,-902.36218)"></g>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="m 1925,0 0,150 -1925,0"></path>
+									</svg>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="row">
+
+						<!--第四件商品-->
+						<div class="col-md-4">
+							<div class="box-item">
+								<div class="svg-container post-svg svg-block">
+									<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1950 150">
+										<g transform="translate(0,-902.36218)"></g>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="M 0,150 0,0 1925,0"></path>
+									</svg>
+								</div>
+								<div class="entry-thumb">
+									<img class="img-responsive" src="" id="img4" style="height: 300px;width: 300px;" >
+									<a href="javascript:void(0)" class="thumb-link" onclick="detail(this)" id="goods4_info"><i class="fa fa-link"></i></a>
+								</div>
+								<div class="content">
+									<h3 class="entry-title">
+									<a href="javascript:void(0)" id="goods_4" onclick="detail(this)" id="goods4_info">Goods4_Title</a>
+								</h3>
+								</div>
+								<div class="read-more">
+									<a href="javascript:void(0)" onclick="detail(this)" id="goods4_info">
+										<font size="4">商品详情</font>
+									</a>
+								</div>
+								<div class="svg-container post-bottom-svg svg-block">
+									<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1890 150">
+										<g transform="translate(0,-902.36218)"></g>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="m 1925,0 0,150 -1925,0"></path>
+									</svg>
+								</div>
+							</div>
+						</div>
+
+						<!--第五件商品-->
+						<div class="col-md-4">
+							<div class="box-item">
+								<div class="svg-container post-svg svg-block">
+									<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1950 150">
+										<g transform="translate(0,-902.36218)"></g>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="M 0,150 0,0 1925,0"></path>
+									</svg>
+								</div>
+								<div class="entry-thumb">
+									<img class="img-responsive" src="" id="img5" style="height: 300px;width: 300px;">
+									<a href="javascript:void(0)" class="thumb-link" onclick="detail(this)" id="goods5_info"><i class="fa fa-link"></i></a>
+								</div>
+								<div class="content">
+									<h3 class="entry-title">
+									<a href="javascript:void(0)" id="goods_5" onclick="detail(this)" id="goods5_info">Goods5_Title</a>
+								</h3>
+								</div>
+								<div class="read-more">
+									<a href="javascript:void(0)" onclick="detail(this)" id="goods5_info">
+										<font size="4">商品详情</font>
+									</a>
+								</div>
+								<div class="svg-container post-bottom-svg svg-block">
+									<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1890 150">
+										<g transform="translate(0,-902.36218)"></g>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="m 1925,0 0,150 -1925,0"></path>
+									</svg>
+								</div>
+							</div>
+						</div>
+
+						<!--第六件商品-->
+						<div class="col-md-4">
+							<div class="box-item">
+								<div class="svg-container post-svg svg-block">
+									<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1950 150">
+										<g transform="translate(0,-902.36218)"></g>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="M 0,150 0,0 1925,0"></path>
+									</svg>
+								</div>
+								<div class="entry-thumb">
+									<img class="img-responsive" src="" id="img6" style="height: 300px;width: 300px;">
+									<a href="javascript:void(0)" class="thumb-link" onclick="detail(this)" id="goods6_info"><i class="fa fa-link"></i></a>
+								</div>
+								<div class="content">
+									<h3 class="entry-title">
+									<a href="javascript:void(0)" id="goods_6" onclick="detail(this)" id="goods6_info">Goods6_Title</a>
+								</h3>
+								</div>
+								<div class="read-more">
+									<a href="javascript:void(0)" onclick='detail(this)' id="goods6_info">
+										<font size="4">商品详情</font>
+									</a>
+								</div>
+								<div class="svg-container post-bottom-svg svg-block">
+									<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1890 150">
+										<g transform="translate(0,-902.36218)"></g>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+										<path d="m 1925,0 0,150 -1925,0"></path>
+									</svg>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</section>
+		</div>
+
+		<!--商品详情模态框-->
+		<div class="modal fade" role="dialog" id="goods_detail">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">
+							<font face="FontAwesome">商品详情</font>
+						</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					</div>
+					<div class="modal-body">
+						<font face="FontAwesome"></font>
+						<div class="py-5" style="">
+							<div class="container">
+								<div class="row">
+									<div class="col-md-6" id="img">
+									</div>
+									<div class="col-md-6" draggable="true">
+										<div class="row">
+											<div class="col-md-12" id="information">
+												<h2 class="pb-5"><font face="仿宋"><font size="6">商品名称：</font></h2>
+												<h2 class="pb-5"><font face="仿宋"><font size="6">商品价格：</font></h2>
+												<h2 class="pb-5"><font face="仿宋"><font size="6">商品库存：</font></h2>
+												<h2 class="pb-5"><font face="仿宋"><font size="6">具体信息:</p></font></h2>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
+	<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+	<script type="text/javascript">
+		function initialize() {
+			$.ajax({
+				type: "get",
+				url: "/customer_ask_for_recommend",
+				async: false,
+				dataType: "jsonp",
+				jsonp: "callback",
+				jsonpCallback: "successCallback",
+				success: function(data) {
+					img1.src = "http://" + document.location.host + data[0]["img"];
+					img2.src = "http://" + document.location.host + data[1]['img'];
+					img3.src = "http://" + document.location.host + data[2]['img'];
+					img4.src = "http://" + document.location.host + data[3]['img'];
+					img5.src = "http://" + document.location.host + data[4]['img'];
+					img6.src = "http://" + document.location.host + data[5]['img'];
+					var obj1 = document.getElementById("goods_1");
+					var obj2 = document.getElementById("goods_2");
+					var obj3 = document.getElementById("goods_3");
+					var obj4 = document.getElementById("goods_4");
+					var obj5 = document.getElementById("goods_5");
+					var obj6 = document.getElementById("goods_6");
+					obj1.innerText = data[0]["name"];
+					obj2.innerText = data[1]["name"];
+					obj3.innerText = data[2]["name"];
+					obj4.innerText = data[3]["name"];
+					obj5.innerText = data[4]["name"];
+					obj6.innerText = data[5]["name"];
+				},
+				error: function() {
+					alert("获取推荐商品失败！")
+				}
+			});
+		}
+		initialize();
+
+		function detail(obj) {
+		    console.log(obj);
+			$("#goods_detail").modal('show');
+			var goods_name;
+			if(obj.id == "goods1_info" || obj.id == "goods_1") {
+				goods_name = document.getElementById("goods_1").innerText;
+			} else if(obj.id == "goods2_info" || obj.id == "goods_2") {
+				goods_name = document.getElementById("goods_2").innerText;
+			} else if(obj.id == "goods3_info" || obj.id == "goods_3") {
+				goods_name = document.getElementById("goods_3").innerText;
+			} else if(obj.id == "goods4_info" || obj.id == "goods_4") {
+				goods_name = document.getElementById("goods_4").innerText;
+			} else if(obj.id == "goods5_info" || obj.id == "goods_5") {
+				goods_name = document.getElementById("goods_5").innerText;
+			} else if(obj.id == "goods6_info" || obj.id == "goods_6") {
+				goods_name = document.getElementById("goods_6").innerText;
+			}
+			console.log(goods_name);
+			$.ajax({
+				url: "/customer_ask_for_goods_info?name=" + goods_name,
+				data: {
+					"name": goods_name
+				},
+				type: 'get',
+				async: false,
+				dataType: "jsonp",
+				jsonp: "callback",
+				jsonpCallback: "successCallback",
+				success: function(data) {
+					//接受前端数据
+					var str = "";
+					var img_str = "";
+					var goods_url = data['img'];
+					var goods_name = data['name'];
+					var goods_price = data['price'];
+					var goods_count = data['stock'];
+					var info = data['info'];
+
+					//显示界面
+					img_str += "<img class=\"img-fluid d-block\" src=\"http://" + document.location.host + goods_url + "\"  >";
+					str += "<h2 class=\"pb-1\"><font face=\"仿宋\"><font size=\"5\">商品名称：" + goods_name +
+						"</font></h2><h2 class=\"pb-1\"><font face=\"仿宋\"><font size=\"5\">商品价格：" + goods_price +
+						"</font></h2><h2 class=\"pb-1\"><font face=\"仿宋\"><font size=\"5\">商品库存：" + goods_count +
+						"</font></h2><h2 class=\"pb-1\"><font face=\"仿宋\"><font size=\"5\">具体信息：<p>" + info +
+						"</p></font></h2>";
+					img.innerHTML = img_str;
+					information.innerHTML = str;
+				},
+				error: function() {
+					alert("查看商品详情失败!");
+				}
+			});
+
+		}
+	</script>
 
 </html>
