@@ -1,0 +1,25 @@
+<!--
+文件名：search.html
+创建时间：9-2
+作者：李若涵
+简要说明：搜索商品 获取商品列表
+-->
+<!--pages/search/search.wxml-->
+<view class="containera">
+  <view class="tit">
+    <view class="title_val">商品列表</view>
+    <!-- <view class="more">更多</view> -->
+  </view>
+  <block wx:for-items="{{listData}}" wx:key="name">
+    <van-card
+      price="{{item.price}}"
+      title="{{item.name}}"
+      thumb="http://{{ip}}:8001{{item.img}}"
+      bindtap="catchTap"
+      data-type="{{item.name}}"
+    />
+    <view class="goodsa"></view>
+  </block>  
+</view>
+<!-- desc="描述信息"
+num="2" -->

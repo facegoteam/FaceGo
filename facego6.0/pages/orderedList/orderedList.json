@@ -1,0 +1,18 @@
+
+{
+  "navigationBarTitleText": "订单记录",
+  "usingComponents": {
+    "wux-prompt": "../dist1/prompt/index",
+      "wux-card": "../dist1/card/index",
+      "wux-wing-blank": "../dist1/wing-blank/index",
+      "van-rate": "../dist/rate/index",
+      "van-goods-action": "/dist/goods-action/index",
+    "van-goods-action-icon": "/dist/goods-action-icon/index",
+    "van-goods-action-button": "/dist/goods-action-button/index",
+    "van-toast": "/dist/toast/index",
+    "wux-cell-group": "/dist1/cell-group/index",
+    "wux-cell": "/dist1/cell/index",
+    "wux-input-number": "/dist1/input-number/index",
+    "wux-rater": "/dist1/rater/index"
+  }
+}

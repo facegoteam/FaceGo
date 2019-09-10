@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "商品分类列表",
+  "usingComponents": {
+    "van-search": "../dist/search/index"
+  }
+}

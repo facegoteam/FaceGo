@@ -1,0 +1,43 @@
+<!--
+文件名：catogary
+创建时间：8-24
+作者：黄少豪 李若涵
+简要说明：商品侧栏分类页面
+修改日期：9-4
+-->
+
+<view class="VerticalBox">
+  <!-- 左栏滑动 -->
+  <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" >
+    <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{list}}" wx:key bindtap='tabSelect' data-id="{{index}}">
+      {{item.name}}
+    </view>
+  </scroll-view>
+
+  <!-- 右栏 -->
+  <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 0rpx)" scroll-into-view="main-{{MainCur}}" bindscroll="VerticalMain">
+    <view class="padding-top padding-lr" wx:for="{{list}}" wx:key id="main-{{index}}">
+      <view class='cu-bar solid-bottom bg-white'>
+        <view class='action'>
+          <text class='cuIcon-title text-green'></text> {{item.name}} </view>
+      </view>
+      <view class="cu-list menu-avatar">
+
+      <block wx:for="{{item.listdata}}" wx:for-item="listitem" wx:key="id">
+        <view class="cu-item cur" bindtap="catchTap" data-type="{{listitem.name}}">
+          <view class="cu-avatar radius lg" style="background-image:url(http://{{ip}}:8001{{listitem.img}});">
+          </view>
+          <view class="content">
+              <text class="text-cut">{{listitem.name}}</text>
+          </view>
+          <view class="action">
+            <view class="text-grey text-df">{{listitem.price}}元</view>
+          </view>
+        </view>
+      </block> 
+      </view>
+
+
+    </view>
+  </scroll-view>
+</view>

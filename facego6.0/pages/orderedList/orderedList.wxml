@@ -1,0 +1,120 @@
+<!--
+文件名：orderedList
+创建时间：9-2
+作者：黄少豪 李若涵
+简要说明：查看购买记录页面
+修改日期：9-6
+-->
+<import src="../../wxParse/wxParse.wxml" />
+
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-tab">
+            <view class="weui-navbar">
+                <block wx:for-items="{{ tabs}}" wx:key="{{ index }}">
+                    <view data-id="{{ index }}" class="weui-navbar__item {{ activeIndex == index ? 'weui-bar__item_on' : '' }}" bindtap="tabClick">
+                        <view class="weui-navbar__title">{{ item }}</view>
+                    </view>
+                </block>
+                <view class="weui-navbar__slider" style="left: {{ sliderLeft }}px; transform: translateX({{ sliderOffset }}px); -webkit-transform: translateX({{ sliderOffset }}px);"></view>
+            </view>
+            <!--body 无商品-->
+            <view class="weui-tab__panel" wx:if="{{!flag}}">
+            
+                <view class="weui-tab__content"  hidden="{{ activeIndex !== 0 }}">
+                    <wux-prompt  visible="{{ activeIndex === 0 }}" title="{{ msg1.title }}" text="{{ msg1.text }}" />
+                </view>
+
+                <view class="weui-tab__content" hidden="{{ activeIndex !== 1 }}" >
+                    <wux-prompt visible="{{ activeIndex === 1 }}" icon="{{ msg2.icon }}" title="{{ msg2.title }}" text="{{ msg2.text }}" buttons="{{ msg2.buttons }}" bind:click="buttonClicked" />
+                </view>
+
+                <view class="weui-tab__content" hidden="{{ activeIndex !== 2 }}">
+                    <wux-prompt visible="{{ activeIndex === 2 }}" icon="{{ msg3.icon }}" title="{{ msg3.title }}" />
+                </view>
+
+            </view>
+             <!--body 无商品-->
+
+             <!--body 有商品-->
+            <view class="weui-tab__panel" wx:else>
+
+            <!--tag1-->
+              <view class="weui-tab__content"  hidden="{{ activeIndex !== 0 }}">
+                <block wx:for-items="{{goodsList}}" wx:key="name">
+                  <view class="goodsa"></view>
+
+                  <wux-wing-blank size="default">
+                    <wux-card title="{{item.name}}" extra="¥{{item.price}}*{{item.count}}=¥{{item.total}}" thumb="http://{{ip}}:8001{{item.img}}">
+                      <view slot="body">下单时间：{{item.time}}</view>
+                      <view slot="footer">状态：{{item.rated=='0'?'未评价':'已评价'}}</view>
+                    </wux-card>
+                  </wux-wing-blank>
+                  
+          
+                </block>
+
+              </view>
+            <!--tag1-->  
+
+            <!--tag2-->
+              <view class="weui-tab__content"  hidden="{{ activeIndex !== 1 }}">
+                <block wx:for-items="{{goodsListTihuo}}" wx:key="name">
+                  <view class="goodsa"></view>
+                
+                  <wux-wing-blank size="default">
+                    <wux-card title="{{item.name}}" extra="¥{{item.price}}*{{item.count}}=¥{{item.total}}" thumb="http://{{ip}}:8001{{item.img}}">
+                      <view slot="body">订单号：{{item.token}}</view>
+                      <view slot="footer">下单时间：{{item.time}}</view>
+                    </wux-card>
+                  </wux-wing-blank>
+          
+                </block>
+              </view>
+            <!--tag2-->  
+
+
+
+              <!--tag3-->
+              <view class="weui-tab__content"  hidden="{{ activeIndex !== 2 }}">
+                <block wx:for-items="{{goodsListPingjia}}" wx:key="name">
+                
+                  <view class="goodsa"></view>
+                  <wux-card full title="付款金额" extra="¥{{item.price}}*{{item.count}}=¥{{item.total}}"  id="{{item.name}}" data-token="{{item.token}}" actions="{{ actions1 }}" bind:action="onAction1" >
+
+                      <view slot="body">商品：{{item.name}}</view>
+                      <view slot="footer" >状态:待评价</view>
+                  </wux-card>
+
+                </block>
+              </view>
+              <!--tag3-->  
+
+
+            </view>
+            <!--body 有商品-->
+        </view>
+    </view>
+</view>
+
+
+<view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white">
+      <view class="action text-blue" bindtap="hideModal">取消</view>
+      <view class="action text-green" bindtap="confirm">确定</view>
+      
+    </view>
+    <view class="padding-xl">
+
+      <wux-cell title="Star" hover-class="none">
+          <view slot="footer">
+              <!-- <wux-rater  value="{{ value }}" allow-half allow-clear allow-touch-move default-value="{{ 2.5 }}" /> -->
+              <wux-rater controlled value="{{ value }}" allow-half allow-clear allow-touch-move bind:change="onChange" />
+              <text class="wux-rater__text">{{value}} stars</text>
+          </view>
+      </wux-cell>
+
+    </view>
+  </view>
+</view>

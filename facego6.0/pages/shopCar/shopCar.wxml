@@ -1,0 +1,63 @@
+<!--
+文件名：shopCar
+创建时间：8-29
+作者：李若涵 黄少豪
+简要说明：购物车页面 增删商品 提交订单
+修改日期：9-2
+-->
+<view class='wraper'>
+  <view class='main'>
+
+    <view class="cu-form-group">
+        <view class="title">提货地址</view>
+        <picker bindchange="PickerChange" value="{{index}}" range="{{picker}}">
+          <view class="picker">
+            {{index?picker[index]:'请选择提货地址'}}
+          </view>
+        </picker>
+    </view>
+
+    <!--要是够车内没有数据，就行显示没有数据-->
+    <view class="cart" hidden="{{iscart}}">
+        <image src="/images/cart.png"/>
+        <view>购物车什么都没有，赶快去购物吧</view>
+    </view>
+
+    <!--要是有数据，就显示数据-->
+    <block wx:for-items="{{goodsItem}}" wx:key="name">
+      <van-card 
+        num="{{item.count}}"
+        tag="{{item.type}}"
+        price="{{item.price}}"
+        title="{{item.name}}"
+        thumb="http://{{ip}}:8001{{item.img}}"
+      >  
+        <view slot="footer">
+        <van-dialog id="van-dialog"  />
+        <van-button icon="arrow-up" type="default" size="mini" bind:click="add" id="{{item.name}}"></van-button>
+        <van-button icon="arrow-down" type="default" size="mini" bind:click="minus" id="{{item.name}}" ></van-button>
+          <van-button icon="star-o" type="primary" size="mini" bind:click="order" id="{{item.name}}">下单</van-button>
+          <van-button size="mini" bind:click="delete" id="{{item.name}}">删除</van-button>
+        </view>
+      </van-card>
+      <view class="goodsa"></view>
+    </block>    
+
+  </view>
+
+  <van-submit-bar 
+    safe-area-inset-bottom="{{false}}"
+    price="{{ pirceAll }}"
+    button-text="提交订单"
+    bind:submit="onClickButton"
+    tip="{{ true }}"
+    
+  >
+  <!-- bindtap="order" -->
+    <!-- <van-tag type="primary">共x元</van-tag> -->
+    <!-- <view slot="tip">
+      您的收货地址不支持同城送, <text>修改地址</text>
+    </view> -->
+  </van-submit-bar>
+
+</view>

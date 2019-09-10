@@ -1,0 +1,13 @@
+<!--
+文件名：analysis
+创建时间：8-27
+作者：李若涵
+简要说明：用户购买记录图表分析
+修改日期：9-1
+-->
+<view class="containerr">
+    <view class="title">类别分析</view>
+    <canvas canvas-id="ringCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
+    <view class="title">月度分析</view>
+    <canvas canvas-id="columnCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
+</view>
