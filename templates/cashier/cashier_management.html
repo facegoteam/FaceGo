@@ -5,66 +5,68 @@
 说明：web收银员页面的商品管理商品列表
 修改日期：2019-08-25
 -->
-
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
-  <link rel="stylesheet" href="/static/css/bg.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
-</head>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
+		<link rel="stylesheet" href="/static/css/bg.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+		<link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
+	</head>
 
-<body>
-  <div class="py-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="btn-group">
-            <a href="/cashier" class="btn btn-dark"><i class="fa fa-database" aria-hidden="true"></i>&nbsp;商品管理</a>
-            <a href="/cashier_customer_identification" class="btn btn-outline-dark" style=""><i class="fa fa-id-badge" aria-hidden="true"></i> 识别用户</a>
-            <a href="/cashier_order" class="btn btn-outline-dark" ><i class="fa fa-commenting-o" aria-hidden="true"></i> 查看订单</a>
-            <a href="/staff_logout" class="btn btn-outline-dark"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; 登出&nbsp; &nbsp;</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  <div class="pt-3" style="">
+	<body>
+		<div class="py-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="btn-group">
+							<a href="/cashier" class="btn btn-dark"><i class="fa fa-database" aria-hidden="true"></i>&nbsp;商品管理</a>
+							<a href="/cashier_customer_identification" class="btn btn-outline-dark" style=""><i class="fa fa-id-badge"
+								 aria-hidden="true"></i> 识别用户</a>
+							<a href="/cashier_order" class="btn btn-outline-dark"><i class="fa fa-commenting-o" aria-hidden="true"></i> 查看订单</a>
+							<a href="/staff_logout" class="btn btn-outline-dark"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;
+								登出&nbsp; &nbsp;</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="pt-3" style="">
 				<div class="container" id="table">
-                    <div class="row">
+					<div class="row">
 					</div>
 					<div class="col-md-12 my-3">
 						<div class="container">
 							<div class="row">
 								<div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-md-2"><button type="button" class="btn btn-outline-danger" v-on:click="add()"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;添加商品</button></div>
-                                        <div class="col-md-2"></div>
-                                        <div class="col-md-2"></div>
-                                        <div class="col-md-2 pb-5"></div>
-                                        <div class="col-md-2">
-                                    <!--选择分类选择框 -->
-                                    <select class="form-control" id="stype" v-on:change="chooseType">
-                                          <option value ="">全部</option>
-                                          <option value ="饮品">饮品</option>
-                                          <option value ="食品">食品</option>
-                                          <option value="日用品">日用品</option>
-                                          <option value="书籍杂志">书籍杂志</option>
-                                        </select>
+									<div class="row">
+										<div class="col-md-2"><button type="button" class="btn btn-outline-danger" v-on:click="add()"><i class="fa fa-plus"
+												 aria-hidden="true"></i>&nbsp;添加商品</button></div>
+										<div class="col-md-2"></div>
+										<div class="col-md-2"></div>
+										<div class="col-md-2 pb-5"></div>
+										<div class="col-md-2">
+											<!--选择分类选择框 -->
+											<select class="form-control" id="stype" v-on:change="chooseType">
+												<option value="">全部</option>
+												<option value="饮品">饮品</option>
+												<option value="食品">食品</option>
+												<option value="日用品">日用品</option>
+												<option value="书籍杂志">书籍杂志</option>
+											</select>
 
-                                        </div>
-                                        <div class="col-md-2">
-                                          <form class="form-inline">
-                                            <div class="input-group">
-                                              <input type="text" class="form-control" id="inlineFormInputGroup" v-on:input="searchFn" placeholder="Search">
-                                              <div class="input-group-append"><button class="btn btn-dark" type="button"><i class="fa fa-search"></i></button></div>
-                                            </div>
-                                          </form>
-                                        </div>
-                                      </div>
+										</div>
+										<div class="col-md-2">
+											<form class="form-inline">
+												<div class="input-group">
+													<input type="text" class="form-control" id="inlineFormInputGroup" v-on:input="searchFn" placeholder="Search">
+													<div class="input-group-append"><button class="btn btn-dark" type="button"><i class="fa fa-search"></i></button></div>
+												</div>
+											</form>
+										</div>
+									</div>
 									<!--商品信息表格-->
 									<table class="table table-bordered " style="background:rgba(255,255,255,0.2);filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000,endcolorstr=#7F000000)">
 										<thead class="thead-dark">
@@ -105,7 +107,7 @@
 										<div class="modal-dialog" role="document">
 											<div class="modal-content">
 												<div class="modal-header">
-                                                    <h4 class="modal-title" style="-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none">
+													<h4 class="modal-title" style="-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none">
 														<font face="FontAwesome">新增信息</font>
 													</h4>
 													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -136,7 +138,7 @@
 														<div class="form-group">
 															<label>商品图片</label>
 															<input type="file" name="file" id="file" multiple="multiple" onchange="filechange(event)" /></br>
-													        <img src=" " id="img"  style="width: 200px;height: 200px;">
+															<img src=" " id="img" style="width: 200px;height: 200px;">
 														</div>
 													</form>
 												</div>
@@ -159,7 +161,7 @@
 										<div class="modal-dialog" role="document">
 											<div class="modal-content">
 												<div class="modal-header">
-                                                    <h4 class="modal-title" style="-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none">编辑商品信息</h4>
+													<h4 class="modal-title" style="-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none">编辑商品信息</h4>
 													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 												</div>
 												<div class="modal-body">
@@ -207,354 +209,362 @@
 
 				</div>
 
-  </div>
-  </div>
-</body>
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
-<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
-<script>
-    var img_file;
-    var filechange=function(event){
-    	var files=event.target.files, file;
-    	if(files&&files.length>0){
-    		file=files[0];
-    		if(file.size>1024*1024*2){
-    			alert("图片大小不能超过2MB!");
-    			return false;
-    		}
-    		var url=window.URL||window.webkitURL;
-    		var imgurl=URL.createObjectURL(file);
-    		$("#img").attr("src",imgurl);
-    	}
-    };
-    var obj = [];
-    var app = new Vue({
-        delimiters:['{[', ']}'],
-        el: "#table",
-        data: {
-            selected: -1,
-            selectedlist: {},
-            tableData: {
-                "id": "",
-                "name": "",
-                "stock": "",
-                "price": "",
-                "sold": "",
-                "type": "",
-                "img": "",
-                "good_id": "",
-            },
-            tableDatas: [],
-            cloneTableDatas: [],
-            search: "",
-        },
-        //实例创建后显示数据库相关信息
-        created: function() {
-            var _self = this;
-            $.ajax({
-                url: '/staff_ask_for_goods_list',
-                data: {
-                    "identity": "web"
-                },
-                type: 'post',
-                //async: false,
-                dataType: "jsonp",
-                jsonp: "callback",
-                jsonpCallback: "successCallback",
-                success: function(data) {
-                    _self.tableDatas = data;
-                    for(var i=0;i<_self.tableDatas.length;i++){
-                        _self.tableDatas[i].id = i+1;
-                        _self.tableDatas[i].price = _self.tableDatas[i].price.toFixed(2);
-                        _self.tableDatas[i]["img"] = 'http://' + document.location.host + _self.tableDatas[i]["img"];
-                    }
-                    console.log(_self.tableDatas);
-                    _self.getShowData(_self.tableDatas);
-                },
-                error: function() {
-                    alert("查询出错");
-                }
-            })
+			</div>
+		</div>
+	</body>
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	 crossorigin="anonymous" style=""></script>
+	<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+	<script>
+		var img_file;
+		var filechange = function(event) {
+			var files = event.target.files,
+				file;
+			if (files && files.length > 0) {
+				file = files[0];
+				if (file.size > 1024 * 1024 * 2) {
+					alert("图片大小不能超过2MB!");
+					return false;
+				}
+				var url = window.URL || window.webkitURL;
+				var imgurl = URL.createObjectURL(file);
+				$("#img").attr("src", imgurl);
+			}
+		};
+		var obj = [];
+		var app = new Vue({
+			delimiters: ['{[', ']}'],
+			el: "#table",
+			data: {
+				selected: -1,
+				selectedlist: {},
+				tableData: {
+					"id": "",
+					"name": "",
+					"stock": "",
+					"price": "",
+					"sold": "",
+					"type": "",
+					"img": "",
+					"good_id": "",
+				},
+				tableDatas: [],
+				cloneTableDatas: [],
+				search: "",
+			},
+			//实例创建后显示数据库相关信息
+			created: function() {
+				var _self = this;
+				$.ajax({
+					url: '/staff_ask_for_goods_list',
+					data: {
+						"identity": "web"
+					},
+					type: 'post',
+					//async: false,
+					dataType: "jsonp",
+					jsonp: "callback",
+					jsonpCallback: "successCallback",
+					success: function(data) {
+						_self.tableDatas = data;
+						for (var i = 0; i < _self.tableDatas.length; i++) {
+							_self.tableDatas[i].id = i + 1;
+							_self.tableDatas[i].price = _self.tableDatas[i].price.toFixed(2);
+							_self.tableDatas[i]["img"] = 'http://' + document.location.host + _self.tableDatas[i]["img"];
+						}
+						console.log(_self.tableDatas);
+						_self.getShowData(_self.tableDatas);
+					},
+					error: function() {
+						alert("查询出错");
+					}
+				})
 
-        },
-        methods: {
-            <!--
+			},
+			methods: {
+				/*
 			名称：getShowData
 			作者：陈雨琦
 			时间：2019-08-29
 			说明：获取显示到页面上的信息
-			-->
-            getShowData: function(arr) {
-                this.cloneTableDatas = JSON.parse(JSON.stringify(arr));
-            },
-            <!--
+			*/
+				getShowData: function(arr) {
+					this.cloneTableDatas = JSON.parse(JSON.stringify(arr));
+				},
+				/*
 			名称：add
 			作者：陈雨琦
 			时间：2019-08-29
 			说明：显示新增商品模态框
-			-->
-            add: function() {
-                console.log('add');
-                {#console.log(typeof(this.tableData));#}
-                {#console.log(this.tableDatas[this.tableDatas.length-1]);#}
-                this.tableData = {
-                    "id": "",
-                    "name": "",
-                    "stock": "",
-                    "price": "",
-                    "sold": "",
-                    "type": "",
-                    "img": "",
-                    "good_id": "",
-                };
-                $('#addModal').modal('show');
-            },
-            <!--
+			*/
+				add: function() {
+					console.log('add'); {#
+						console.log(typeof(this.tableData));#
+					} {#
+						console.log(this.tableDatas[this.tableDatas.length - 1]);#
+					}
+					this.tableData = {
+						"id": "",
+						"name": "",
+						"stock": "",
+						"price": "",
+						"sold": "",
+						"type": "",
+						"img": "",
+						"good_id": "",
+					};
+					$('#addModal').modal('show');
+				},
+				/*
 			名称：addSubForm
 			作者：陈雨琦
 			时间：2019-08-29
 			说明：提交新增商品信息
-			-->
-            addSubForm: function() {
-                console.log('addsubform');
-                var file = document.getElementById("file").files[0];
-    		    {#console.log(file==undefined);#}
+			*/
+				addSubForm: function() {
+					console.log('addsubform');
+					var file = document.getElementById("file").files[0]; {#
+						console.log(file == undefined);#
+					}
+					var isInteger = /^\d+$/;
+					var isValidPrice = /(^[1-9](\d+)?(\.\d{1,2})?$)|(^0$)|(^\d\.\d{1,2}$)/;
+					var isValidType = /^(饮品)|(食品)|(日用品)|(书籍杂志)$/;
+					if (!isInteger.test(this.tableData.stock.toString()) || this.selectedlist.stock == 0) {
+						alert("请正确输入库存(正整数)");
+						return;
+					}
+					if (!isValidPrice.test(this.tableData.price.toString()) || this.selectedlist.price == 0) {
+						alert("请输入正确价格(正数，小数最多保留两位)");
+						return;
+					}
+					if (!isValidType.test(this.tableData.type)) {
+						alert("请输入正确的类别: 食品、饮品、日用品、书籍杂志");
+						return;
+					}
+					if (this.tableData.name == "") {
+						alert("商品名不能为空");
+						return;
+					}
+					if (file == undefined) {
+						alert("请上传商品图片");
+						return;
+					}
+					//商品名称查重
+					for (var i = 0; i < this.tableDatas.length; i++) {
+						if (this.tableData.name == this.tableDatas[i].name) {
+							alert("商品名重复！请重新输入商品名");
+							return;
+						}
+					}
 
-				<!--
-				名称：
-				作者：黄文政
-				时间：2019-08-29
-				说明：判断输入是否合法
-				-->
-                var isInteger = /^\d+$/;
-                var isValidPrice = /(^[1-9](\d+)?(\.\d{1,2})?$)|(^0$)|(^\d\.\d{1,2}$)/;
-                var isValidType = /^(饮品)|(食品)|(日用品)|(书籍杂志)$/;
-                if(!isInteger.test(this.tableData.stock.toString()) || this.selectedlist.stock == 0){
-                    alert("请正确输入库存(正整数)");
-                    return;
-                }
-                if(!isValidPrice.test(this.tableData.price.toString()) || this.selectedlist.price == 0){
-                    alert("请输入正确价格(正数，小数最多保留两位)");
-                    return;
-                }
-                if(!isValidType.test(this.tableData.type)){
-                    alert("请输入正确的类别: 食品、饮品、日用品、书籍杂志");
-                    return;
-                }
-                if(this.tableData.name == ""){
-                    alert("商品名不能为空");
-                    return;
-                }
-                if(file == undefined){
-                    alert("请上传商品图片");
-                    return;
-                }
-                //商品名称查重
-                for(var i=0; i<this.tableDatas.length; i++){
-                    if(this.tableData.name == this.tableDatas[i].name){
-                        alert("商品名重复！请重新输入商品名");
-                        return;
-                    }
-                }
-
-                this.tableData.id = this.tableDatas.length + 1;
-                this.tableData.price = parseFloat(this.tableData.price).toFixed(2);
-                //向数据库发送，并获得id
-                var formdata = new FormData();
-                var _self = this;
-                //上传图片和其他信息
-                formdata.append('file', file);
-                formdata.append('img_name', file['name']);
-                formdata.append('name', this.tableData.name);
-                formdata.append('stock', this.tableData.stock);
-                formdata.append('price', this.tableData.price);
-                formdata.append('type', this.tableData.type);
-                formdata.append('info', this.tableData.info);
-                var id;
-                $.ajax({
-                    url: "/staff_add_goods_details",
-                    type: "post",
-                    data: formdata,
-                    processData: false,
-                    contentType: false,
-                    success: function (data) {
-                        id = parseInt(data);
-                        _self.tableData['good_id'] = id;
-                        //console.log(id);
-                        console.log('新增成功')
-                    },
-                    error: function () {
-                        console.log('新增失败，请检查网络！');
-                    }
-                });
-                this.tableData.img = 'http://' + document.location.host + '/static/img/' +file['name'];
-                this.tableDatas.push(this.tableData);
-                this.getShowData(this.tableDatas);
-                this.tableData = {};
-                $('#addModal').modal('hide');
-                //清空图片，file
-                $("#file").val("");
-                $("#img").attr("src"," ");
-            },
-            <!--
+					this.tableData.id = this.tableDatas.length + 1;
+					this.tableData.price = parseFloat(this.tableData.price).toFixed(2);
+					//向数据库发送，并获得id
+					var formdata = new FormData();
+					var _self = this;
+					//上传图片和其他信息
+					formdata.append('file', file);
+					formdata.append('img_name', file['name']);
+					formdata.append('name', this.tableData.name);
+					formdata.append('stock', this.tableData.stock);
+					formdata.append('price', this.tableData.price);
+					formdata.append('type', this.tableData.type);
+					formdata.append('info', this.tableData.info);
+					var id;
+					$.ajax({
+						url: "/staff_add_goods_details",
+						type: "post",
+						data: formdata,
+						processData: false,
+						contentType: false,
+						success: function(data) {
+							id = parseInt(data);
+							_self.tableData['good_id'] = id;
+							console.log(id);
+							console.log('新增成功');
+							document.location.reload();
+						},
+						error: function() {
+							console.log('新增失败，请检查网络！');
+						}
+					});
+					this.tableData.img = 'http://' + document.location.host + '/static/img/' + file['name'];
+					this.tableDatas.push(this.tableData);
+					this.getShowData(this.tableDatas);
+					this.tableData = {};
+					$('#addModal').modal('hide');
+					//清空图片，file
+					$("#file").val("");
+					$("#img").attr("src", " ");
+				},
+				/*
 			名称：edit
 			作者：陈雨琦
 			时间：2019-08-29
 			说明：显示编辑商品信息模态框
-			-->
-            edit: function(index) {
-                console.log('edit');
-                $('#editModal').modal('show');
-                this.selected = index;
-                this.selectedlist = JSON.parse(JSON.stringify(this.cloneTableDatas))[index];
-            },
-			<!--
-			名称：chooseType
-			作者：陈雨琦
-			时间：2019-08-29
-			说明：选择商品种类
-			-->
-		  chooseType: function(){
-			  var myselect = document.getElementById("stype");
-			  var index = myselect.selectedIndex;
-			  var kind = myselect.options[index].value;
-			  console.log("choosetype");
-			  //查询type列
-			  if(kind){
-				  var searchArray = [];
-				  this.tableDatas.forEach(function(item){
-					  if(item.type == kind){
-						  searchArray.push(item);
-					  }
-				  });
-				  this.getShowData(searchArray);
-				} else{
-				  this.getShowData(this.tableDatas);
-				}
-		  },
-            <!--
+			*/
+				edit: function(index) {
+					console.log('edit');
+					$('#editModal').modal('show');
+					this.selected = index;
+					this.selectedlist = JSON.parse(JSON.stringify(this.cloneTableDatas))[index];
+				},
+				/*
+				名称：chooseType
+				作者：陈雨琦
+				时间：2019-08-29
+				说明：选择商品种类
+				*/
+				chooseType: function() {
+					var myselect = document.getElementById("stype");
+					var index = myselect.selectedIndex;
+					var kind = myselect.options[index].value;
+					console.log("choosetype");
+					//查询type列
+					if (kind) {
+						var searchArray = [];
+						this.tableDatas.forEach(function(item) {
+							if (item.type == kind) {
+								searchArray.push(item);
+							}
+						});
+						this.getShowData(searchArray);
+					} else {
+						this.getShowData(this.tableDatas);
+					}
+				},
+				/*
 			名称：editSubForm
 			作者：陈雨琦，黄文政
 			时间：2019-08-29
 			说明：提交编辑
-			-->
-            editSubForm: function() {
-                var result = confirm("是否保存所做改动"); //在页面上弹出确认对话框
-                if (result == true) {
-                    //判断输入是否合法
-                    var isInteger = /^\d+$/;
-                    var isValidPrice = /(^[1-9](\d+)?(\.\d{1,2})?$)|(^0$)|(^\d\.\d{1,2}$)/;
-                    var isValidType = /^(饮品)|(食品)|(日用品)|(书籍杂志)$/;
-                    if(!isInteger.test(this.selectedlist.stock.toString()) || this.selectedlist.stock == 0){
-                        alert("请正确输入库存(正整数)");
-                        return;
-                    }
-                    if(!isValidPrice.test(this.selectedlist.price.toString()) || this.selectedlist.price == 0){
-                        alert("请输入正确价格(正数，小数最多保留两位)");
-                        return;
-                    }
-                    if(!isValidType.test(this.selectedlist.type)){
-                        alert("请输入正确的类别: 食品、饮品、日用品、书籍杂志");
-                        return;
-                    }
-                    if(this.selectedlist.name == ""){
-                        alert("商品名不能为空");
-                        return;
-                    }
-                    //商品名称查重
-                    for(var i=0; i<this.tableDatas.length; i++){
-                        if(this.selectedlist.name == this.tableDatas[i].name){
-                            alert("商品名重复！请重新输入商品名");
-                            return;
-                        }
-                    }
+			*/
+				editSubForm: function() {
+					var result = confirm("是否保存所做改动"); //在页面上弹出确认对话框
+					if (result == true) {
+						//判断输入是否合法
+						var isInteger = /^\d+$/;
+						var isValidPrice = /(^[1-9](\d+)?(\.\d{1,2})?$)|(^0$)|(^\d\.\d{1,2}$)/;
+						var isValidType = /^(饮品)|(食品)|(日用品)|(书籍杂志)$/;
+						if (!isInteger.test(this.selectedlist.stock.toString()) || this.selectedlist.stock == 0) {
+							alert("请正确输入库存(正整数)");
+							return;
+						}
+						if (!isValidPrice.test(this.selectedlist.price.toString()) || this.selectedlist.price == 0) {
+							alert("请输入正确价格(正数，小数最多保留两位)");
+							return;
+						}
+						if (!isValidType.test(this.selectedlist.type)) {
+							alert("请输入正确的类别: 食品、饮品、日用品、书籍杂志");
+							return;
+						}
+						if (this.selectedlist.name == "") {
+							alert("商品名不能为空");
+							return;
+						}
+						//商品名称查重
+						for (var i = 0; i < this.tableDatas.length; i++) {
+							if (i == this.selectedlist.id - 1)
+								continue;
+							if (this.selectedlist.name == this.tableDatas[i].name) {
+								alert("商品名重复！请重新输入商品名");
+								return;
+							}
+						}
 
 
-                    // 保留两位小数
-                    this.tableDatas[this.selected].price = parseFloat(this.tableDatas[this.selected].price).toFixed(2);
-                    //this.getShowData(this.tableDatas);
-                    this.selectedlist.price = parseFloat(this.selectedlist.price).toFixed(2);
-                    $.ajax({
-                        url:"/staff_change_goods_details",
-                        data:{
-                            'name': this.selectedlist.name,
-                            'price': this.selectedlist.price,
-                            'stock': this.selectedlist.stock,
-                            'type': this.selectedlist.type,
-                            'info': this.selectedlist.info,
-                            'good_id': this.tableDatas[this.selectedlist.id-1]['good_id'],
-                        },
-                        type: 'post',
-                        success: function(obj){
-                            Vue.set(this.tableDatas, this.selectedlist.id-1, this.selectedlist);
-                            Vue.set(this.cloneTableDatas, this.selected, this.selectedlist);
-                            $('#editModal').modal('hide');
-                        },
-                        error: function (obj) {
-                            alert('保存失败，请检查网络！')
-                        }
-                    })
-                }
-            },
+						// 保留两位小数
+						this.tableDatas[this.selected].price = parseFloat(this.tableDatas[this.selected].price).toFixed(2);
+						//this.getShowData(this.tableDatas);
+						this.selectedlist.price = parseFloat(this.selectedlist.price).toFixed(2);
 
-			<!--
-			名称：del
-			作者：陈雨琦
-			时间：2019-08-29
-			说明：删除商品
-			-->
-            del: function(index) {
-                var result = confirm("确定是否删除该商品条目"); //在页面上弹出确认对话框
-                // console.log(result);
-                //console.log(this.tableDatas[index]['good_id']);
-                //console.log(this.tableDatas[index].name);
-                if (result == true) {
-                    $.ajax({
-                        url:"/staff_delete_details",
-                        data:{
-                            'good_id': this.tableDatas[index]['good_id'],
-                        },
-                        type: 'post',
-                        success: function(obj){
-                            console.log(obj);
-                        },
-                        error: function (obj) {
-                            alert('删除失败，请检查网络！')
-                        }
-                    });
-                    this.tableDatas.splice(index, 1);
-                    this.getShowData(this.tableDatas);
-                } else {
+						var _self = this;
 
-                }
-            },
-            <!--
+						$.ajax({
+							url: "/staff_change_goods_details",
+							data: {
+								'name': this.selectedlist.name,
+								'price': this.selectedlist.price,
+								'stock': this.selectedlist.stock,
+								'type': this.selectedlist.type,
+								'info': this.selectedlist.info,
+								'good_id': this.tableDatas[this.selectedlist.id - 1]['good_id'],
+							},
+							type: 'post',
+							success: function(obj) {
+								Vue.set(_self.tableDatas, _self.selectedlist.id - 1, _self.selectedlist);
+								Vue.set(_self.cloneTableDatas, _self.selected, _self.selectedlist);
+								$('#editModal').modal('hide');
+								document.location.reload();
+							},
+							error: function(obj) {
+								alert('保存失败，请检查网络！')
+							}
+						})
+					}
+				},
+
+				/*
+				名称：del
+				作者：陈雨琦
+				时间：2019-08-29
+				说明：删除商品
+				*/
+				del: function(index) {
+					selectedlist = JSON.parse(JSON.stringify(this.cloneTableDatas))[index];
+					console.log(selectedlist);
+					console.log(selectedlist.good_id);
+					var result = confirm("确定是否删除该商品条目"); //在页面上弹出确认对话框
+					var _self = this;
+					if (result == true) {
+						$.ajax({
+							url: "/staff_delete_details",
+							data: {
+								'good_id': selectedlist.good_id,
+							},
+							type: 'post',
+							success: function(obj) {
+								console.log(obj);
+								alert("删除成功");
+								document.location.reload();
+								_self.tableDatas.splice(selectedlist.id, 1);
+								_self.getShowData(_self.tableDatas);
+							},
+							error: function(obj) {
+								alert('删除失败，请检查网络！')
+							}
+						});
+					}
+
+
+				},
+				/*
 			名称：editSubForm
 			作者：陈雨琦，黄文政
 			时间：2019-08-29
 			说明：通过商品名称查询商品
-			-->
-            searchFn: function(e) {
-                var key = e.target.value;
-                //查询firstName列
-                if (key) {
-                    var searchArray = [];
-                    this.tableDatas.forEach(function(item) {
-                        if (item.name.indexOf(key) > -1) {
-                            searchArray.push(item);
-                        }
-                        if (item.type.indexOf(key) > -1) {
-                            searchArray.push(item);
-                        }
-                    });
-                    this.getShowData(searchArray);
-                } else {
-                    this.getShowData(this.tableDatas);
-                }
-            }
+			*/
+				searchFn: function(e) {
+					var key = e.target.value;
+					//查询firstName列
+					if (key) {
+						var searchArray = [];
+						this.tableDatas.forEach(function(item) {
+							if (item.name.indexOf(key) > -1) {
+								searchArray.push(item);
+							}
+							if (item.type.indexOf(key) > -1) {
+								searchArray.push(item);
+							}
+						});
+						this.getShowData(searchArray);
+					} else {
+						this.getShowData(this.tableDatas);
+					}
+				}
 
-        }
-    })
-</script>
+			}
+		})
+	</script>
 </html>

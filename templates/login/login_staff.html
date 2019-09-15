@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html>
-
 <!--
 文件名：login_staff
 创建时间：2019-08-23
@@ -8,97 +5,118 @@
 说明：员工的登陆界面，输入员工id和密码，登陆网站
 修改日期：2019-08-25
 -->
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
-  <link rel="stylesheet" href="/static/css/bg.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
-</head>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
+		<link rel="stylesheet" href="/static/css/bg.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+		<link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
+	</head>
 
-<body>
-  <div class="py-5" style="background-image: url('/static/img/login_staff/staff_login.jpg'); background-position:left center; background-size: cover;">
-    <div class="container">
-      <div class="row">
-        <div class="p-5 col-md-5">
-          <h1 ><font size="7"><strong>Staff&nbsp;Login</strong></font></h1>
-            <p class="mb-3"><font size="4">please&nbsp; input&nbsp; your&nbsp; staff&nbsp; id&nbsp; and&nbsp; password</font></p>
-          <form id="form">
-            <div class="form-group"> <input type="text" class="form-control" placeholder="staff id" id="id"> </div>
-            <div class="form-group"> <input type="password" class="form-control" placeholder="Password" id="pwd"> <small class="form-text text-muted text-right">
-              </small> </div>
-          </form>
-            <button type="button" class="btn btn-primary" onclick="submitForm()">login</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="py-3">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <p><font size=5>FaceGo-Nanjing</font></p>
-          <p><font size=5>025-52090271</font></p>
-          <p class="mb-0"><font size=5>facego@seu.edu.cn</font></p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 d-flex align-items-center justify-content-center my-3"> <a href="#">
-            <i class="d-block fa fa-facebook-official text-muted fa-lg mr-2"></i>
-          </a> <a href="#">
-            <i class="d-block fa fa-instagram text-muted fa-lg mx-2"></i>
-          </a> <a href="#">
-            <i class="d-block fa fa-google-plus-official text-muted fa-lg mx-2"></i>
-          </a> <a href="#">
-            <i class="d-block fa fa-pinterest-p text-muted fa-lg mx-2"></i>
-          </a> <a href="#">
-            <i class="d-block fa fa-reddit text-muted fa-lg mx-2"></i>
-          </a> <a href="#">
-            <i class="d-block fa fa-twitter text-muted fa-lg ml-2"></i>
-          </a> </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 text-center">
-            <p class="mb-0"><font size="4">© 2019-FaceGo. All rights reserved</font></p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
- </body>
-    <script src="/static/js/jquery.js"></script>
-    <script>
-      //方法名：submitForm
-      //作者：姜子玥
-      //创建时间：2019-08-25
-      //说明：获取id 密码 和传入后端进行登录验证
-        function submitForm() {
-            var form = document.getElementById("form");
-            var id = document.getElementById('id').value;
-            var pwd = document.getElementById('pwd').value;
-            console.log(id);
-            console.log(pwd);
-            $.ajax({
-                url: '/staff_login',
-                data: {'id': id, 'pwd': pwd},
-                type: 'post',
-                success: function (data) {
-                    console.log(data);
-                    console.log(typeof(data));
-                    if(data == "fail"){
-                        alert('登录失败');
-                    }else {
-                        alert('登录成功');
-                        location.assign('/' + data);
-                    }
-                },
-                error: function () {
-                    alert('登录失败，请检查账号密码')
-                }
-            });
-        }
-    </script>
+	<body>
+		<div class="py-5" style="background-image: url('/static/img/login_staff/staff_login.jpg'); background-position:left center; background-size: cover;">
+			<div class="container">
+				<div class="row">
+					<div class="p-5 col-md-5">
+						<h1>
+							<font size="7"><strong>Staff&nbsp;Login</strong></font>
+						</h1>
+						<p class="mb-3">
+							<font size="4">please&nbsp; input&nbsp; your&nbsp; staff&nbsp; id&nbsp; and&nbsp; password</font>
+						</p>
+						<form id="form">
+							<div class="form-group"> <input type="text" class="form-control" placeholder="staff id" id="id"> </div>
+							<div class="form-group"> <input type="password" class="form-control" placeholder="Password" id="pwd"> <small
+								 class="form-text text-muted text-right">
+								</small> </div>
+						</form>
+						<button type="button" class="btn btn-primary" onclick="submitForm()">login</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="py-3">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<p>
+							<font size=5>FaceGo-Nanjing</font>
+						</p>
+						<p>
+							<font size=5>025-52090271</font>
+						</p>
+						<p class="mb-0">
+							<font size=5>facego@seu.edu.cn</font>
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 d-flex align-items-center justify-content-center my-3"> <a href="#">
+							<i class="d-block fa fa-facebook-official text-muted fa-lg mr-2"></i>
+						</a> <a href="#">
+							<i class="d-block fa fa-instagram text-muted fa-lg mx-2"></i>
+						</a> <a href="#">
+							<i class="d-block fa fa-google-plus-official text-muted fa-lg mx-2"></i>
+						</a> <a href="#">
+							<i class="d-block fa fa-pinterest-p text-muted fa-lg mx-2"></i>
+						</a> <a href="#">
+							<i class="d-block fa fa-reddit text-muted fa-lg mx-2"></i>
+						</a> <a href="#">
+							<i class="d-block fa fa-twitter text-muted fa-lg ml-2"></i>
+						</a> </div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<p class="mb-0">
+							<font size="4">© 2019-FaceGo. All rights reserved</font>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		 crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+		 crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		 crossorigin="anonymous" style=""></script>
+	</body>
+	<script src="/static/js/jquery.js"></script>
+	<script>
+		//方法名：submitForm
+		//作者：姜子玥
+		//创建时间：2019-08-25
+		//说明：获取id 密码 和传入后端进行登录验证
+		function submitForm() {
+			var form = document.getElementById("form");
+			var id = document.getElementById('id').value;
+			var pwd = document.getElementById('pwd').value;
+			console.log(id);
+			console.log(pwd);
+			$.ajax({
+				url: '/staff_login',
+				data: {
+					'id': id,
+					'pwd': pwd
+				},
+				type: 'post',
+				success: function(data) {
+					console.log(data);
+					console.log(typeof(data));
+					if (data == "fail") {
+						alert('登录失败');
+					} else {
+						alert('登录成功');
+						location.assign('/' + data);
+					}
+				},
+				error: function() {
+					alert('登录失败，请检查账号密码')
+				}
+			});
+		}
+	</script>
 </html>

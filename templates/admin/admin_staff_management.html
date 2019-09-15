@@ -1,9 +1,9 @@
 <!--
-	名称：admin_staff_management.html
-	作者：姜子玥
-	时间：2019-08-29
-	说明：管理员管理员工信息，增加，编辑，删除
-	
+文件名：admin_staff_management.html
+创建时间：2019-08-29
+作者：姜子玥
+说明：管理员管理员工信息，增加，编辑，删除
+修改时间：2019-08-29
 -->
 <!DOCTYPE html>
 <html>
@@ -11,8 +11,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
-        <link rel="stylesheet" href="/static/css/bg.css">
+		<link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
+		<link rel="stylesheet" href="/static/css/bg.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
 		<link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
 	</head>
@@ -36,7 +36,8 @@
 								<font face="FontAwesome"> 门店管理</font>
 							</a>
 							<a href="/admin_record" class="btn btn-outline-dark"><i class="fa fa-database" aria-hidden="true"></i> 销售记录 </a>
-							<a href="/staff_logout" class="btn btn-outline-dark"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; 登出&nbsp;&nbsp;</a>
+							<a href="/staff_logout" class="btn btn-outline-dark"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;
+								登出&nbsp;&nbsp;</a>
 						</div>
 					</div>
 				</div>
@@ -156,7 +157,7 @@
 									<div class="modal-content">
 										<div class="modal-header">
 											<h4 class="modal-title">
-											<font face="FontAwesome">编辑员工信息</font>
+												<font face="FontAwesome">编辑员工信息</font>
 											</h4>
 											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 										</div>
@@ -170,8 +171,8 @@
 												<div class="form-group">
 													<label>员工身份</label>
 													<select class="custom-select" id="editIdentity" v-on:change="getEditIdentity" style="width: 150px">
-                                                        <option>选择身份</option>
-                                                        <option value="cashier">收银员</option>
+														<option>选择身份</option>
+														<option value="cashier">收银员</option>
 														<option value="admin">管理员</option>
 													</select>
 													<input type="text" name="name" readonly="true" class="form-control" v-model="selectedlist.identity" id="edit_identity">
@@ -209,7 +210,8 @@
 		</div>
 	</body>
 	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	 crossorigin="anonymous" style=""></script>
 	<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
 	<script>
 		var app = new Vue({
@@ -226,7 +228,7 @@
 					"pwd": "",
 				},
 				addStaff: {
-					"id":"",
+					"id": "",
 					"identity": "", //员工身份
 					"staff_name": "", //人的姓名
 					"shop_name": "",
@@ -238,10 +240,10 @@
 				cloneTableDatas: [],
 				search: "",
 			},
-            //方法名：created
-            //创建时间：2019-08-29
-            //作者：姜子玥
-            //说明：实例创建后显示数据库相关信息
+			//方法名：created
+			//创建时间：2019-08-29
+			//作者：姜子玥
+			//说明：实例创建后显示数据库相关信息
 			created: function() {
 				var _self = this;
 				//获取数据库显示员工信息
@@ -256,11 +258,11 @@
 					jsonp: "callback",
 					jsonpCallback: "successCallback",
 					success: function(data) {
-						for(var i=0;i<data.length;i++){
-							_self.staffDatas[i]=data[i];
-							_self.staffDatas[i]['id']=i+1;
-                        }
-                        _self.getShowData(_self.staffDatas);
+						for (var i = 0; i < data.length; i++) {
+							_self.staffDatas[i] = data[i];
+							_self.staffDatas[i]['id'] = i + 1;
+						}
+						_self.getShowData(_self.staffDatas);
 						console.log(_self.staffDatas);
 					},
 					error: function() {
@@ -282,10 +284,12 @@
 							success: function(data) {
 								_self.shoplist = data;
 								var shop_list = _self.shoplist;
-								for(var i=0;i<shop_list.length;i++){
-                                    $('#editSelectShop').append("<option value='" + shop_list[i]["name"] + "'>" + shop_list[i]["name"] + "</option>");
-                                    $('#selectShop').append("<option value='" + shop_list[i]["name"] + "'>" + shop_list[i]["name"] + "</option>");
-                                }
+								for (var i = 0; i < shop_list.length; i++) {
+									$('#editSelectShop').append("<option value='" + shop_list[i]["name"] + "'>" + shop_list[i]["name"] +
+										"</option>");
+									$('#selectShop').append("<option value='" + shop_list[i]["name"] + "'>" + shop_list[i]["name"] +
+										"</option>");
+								}
 							},
 							error: function() {
 								console.log("shop fail");
@@ -296,17 +300,17 @@
 				});
 			},
 			methods: {
-			    //方法名：created
-                //创建时间：2019-08-29
-                //作者：姜子玥
-                //说明：获取需要渲染到页面中的数据
+				//方法名：created
+				//创建时间：2019-08-29
+				//作者：姜子玥
+				//说明：获取需要渲染到页面中的数据
 				getShowData: function(arr) {
 					this.cloneTableDatas = JSON.parse(JSON.stringify(arr));
 				},
-                //方法名：add
-                //创建时间：2019-08-29
-                //作者：姜子玥
-                //说明：弹出新增信息模态框
+				//方法名：add
+				//创建时间：2019-08-29
+				//作者：姜子玥
+				//说明：弹出新增信息模态框
 				add: function() {
 					$('#addStaff').modal('show');
 					//var shop_list = this.shoplist;
@@ -314,69 +318,69 @@
 					//	$('#selectShop').append("<option value='" + shop_list[i]["name"] + "'>" + shop_list[i]["name"] + "</option>");
 					//};
 				},
-                //方法名：getAddIdentity
-                //创建时间：2019-08-29
-                //作者：姜子玥
-                //说明：获取新增员工的身份信息
+				//方法名：getAddIdentity
+				//创建时间：2019-08-29
+				//作者：姜子玥
+				//说明：获取新增员工的身份信息
 				getAddIdentity: function() {
 					this.addStaff.identity = document.getElementById("selectIdentity").value;
 				},
-                //方法名：getAddShop
-                //创建时间：2019-08-29
-                //作者：姜子玥
-                //说明：获取新增员工所属的商店名称
+				//方法名：getAddShop
+				//创建时间：2019-08-29
+				//作者：姜子玥
+				//说明：获取新增员工所属的商店名称
 				getAddShop: function() {
 					this.addStaff.shop_name = document.getElementById("selectShop").value;
 				},
 
-                //方法名：addSubmit
-                //创建时间：2019-08-29
-                //作者：姜子玥
-                //说明：提交新增给后台数据
+				//方法名：addSubmit
+				//创建时间：2019-08-29
+				//作者：姜子玥
+				//说明：提交新增给后台数据
 				addSubmit: function() {
-					var _self=this;
+					var _self = this;
 					this.addStaff.identity = document.getElementById("add_identity").value;
 
 					//判断错误输入
-                    if(this.addStaff.staff_name.length ==0){
-                        alert("请输入员工姓名");
-                        return;
-                    }
-                    if(this.addStaff.identity.length == 0){
-                        alert("请选择身份");
-                        return;
-                    }
-                    if(this.addStaff.shop_name.length == 0){
-                        alert("请选择工作商店");
-                        return;
-                    }
-                    if(!(/^\d+$/.test(this.addStaff.staff_id))){
-                        alert("账号只能包含数字！");
-                        return;
-                    }
-                    if(this.addStaff.pwd.length == 0){
-                        alert("请输入账户密码");
-                        return;
-                    }
-                    if(this.addStaff.identity == "cashier"){
-                        if(this.addStaff.shop_name == "全部"){
-                            alert("收银员只能选一个工作商店");
-                            return;
-                        }
-                    }else{
-                        if(this.addStaff.shop_name != "全部"){
-                            alert("管理员的工作商店只能为\"全部\"");
-                            return;
-                        }
-                    }
-                    //重复用户名
-                    var staff_id_repeat = false;
-                    for(var i=0; i<_self.staffDatas.length; i++){
-                        if(this.addStaff.staff_id == _self.staffDatas[i].staff_id){
-                            alert("账号重复！");
-                            return;
-                        }
-                    }
+					if (this.addStaff.staff_name.length == 0) {
+						alert("请输入员工姓名");
+						return;
+					}
+					if (this.addStaff.identity.length == 0) {
+						alert("请选择身份");
+						return;
+					}
+					if (this.addStaff.shop_name.length == 0) {
+						alert("请选择工作商店");
+						return;
+					}
+					if (!(/^\d+$/.test(this.addStaff.staff_id))) {
+						alert("账号只能包含数字！");
+						return;
+					}
+					if (this.addStaff.pwd.length == 0) {
+						alert("请输入账户密码");
+						return;
+					}
+					if (this.addStaff.identity == "cashier") {
+						if (this.addStaff.shop_name == "全部") {
+							alert("收银员只能选一个工作商店");
+							return;
+						}
+					} else {
+						if (this.addStaff.shop_name != "全部") {
+							alert("管理员的工作商店只能为\"全部\"");
+							return;
+						}
+					}
+					//重复用户名
+					var staff_id_repeat = false;
+					for (var i = 0; i < _self.staffDatas.length; i++) {
+						if (this.addStaff.staff_id == _self.staffDatas[i].staff_id) {
+							alert("账号重复！");
+							return;
+						}
+					}
 
 
 					$.ajax({
@@ -384,7 +388,7 @@
 						url: "/admin_add_staff",
 						async: false,
 						data: {
-							"identity":_self.addStaff.identity, //员工身份
+							"identity": _self.addStaff.identity, //员工身份
 							"staff_name": _self.addStaff.staff_name, //人的姓名
 							"shop_name": _self.addStaff.shop_name,
 							"staff_id": _self.addStaff.staff_id,
@@ -396,7 +400,7 @@
 						success: function(data) {
 							//获取数据库添加信息
 							alert("添加成功！");
-							_self.addStaff.id=_self.staffDatas.length+1;
+							_self.addStaff.id = _self.staffDatas.length + 1;
 							_self.staffDatas.push(_self.addStaff);
 							_self.getShowData(_self.staffDatas);
 							_self.addStaff = {};
@@ -409,54 +413,54 @@
 
 				},
 
-                //方法名：edit
-                //创建时间：2019-08-29
-                //作者：姜子玥
-                //说明：弹出编辑的信息框
+				//方法名：edit
+				//创建时间：2019-08-29
+				//作者：姜子玥
+				//说明：弹出编辑的信息框
 				edit: function(index) {
 					$('#editStaff').modal('show');
 					this.selected = index;
-					this.selectedlist = JSON.parse(JSON.stringify(this.staffDatas))[index];
+					this.selectedlist = JSON.parse(JSON.stringify(this.cloneTableDatas))[index];
 				},
 
-                //方法名：editSubmit
-                //创建时间：2019-08-29
-                //作者：姜子玥
-                //说明：提交编辑给后台数据
+				//方法名：editSubmit
+				//创建时间：2019-08-29
+				//作者：姜子玥
+				//说明：提交编辑给后台数据
 				editSubmit: function() {
-					var _self=this;
+					var _self = this;
 					var result = confirm("是否保存所做改动"); //在页面上弹出确认对话框
-					if(result == true) {
+					if (result == true) {
 						this.selectedlist.identity = document.getElementById("edit_identity").value;
 
-					//判断错误输入
-                    if(this.selectedlist.staff_name.length ==0){
-                        alert("请输入员工姓名");
-                        return;
-                    }
-                    if(this.selectedlist.identity.length == 0){
-                        alert("请选择身份");
-                        return;
-                    }
-                    if(this.selectedlist.shop_name.length == 0){
-                        alert("请选择工作商店");
-                        return;
-                    }
-                    if(this.selectedlist.pwd.length == 0){
-                        alert("请输入账户密码");
-                        return;
-                    }
-                    if(this.selectedlist.identity == "cashier"){
-                        if(this.selectedlist.shop_name == "全部"){
-                            alert("收银员只能选一个工作商店");
-                            return;
-                        }
-                    }else{
-                        if(this.selectedlist.shop_name != "全部"){
-                            alert("管理员的工作商店只能为\"全部\"");
-                            return;
-                        }
-                    }
+						//判断错误输入
+						if (this.selectedlist.staff_name.length == 0) {
+							alert("请输入员工姓名");
+							return;
+						}
+						if (this.selectedlist.identity.length == 0) {
+							alert("请选择身份");
+							return;
+						}
+						if (this.selectedlist.shop_name.length == 0) {
+							alert("请选择工作商店");
+							return;
+						}
+						if (this.selectedlist.pwd.length == 0) {
+							alert("请输入账户密码");
+							return;
+						}
+						if (this.selectedlist.identity == "cashier") {
+							if (this.selectedlist.shop_name == "全部") {
+								alert("收银员只能选一个工作商店");
+								return;
+							}
+						} else {
+							if (this.selectedlist.shop_name != "全部") {
+								alert("管理员的工作商店只能为\"全部\"");
+								return;
+							}
+						}
 
 
 
@@ -477,6 +481,7 @@
 							},
 							success: function(data) {
 								alert("修改成功!");
+								document.location.reload();
 							},
 							error: function() {
 								alert("修改失败！");
@@ -484,37 +489,37 @@
 								$('#editStaff').modal('hide');
 							}
 						});
-						        Vue.set(_self.staffDatas, _self.selected, _self.selectedlist);
-								_self.getShowData(_self.staffDatas);
-								$('#editStaff').modal('hide');
+						//Vue.set(_self.staffDatas, _self.selected, _self.selectedlist);
+						_self.getShowData(_self.staffDatas);
+						$('#editStaff').modal('hide');
 					}
 				},
 
-                //方法名：getEditIdentity
-                //创建时间：2019-08-29
-                //作者：姜子玥
-                //说明：获取编辑的身份信息
+				//方法名：getEditIdentity
+				//创建时间：2019-08-29
+				//作者：姜子玥
+				//说明：获取编辑的身份信息
 				getEditIdentity: function() {
 					this.selectedlist.identity = document.getElementById("editIdentity").value;
 				},
 
-                //方法名：getEditShop
-                //创建时间：2019-08-29
-                //作者：姜子玥
-                //说明：获取编辑的商店名称
+				//方法名：getEditShop
+				//创建时间：2019-08-29
+				//作者：姜子玥
+				//说明：获取编辑的商店名称
 				getEditShop: function() {
 					this.selectedlist.shop_name = document.getElementById("editSelectShop").value;
 				},
 
-                //方法名：del
-                //创建时间：2019-08-29
-                //作者：姜子玥
-                //说明：弹出删除模态框 并提交给后台
+				//方法名：del
+				//创建时间：2019-08-29
+				//作者：姜子玥
+				//说明：弹出删除模态框 并提交给后台
 				del: function(index) {
 					var result = confirm("确定是否删除该员工"); //在页面上弹出确认对话框
-					if(result == true) {
+					if (result == true) {
 						this.selected = index;
-						this.selectedlist = JSON.parse(JSON.stringify(this.staffDatas))[index];
+						this.selectedlist = JSON.parse(JSON.stringify(this.cloneTableDatas))[index];
 						var del_name = this.selectedlist.staff_id;
 						$.ajax({
 							type: "get",
@@ -528,12 +533,13 @@
 							},
 							success: function(data) {
 								alert("删除成功");
+								document.location.reload();
 							},
 							error: function() {
 								alert("删除失败");
 							}
 						});
-						this.staffDatas.splice(index, 1);
+						//this.staffDatas.splice(index, 1);
 						this.getShowData(this.staffDatas);
 					} else {
 
@@ -541,25 +547,25 @@
 				},
 
 				//方法名：searchFn
-                //创建时间：2019-08-29
-                //作者：姜子玥
-                //说明：搜索
+				//创建时间：2019-08-29
+				//作者：姜子玥
+				//说明：搜索
 				searchFn: function(e) {
 					var key = e.target.value;
 					//查询firstName列
-					if(key) {
+					if (key) {
 						var searchArray = [];
 						this.staffDatas.forEach(function(item) {
-							if(item.staff_name.indexOf(key) > -1) {
+							if (item.staff_name.indexOf(key) > -1) {
 								searchArray.push(item);
 							}
-							if(item.identity.indexOf(key) > -1) {
+							if (item.identity.indexOf(key) > -1) {
 								searchArray.push(item);
 							}
-							if(item.shop_name.indexOf(key) > -1) {
+							if (item.shop_name.indexOf(key) > -1) {
 								searchArray.push(item);
 							}
-							if(item.staff_id.indexOf(key) > -1) {
+							if (item.staff_id.indexOf(key) > -1) {
 								searchArray.push(item);
 							}
 						});

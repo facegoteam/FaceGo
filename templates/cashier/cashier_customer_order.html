@@ -7,547 +7,557 @@
 -->
 <!DOCTYPE html>
 <html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
+		<link rel="stylesheet" href="/static/css/bg.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+		<link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
+	</head>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
-  <link rel="stylesheet" href="/static/css/bg.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
-</head>
-
-<body>
-  <div class="py-5" >
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="row">
-            <div class="col-md-6 pb-5">
-              <div class="col-md-12"><a class="btn btn-outline-primary" href="/cashier_customer_identification" contenteditable="false">&lt;&lt;返回</a></div>
-            </div>
-            <div class="col-md-6">
-              <h1 class="text-right" style="-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none"><i class="fa fa-heart text-danger" aria-hidden="true"></i>&nbsp;微笑服务~~ ^▽^</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row" id = "table">
-        <div class="col-md-6 pr-3">
-          <h4 class="">推荐商品&nbsp;</h4>
-        </div>
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-md-6 pl-3">
-              <h4 class="" contenteditable="true">待完成的订单</h4>
-            </div>
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-6"></div>
-                <div class="col-md-6"><button type="button" class="btn btn-sm btn-outline-danger" btn-sm="" v-on:click="add">+添加购买记录</button></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 pr-3">
-          <!--显示用户推荐商品-->
-          <table class="table"  style="background:rgba(255,255,255,0.2);filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000,endcolorstr=#7F000000)">
-            <thead>
-              <tr>
-                <th>No.</th>
-                <th>商品名称</th>
-                <th>商品价格</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(item,index) in cloneRecommendDatas">
-                <td>{[ item.id ]}</td>
-                <td>{[ item.recommend_name]}</td>
-                <td>{[ item.recommend_price ]}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col-md-6 pl-3">
-          <!--显示用户已下的未完成的订单-->
-          <div class="table-responsive">
-            <table class="table" style="background:rgba(255,255,255,0.2);filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000,endcolorstr=#7F000000)">
-              <thead>
-                <tr>
-                  <th>No.</th>
-                  <th>订单号</th>
-                  <th>下单时间</th>
-                  <th>操作</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!--显示table的内容部分-->
-                <tr v-for="(item,index) in cloneOrderDatas">
-                  <td>{[ item.id ]}</td>
-                  <td>{[ item.token ]}</td>
-                  <td>{[ item.time ]}</td>
-                  <td>
-                    <button type="button" class="btn btn-sm btn-danger mx-1" btn-sm="" v-on:click="detail(index)">查看</button>
-					<button type="button" class="btn btn-sm btn-danger mx-1" btn-sm="" v-on:click="finish(index)">完成</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <!--
+	<body>
+		<div class="py-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-6 pb-5">
+								<div class="col-md-12"><a class="btn btn-outline-primary" href="/cashier_customer_identification"
+									 contenteditable="false">&lt;&lt;返回</a></div>
+							</div>
+							<div class="col-md-6">
+								<h1 class="text-right" style="-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none"><i
+									 class="fa fa-heart text-danger" aria-hidden="true"></i>&nbsp;微笑服务~~ ^▽^</h1>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" id="table">
+					<div class="col-md-6 pr-3">
+						<h4 class="">推荐商品&nbsp;</h4>
+					</div>
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-md-6 pl-3">
+								<h4 class="" contenteditable="true">待完成的订单</h4>
+							</div>
+							<div class="col-md-6">
+								<div class="row">
+									<div class="col-md-6"></div>
+									<div class="col-md-6"><button type="button" class="btn btn-sm btn-outline-danger" btn-sm="" v-on:click="add">+添加购买记录</button></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 pr-3">
+						<!--显示用户推荐商品-->
+						<table class="table" style="background:rgba(255,255,255,0.2);filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000,endcolorstr=#7F000000)">
+							<thead>
+								<tr>
+									<th>No.</th>
+									<th>商品名称</th>
+									<th>商品价格</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="(item,index) in cloneRecommendDatas">
+									<td>{[ item.id ]}</td>
+									<td>{[ item.recommend_name]}</td>
+									<td>{[ item.recommend_price ]}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-md-6 pl-3">
+						<!--显示用户已下的未完成的订单-->
+						<div class="table-responsive">
+							<table class="table" style="background:rgba(255,255,255,0.2);filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000,endcolorstr=#7F000000)">
+								<thead>
+									<tr>
+										<th>No.</th>
+										<th>订单号</th>
+										<th>下单时间</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!--显示table的内容部分-->
+									<tr v-for="(item,index) in cloneOrderDatas">
+										<td>{[ item.id ]}</td>
+										<td>{[ item.token ]}</td>
+										<td>{[ item.time ]}</td>
+										<td>
+											<button type="button" class="btn btn-sm btn-danger mx-1" btn-sm="" v-on:click="detail(index)">查看</button>
+											<button type="button" class="btn btn-sm btn-danger mx-1" btn-sm="" v-on:click="finish(index)">完成</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<!--
 			名称：detailModal
 			作者：陈雨琦
 			时间：2019-08-29
 			说明：模态框查看订单详情
 			-->
-            <div class="modal fade" tabindex="-1" role="dialog" id="detailModal">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title" contenteditable="true">
-                      <font face="FontAwesome">详情</font>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
-                    </h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="table-responsive">
-                      <table class="table table-striped table-borderless" >
-                        <thead>
-                          <tr>
-                            <th>No.</th>
-                            <th>商品名称</th>
-                            <th>商品数量</th>
-                            <th>商品单价</th>
-                          </tr>
-                        </thead>
-                        <tbody id="detail">
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                      <div class="col-9">
-                        <h5 contenteditable="false" id="total" align="left"></h5>
-                      </div>
-                      <div class="col-3">
-                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">取消</button>
-                      </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-             <!--
+							<div class="modal fade" tabindex="-1" role="dialog" id="detailModal">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title" contenteditable="true">
+												<font face="FontAwesome">详情</font>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+											</h4>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+										</div>
+										<div class="modal-body">
+											<div class="table-responsive">
+												<table class="table table-striped table-borderless">
+													<thead>
+														<tr>
+															<th>No.</th>
+															<th>商品名称</th>
+															<th>商品数量</th>
+															<th>商品单价</th>
+														</tr>
+													</thead>
+													<tbody id="detail">
+													</tbody>
+												</table>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<div class="col-9">
+												<h5 contenteditable="false" id="total" align="left"></h5>
+											</div>
+											<div class="col-3">
+												<button type="button" class="btn btn-outline-primary" data-dismiss="modal">取消</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--
 			名称：addModal
 			作者：陈雨琦
 			时间：2019-9-2
 			说明：模态框增加订单
 			-->
-            <div class="modal fade" tabindex="-1" role="dialog" id="addModal">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title">
-                      <font face="FontAwesome">新增订单</font>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
-                    </h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                  </div>
-                  <div class="modal-body">
-                    <form>
-                      <div class="form-group">
-                        <label>商品名称</label>
-                        <input type="text" name="name" class="form-control" v-model="addOrder.good_name" id="add_name" v-on:input="onInput" list="data">
-                        <datalist id="data">
-                        </datalist>
-                      </div>
-                      <div class="form-group">
-                        <label>商品数量</label>
-                        <input type="text" name="count" class="form-control" v-model="addOrder.good_count" id="add_count">
-                      </div>
-                    </form>
-                    <div class="row">
-                      <div class="col-md-3"></div>
-                      <div class="col-md-3"></div>
-                      <div class="col-md-3"></div>
-                      <div class="col-md-3"> <button type="button" class="btn btn-outline-primary" v-on:click="addGoods">添加</button></div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="table-responsive">
-                          <table class="table table-striped table-borderless" id = "newTable">
-                            <thead>
-                              <tr>
-                                <th>商品名称</th>
-                                <th>商品数量</th>
-								<th>操作</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-								<tr v-for="(item,index) in newOrder">
-								  <td>{[ item.name ]}</td>
-								  <td>{[ item.count ]}</td>
-								  <td>
-								    <button type="button" class="btn btn-sm btn-danger mx-1" btn-sm="" v-on:click="delTip(index)">删除</button>
-								  </td>
-								</tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-primary" v-on:click="addSubmit">提交</button>
-                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">取消</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="mt-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-        </div>
-      </div>
-    </div>
-   </div>
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
-    <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
-    <script>
-      var app = new Vue({
-        delimiters: ['{[', ']}'],
-        el: "#table",
-        data: {
-          total: 0,
-          selected: -1,
-          selectedlist: {},
-          tableData: {
-            "recommend_name": "",
-            "recommend_price": "",
-            "token": "",
-            "time": "",
-            "good_name": "",
-            "good_count": "",
-            "good_price": ""
-          },
-          //添加新订单条目信息
-          addOrder: {
-            "good_name": "",
-            "good_count": "",
-          },
-          //推荐商品信息
-          recommendDatas: [],
-          orderDatas: [],
-          detailDatas: [],
-          cloneRecommendDatas: [],
-          cloneOrderDatas: [],
-		  newOrder:[],
-          search: ""
-        },
-        //实例创建后显示数据库相关信息
-        created: function() {
-          var _self = this;
-          //获取推荐商品信息
-          $.ajax({
-            url: '/cashier_ask_for_customer_recommend',
-            data: {
-              "identity": "web"
-            },
-            type: 'get',
-            async: true,
-            dataType: "jsonp",
-            jsonp: "callback",
-            jsonpCallback: "successCallback",
-            success: function(data) {
-              for (var i = 0; i < data.length; i++) {
-                _self.recommendDatas[i] = data[i];
-                _self.recommendDatas[i]['id'] = i + 1;
-                _self.recommendDatas[i]['recommend_price'] = _self.recommendDatas[i]['recommend_price'].toFixed(2);
-              }
-                _self.getShowDataR(_self.recommendDatas);
-              console.log(_self.recommendDatas);
-            },
-            error: function() {
-              alert("推荐错误");
-            },
-            complete: function() {
-              //获取订单列表
-              $.ajax({
-                type: "get",
-                url: "/cashier_ask_for_customer_order",
-                async: false,
-                jsonpCallback: "successCallback",
-                dataType: "jsonp",
-                jsonp: "callback",
-                data: {
-                  "identity": "web"
-                },
-                success: function(data) {
-                  for (var i = 0; i < data.length; i++) {
-                    _self.orderDatas[i] = data[i];
-                    _self.orderDatas[i]['id'] = i + 1;
-                  }
-                    _self.getShowDataO(_self.orderDatas);
-                  //console.log(_self.orderDatas);
-                },
-                error: function() {
-                  alert("订单错误");
-                }
-              }); //end complete ajax
-            } //end complete
-          }); //end ajax
-          // console.log(typeof(this.tableDatas));
-        }, //end create
-        methods: {
-           <!--
+							<div class="modal fade" tabindex="-1" role="dialog" id="addModal">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title">
+												<font face="FontAwesome">新增订单</font>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+											</h4>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+										</div>
+										<div class="modal-body">
+											<form>
+												<div class="form-group">
+													<label>商品名称</label>
+													<input type="text" name="name" class="form-control" v-model="addOrder.good_name" id="add_name" v-on:input="onInput"
+													 list="data">
+													<datalist id="data">
+													</datalist>
+												</div>
+												<div class="form-group">
+													<label>商品数量</label>
+													<input type="text" name="count" class="form-control" v-model="addOrder.good_count" id="add_count">
+												</div>
+											</form>
+											<div class="row">
+												<div class="col-md-3"></div>
+												<div class="col-md-3"></div>
+												<div class="col-md-3"></div>
+												<div class="col-md-3"> <button type="button" class="btn btn-outline-primary" v-on:click="addGoods">添加</button></div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="table-responsive">
+														<table class="table table-striped table-borderless" id="newTable">
+															<thead>
+																<tr>
+																	<th>商品名称</th>
+																	<th>商品数量</th>
+																	<th>操作</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr v-for="(item,index) in newOrder">
+																	<td>{[ item.name ]}</td>
+																	<td>{[ item.count ]}</td>
+																	<td>
+																		<button type="button" class="btn btn-sm btn-danger mx-1" btn-sm="" v-on:click="delTip(index)">删除</button>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-outline-primary" v-on:click="addSubmit">提交</button>
+											<button type="button" class="btn btn-outline-primary" data-dismiss="modal">取消</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="mt-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		 crossorigin="anonymous" style=""></script>
+		<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+		<script>
+			var app = new Vue({
+				delimiters: ['{[', ']}'],
+				el: "#table",
+				data: {
+					total: 0,
+					selected: -1,
+					selectedlist: {},
+					tableData: {
+						"recommend_name": "",
+						"recommend_price": "",
+						"token": "",
+						"time": "",
+						"good_name": "",
+						"good_count": "",
+						"good_price": ""
+					},
+					//添加新订单条目信息
+					addOrder: {
+						"good_name": "",
+						"good_count": "",
+					},
+					//推荐商品信息
+					recommendDatas: [],
+					orderDatas: [],
+					detailDatas: [],
+					cloneRecommendDatas: [],
+					cloneOrderDatas: [],
+					newOrder: [],
+					search: ""
+				},
+				//实例创建后显示数据库相关信息
+				created: function() {
+					var _self = this;
+					//获取推荐商品信息
+					$.ajax({
+						url: '/cashier_ask_for_customer_recommend',
+						data: {
+							"identity": "web"
+						},
+						type: 'get',
+						async: true,
+						dataType: "jsonp",
+						jsonp: "callback",
+						jsonpCallback: "successCallback",
+						success: function(data) {
+							for (var i = 0; i < data.length; i++) {
+								_self.recommendDatas[i] = data[i];
+								_self.recommendDatas[i]['id'] = i + 1;
+								_self.recommendDatas[i]['recommend_price'] = _self.recommendDatas[i]['recommend_price'].toFixed(2);
+							}
+							_self.getShowDataR(_self.recommendDatas);
+							console.log(_self.recommendDatas);
+						},
+						error: function() {
+							alert("推荐错误");
+						},
+						complete: function() {
+							//获取订单列表
+							$.ajax({
+								type: "get",
+								url: "/cashier_ask_for_customer_order",
+								async: false,
+								jsonpCallback: "successCallback",
+								dataType: "jsonp",
+								jsonp: "callback",
+								data: {
+									"identity": "web"
+								},
+								success: function(data) {
+									for (var i = 0; i < data.length; i++) {
+										_self.orderDatas[i] = data[i];
+										_self.orderDatas[i]['id'] = i + 1;
+									}
+									_self.getShowDataO(_self.orderDatas);
+									//console.log(_self.orderDatas);
+								},
+								error: function() {
+									alert("订单错误");
+								}
+							}); //end complete ajax
+						} //end complete
+					}); //end ajax
+					// console.log(typeof(this.tableDatas));
+				}, //end create
+				methods: {
+					/*
 			名称：onInput
 			作者：黄文政
 			时间：2019-9-7
 			说明：获取商品列表
-			-->
-          onInput: function(){
-            var value = $("#add_name").val();
-            //console.log(value);
-            if(value.length!=0){
-                $.ajax({
-                    type: 'get',
-                    url: '/cashier_customer_search',
-                    async: false,
-                    data: {
-                        'word': value
-                    },
-                    dataType: "jsonp",
-                    jsonp: "callback",
-                    jsonpCallback: "successCallback",
-                    success: function(data) {
-                        //清空datalist
-                        $("#data").empty();
-                        for(var i=0; i<data.length; i++){
-                            $("#data").append('<option value="' + data[i] + '">');
-                        }
-                    },
-                    error: function() {
-                      alert("添加出错");
-                    }
-                });
-            }
-          },
-           <!--
+			*/
+					onInput: function() {
+						var value = $("#add_name").val();
+						//console.log(value);
+						if (value.length != 0) {
+							$.ajax({
+								type: 'get',
+								url: '/cashier_customer_search',
+								async: false,
+								data: {
+									'word': value
+								},
+								dataType: "jsonp",
+								jsonp: "callback",
+								jsonpCallback: "successCallback",
+								success: function(data) {
+									//清空datalist
+									$("#data").empty();
+									for (var i = 0; i < data.length; i++) {
+										$("#data").append('<option value="' + data[i] + '">');
+									}
+								},
+								error: function() {
+									alert("添加出错");
+								}
+							});
+						}
+					},
+					/*
 			名称：getShowDataR
 			作者：陈雨琦
 			时间：2019-9-2
 			说明：获取需要渲染到推荐表格中的数据
-			-->
-          getShowDataR: function(arr) {
-            this.cloneRecommendDatas = JSON.parse(JSON.stringify(arr));
-          },
-          <!--
+			*/
+					getShowDataR: function(arr) {
+						this.cloneRecommendDatas = JSON.parse(JSON.stringify(arr));
+					},
+					/*
 			名称：getShowDataO
 			作者：陈雨琦
 			时间：2019-9-2
 			说明：获取需要渲染到未完成订单表格中的数据
-			-->
-          getShowDataO: function(arr) {
-            this.cloneOrderDatas = JSON.parse(JSON.stringify(arr));
-          },
-          <!--
+			*/
+					getShowDataO: function(arr) {
+						this.cloneOrderDatas = JSON.parse(JSON.stringify(arr));
+					},
+					/*
 			名称：getDetailData
 			作者：陈雨琦
 			时间：2019-9-2
 			说明：获取订单详情的数据（商品名称和数量）
-			-->
-          getDetailData: function(arr) {
-            console.log(arr);
-            this.cloneDetailTableDatas = JSON.parse(JSON.stringify(arr));
-          },
-          <!--
+			*/
+					getDetailData: function(arr) {
+						console.log(arr);
+						this.cloneDetailTableDatas = JSON.parse(JSON.stringify(arr));
+					},
+					/*
 			名称：detail
 			作者：陈雨琦
 			时间：2019-9-2
 			说明：显示订单详情模态框
-			-->
-          detail: function(index) {
-            console.log("detail");
-            $('#detailModal').modal('show');
-            var _self = this;
-            var _goods = this.detailModal;
-            _self.total = 0;
-            token = _self.orderDatas[index]['token'];
-            $.ajax({
-              url: '/cashier_ask_for_order_details',
-              data: {
-                "token": token,
-              },
-              type: 'get',
-              async: false,
-              dataType: "jsonp",
-              jsonp: "callback",
-              jsonpCallback: "successCallback",
-              success: function(data) {
-                str = "";
-                var TR = document.getElementById("detail");
-                $("#detail").html("");
-                for (var i = 0; i < data.length; i++) {
-                  _self.detailDatas[i] = data[i];
-                  _self.detailDatas[i]['id'] = i + 1;
-                  var oTr = document.createElement('tr');
-                  oTr.innerHTML = "<tr><td>" + _self.detailDatas[i]['id'] + "</td><td>" + _self.detailDatas[i]['good_name'] + "</td><td>" + _self.detailDatas[i]['count'] + "</td><td>" + _self.detailDatas[i]['good_price'].toFixed(2) + "</td></tr>";
-                  TR.appendChild(oTr);
-                  _self.total += _self.detailDatas[i]['count'] * _self.detailDatas[i]['good_price'];
-                }
-                  $("#total").html("");
-                $("#total").html("总价："  + (_self.total).toFixed(2));
-                //$(#detailModal).getDetailData(_self.detailDatas);
-                _self.getDetailData(_self.detailDatas);
-                // console.log(_self.detailDatas);
-              },
-              error: function() {
-                alert("查询出错");
-              }
-            });
-          },
-           <!--
+			*/
+					detail: function(index) {
+						console.log("detail");
+						$('#detailModal').modal('show');
+						var _self = this;
+						var _goods = this.detailModal;
+						_self.total = 0;
+						token = _self.orderDatas[index]['token'];
+						$.ajax({
+							url: '/cashier_ask_for_order_details',
+							data: {
+								"token": token,
+							},
+							type: 'get',
+							async: false,
+							dataType: "jsonp",
+							jsonp: "callback",
+							jsonpCallback: "successCallback",
+							success: function(data) {
+								str = "";
+								var TR = document.getElementById("detail");
+								$("#detail").html("");
+								for (var i = 0; i < data.length; i++) {
+									_self.detailDatas[i] = data[i];
+									_self.detailDatas[i]['id'] = i + 1;
+									var oTr = document.createElement('tr');
+									oTr.innerHTML = "<tr><td>" + _self.detailDatas[i]['id'] + "</td><td>" + _self.detailDatas[i]['good_name'] +
+										"</td><td>" + _self.detailDatas[i]['count'] + "</td><td>" + _self.detailDatas[i]['good_price'].toFixed(
+											2) + "</td></tr>";
+									TR.appendChild(oTr);
+									_self.total += _self.detailDatas[i]['count'] * _self.detailDatas[i]['good_price'];
+								}
+								$("#total").html("");
+								$("#total").html("总价：" + (_self.total).toFixed(2));
+								//$(#detailModal).getDetailData(_self.detailDatas);
+								_self.getDetailData(_self.detailDatas);
+								// console.log(_self.detailDatas);
+							},
+							error: function() {
+								alert("查询出错");
+							}
+						});
+					},
+					/*
 			名称：add
 			作者：陈雨琦
 			时间：2019-9-2
 			说明：显示添加购买记录模态框
-			-->
-          add: function() {
-			var _self = this;
-			_self.newOrder=[];
-            $('#addModal').modal('show');
-          },
-          <!--
+			*/
+					add: function() {
+						var _self = this;
+						_self.newOrder = [];
+						$('#addModal').modal('show');
+					},
+					/*
 			名称：addGoods
 			作者：陈雨琦，黄文政
 			时间：2019-9-2
 			说明：添加新增订单中的商品,判断输入是否正确，显示在表格中
-			-->
-		  addGoods:function(){
-              var _self = this;
-              //判断输入是否合法
-              var value = $("#add_name").val();
-              //console.log(value);
-              var isValidGood = false;
-              if(value.length==0){
-                  alert("请输入商品名称");
-                  return;
-              }else{
-                  $.ajax({
-                      type: 'get',
-                      url: '/cashier_customer_search',
-                      async: false,
-                      data: {
-                        'word': value
-                    },
-                      dataType: "jsonp",
-                      jsonp: "callback",
-                      jsonpCallback: "successCallback",
-                      success: function(data) {
-                        //清空datalist
-                        var index = $.inArray(value, data);
-                        if(index>=0)
-                            isValidGood = true;
-                        },
-                      error: function() {
-                      //alert("商品名称查询出错");
-                    }
-                  });
-                }
-                if(!isValidGood){
-                    alert("商品名称错误");
-                    return;
-                }
-                var isInteger = /^\d+$/;
-                if(!isInteger.test(_self.addOrder.good_count.toString()) || _self.addOrder.good_count == 0){
-                    alert("请正确输入商品数量(正整数)");
-                    return;
-                }
+			*/
+					addGoods: function() {
+						var _self = this;
+						//判断输入是否合法
+						var value = $("#add_name").val();
+						//console.log(value);
+						var isValidGood = false;
+						if (value.length == 0) {
+							alert("请输入商品名称");
+							return;
+						} else {
+							$.ajax({
+								type: 'get',
+								url: '/cashier_customer_search',
+								async: false,
+								data: {
+									'word': value
+								},
+								dataType: "jsonp",
+								jsonp: "callback",
+								jsonpCallback: "successCallback",
+								success: function(data) {
+									//清空datalist
+									var index = $.inArray(value, data);
+									if (index >= 0)
+										isValidGood = true;
+								},
+								error: function() {
+									//alert("商品名称查询出错");
+								}
+							});
+						}
+						if (!isValidGood) {
+							alert("商品名称错误");
+							return;
+						}
+						var isInteger = /^\d+$/;
+						if (!isInteger.test(_self.addOrder.good_count.toString()) || _self.addOrder.good_count == 0) {
+							alert("请正确输入商品数量(正整数)");
+							return;
+						}
 
-                var name = _self.addOrder.good_name;
-                var count = _self.addOrder.good_count;
-                _self.newOrder.push({name,count});
-                console.log(_self.newOrder);
-		    },
-          <!--
+						var name = _self.addOrder.good_name;
+						var count = _self.addOrder.good_count;
+						_self.newOrder.push({
+							name,
+							count
+						});
+						console.log(_self.newOrder);
+					},
+					/*
 			名称：delTip
 			作者：陈雨琦
 			时间：2019-9-2
 			说明：删除新增订单的条目
-			-->
-		  delTip:function(index){
-			  var _self =this;
-			  _self.newOrder.splice(index,1);
-		  },
-          <!--
+			*/
+					delTip: function(index) {
+						var _self = this;
+						_self.newOrder.splice(index, 1);
+					},
+					/*
 			名称：addSubmit
 			作者：陈雨琦
 			时间：2019-9-2
 			说明：提交新增购买记录
-			-->
-          addSubmit: function() {
-            var _self = this;
-            $.ajax({
-              type: 'get',
-              url: '/cashier_add_order',
-              async: false,
-              data: {"data":JSON.stringify(_self.newOrder)},
-              dataType: "jsonp",
-              jsonp: "callback",
-              jsonpCallback: "successCallback",
-              success: function(data) {
-                  if (data[0]=="Failed"){
-                      alert("库存不足！");
-                  }
-                  else {
-                      //获取数据库添加信息
-                      alert("添加成功！");
-                      $('#addOrder').modal('hide');
-                      document.location.reload();
-                  }
-              },
-              error: function() {
-                alert("添加出错");
-              }
-            });
-          },
-          <!--
+			*/
+					addSubmit: function() {
+						var _self = this;
+						$.ajax({
+							type: 'get',
+							url: '/cashier_add_order',
+							async: false,
+							data: {
+								"data": JSON.stringify(_self.newOrder)
+							},
+							dataType: "jsonp",
+							jsonp: "callback",
+							jsonpCallback: "successCallback",
+							success: function(data) {
+								if (data[0] == "Failed") {
+									alert("库存不足！");
+								} else {
+									//获取数据库添加信息
+									alert("添加成功！");
+									$('#addOrder').modal('hide');
+									document.location.reload();
+								}
+							},
+							error: function() {
+								alert("添加出错");
+							}
+						});
+					},
+					/*
 			名称：finish
 			作者：黄文政
 			时间：2019-9-2
 			说明：完成订单
-			-->
-          finish: function(index) {
-            var _self = this;
-            token = _self.orderDatas[index]['token'];
-            $.ajax({
-              url: "/cashier_finish_specific_order",
-              data: {
-                "token": token,
-              },
-              type: 'get',
-              async: false,
-              dataType: "jsonp",
-              jsonp: "callback",
-              jsonpCallback: "successCallback",
-              success: function(data) {
-                alert("订单已完成！！");
-              },
-              error: function() {
-                alert("未完成！");
-              }
-            }); //end ajax
-            this.orderDatas.splice(index, 1);
-            this.getShowDataO(this.orderDatas);
-          } //end finish
-        } //end methods
-      })
-    </script>
+		  */
+					finish: function(index) {
+						var _self = this;
+						token = _self.orderDatas[index]['token'];
+						$.ajax({
+							url: "/cashier_finish_specific_order",
+							data: {
+								"token": token,
+							},
+							type: 'get',
+							async: false,
+							dataType: "jsonp",
+							jsonp: "callback",
+							jsonpCallback: "successCallback",
+							success: function(data) {
+								alert("订单已完成！！");
+							},
+							error: function() {
+								alert("未完成！");
+							}
+						}); //end ajax
+						this.orderDatas.splice(index, 1);
+						this.getShowDataO(this.orderDatas);
+					} //end finish
+				} //end methods
+			})
+		</script>
 
-</body>
+	</body>
 
 </html>

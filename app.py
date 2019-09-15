@@ -201,7 +201,7 @@ def customer_logout():
 函数名：customer_ask_for_record
 创建时间：2019-08-27
 作者：黄文政
-说明：顾客查看消费记录
+说明：web及小程序顾客查看消费记录
 修改日期：2019-08-27
 '''
 @app.route('/customer_ask_for_record', methods=['POST', 'GET'])
@@ -273,7 +273,7 @@ def customer_ask_for_record():
 函数名：customer_ask_for_cart
 创建时间：2019-08-29
 作者：黄文政
-说明：顾客查看购物车
+说明：小程序顾客查看购物车
 修改日期：2019-08-29
 '''
 @app.route('/customer_ask_for_cart', methods=['GET', 'POST'])
@@ -304,7 +304,7 @@ def customer_ask_for_cart():
 函数名：customer_add_cart
 创建时间：2019-08-29
 作者：黄文政
-说明：顾客添加购物车
+说明：小程序顾客添加购物车
 修改日期：2019-08-29
 '''
 @app.route('/customer_add_cart', methods=['GET', 'POST'])
@@ -365,7 +365,7 @@ def customer_add_cart():
 函数名：customer_change_cart
 创建时间：2019-08-29
 作者：黄文政
-说明：顾客修改购物车
+说明：小程序顾客修改购物车
 修改日期：2019-08-29
 '''
 @app.route('/customer_change_cart', methods=['GET', 'POST'])
@@ -403,7 +403,7 @@ def customer_change_cart():
 函数名：customer_add_order
 创建时间：2019-09-01
 作者：黄文政
-说明：顾客添加订单
+说明：小程序顾客添加订单
 修改日期：2019-09-01
 '''
 @app.route('/customer_add_order', methods=['GET', 'POST'])
@@ -489,7 +489,7 @@ def customer_add_order():
 函数名：customer_add_order_from_detail
 创建时间：2019-09-03
 作者：黄文政
-说明：顾客从商品详情直接下单
+说明：小程序顾客从商品详情直接下单
 修改日期：2019-09-03
 '''
 @app.route('/customer_add_order_from_detail', methods=['GET', 'POST'])
@@ -569,7 +569,7 @@ def customer_add_order_from_detail():
 函数名：customer_ask_for_good
 创建时间：2019-08-27
 作者：黄文政
-说明：顾客查看商品列表
+说明：小程序顾客查看商品列表
 修改日期：2019-08-27
 '''
 @app.route('/customer_ask_for_good', methods=['GET', 'POST'])
@@ -602,7 +602,7 @@ def customer_ask_for_good():
 函数名：customer_search_for_good
 创建时间：2019-08-30
 作者：黄文政
-说明：顾客搜索商品
+说明：小程序顾客搜索商品
 修改日期：2019-08-30
 '''
 @app.route('/customer_search_for_good', methods=['GET', 'POST'])
@@ -627,7 +627,7 @@ def customer_search_for_good():
 函数名：customer_ask_for_type_statics
 创建时间：2019-08-30
 作者：黄文政
-说明：顾客查看类别消费分析
+说明：小程序顾客查看类别消费分析
 修改日期：2019-08-30
 '''
 @app.route('/customer_ask_for_type_statics', methods=['GET', 'POST'])
@@ -660,7 +660,7 @@ def customer_ask_for_type_statics():
 函数名：customer_ask_for_month_statics
 创建时间：2019-08-30
 作者：黄文政
-说明：顾客查看月份消费分析
+说明：小程序顾客查看月份消费分析
 修改日期：2019-08-30
 '''
 @app.route('/customer_ask_for_month_statics', methods=['GET', 'POST'])
@@ -698,7 +698,7 @@ def customer_ask_for_month_statics():
 函数名：customer_ask_for_shop
 创建时间：2019-08-27
 作者：黄文政
-说明：顾客查看门店列表
+说明：小程序顾客查看门店列表
 修改日期：2019-08-27
 '''
 @app.route('/customer_ask_for_shop', methods=['GET', 'POST'])
@@ -1017,7 +1017,7 @@ def customer_ask_for_recommend_wx():
 函数名：customer_recommend
 创建时间：2019-08-25
 作者：黄文政
-说明：顾客商品推荐界面
+说明：web顾客商品推荐界面
 修改日期：2019-08-25
 '''
 @app.route('/customer_recommend')
@@ -1034,6 +1034,7 @@ def customer_recommend():
 修改日期：2019-09-05
 '''
 @app.route('/customer_ask_for_recommend', methods=["POST", "GET"])
+@login_required
 def customer_ask_for_recommend():
     if request.method == 'GET':
         # 获取推荐数据，从10个中每次随机选6个作为推荐
@@ -1096,9 +1097,6 @@ def customer_ask_for_recommend():
                 result.append({'name': name, 'price': price, 'img': img})
             print(result)
             return "successCallback" + "(" + json.dumps(result) + ")"
-
-
-
     else:
         return "post is not welcomed!"
 
@@ -1108,7 +1106,7 @@ def customer_ask_for_recommend():
 函数名：customer_records
 创建时间：2019-08-25
 作者：黄文政
-说明：顾客购买记录
+说明：web顾客购买记录界面
 修改日期：2019-08-27
 '''
 @app.route('/customer_records')
@@ -1161,6 +1159,7 @@ def staff_login():
 修改日期：2019-08-27
 '''
 @app.route('/staff_logout')
+@login_required
 def staff_logout():
     # 如果有'staff_id'的session，则删除
     keys = session.keys()
@@ -1232,6 +1231,7 @@ def cashier_ask_for_order():
 修改日期：2019-08-27
 '''
 @app.route('/cashier_ask_for_order_details', methods=["POST", "GET"])
+@login_required
 def cashier_ask_for_order_details():
     if request.method == "GET":
         token = request.args.get('token')
@@ -1257,6 +1257,7 @@ def cashier_ask_for_order_details():
 修改日期：2019-09-03
 '''
 @app.route('/cashier_add_order', methods=["POST", "GET"])
+@login_required
 def cashier_add_order():
     if request.method == "GET":
         orders = json.loads(request.args.get('data'))
@@ -1355,6 +1356,7 @@ def cashier_customer_identification():
 修改日期：2019-09-03
 '''
 @app.route('/order_face_upload', methods=['GET', 'POST'])
+@login_required
 def order_face_upload():
     # print('face upload call')
     # print(request.json)
@@ -1392,6 +1394,7 @@ def order_face_upload():
 修改日期：2019-09-03
 '''
 @app.route('/order_register', methods=['GET', 'POST'])
+@login_required
 def order_register():
     print('faceRegister call')
     if request.method == 'POST':
@@ -1494,6 +1497,7 @@ def cashier_ask_for_customer_order():
 修改日期：2019-09-02
 '''
 @app.route('/cashier_ask_for_customer_recommend', methods=["POST", "GET"])
+@login_required
 def cashier_ask_for_customer_recommend():
     result = []
     if request.method == "POST":
@@ -1568,6 +1572,7 @@ def cashier_ask_for_customer_recommend():
 修改日期：2019-09-02
 '''
 @app.route('/cashier_finish_specific_order', methods=["POST", "GET"])
+@login_required
 def cashier_finish_specific_order():
     if request.method == "GET":
         token = request.args.get('token')
@@ -1598,6 +1603,7 @@ def cashier_finish_specific_order():
 修改日期：2019-08-29
 '''
 @app.route('/staff_ask_for_goods_list', methods=['POST', 'GET'])
+@login_required
 def staff_ask_for_goods_list():
     # name = request.form['name']
     if request.method == 'POST':
@@ -1635,6 +1641,7 @@ def staff_ask_for_goods_list():
 修改日期：2019-08-29
 '''
 @app.route('/staff_ask_for_goods_details', methods=['POST', 'GET'])
+@login_required
 def staff_ask_for_goods_details():
     # name = request.form['name']
     name = '小说绘'
@@ -1666,6 +1673,7 @@ def staff_ask_for_goods_details():
 修改日期：2019-08-29
 '''
 @app.route('/staff_change_goods_details', methods=['POST', 'GET'])
+@login_required
 def staff_change_goods_details():
     if request.method == 'POST':
         name = request.form['name']
@@ -1699,6 +1707,7 @@ def staff_change_goods_details():
 修改日期：2019-08-29
 '''
 @app.route('/staff_add_goods_details', methods=['POST', 'GET'])
+@login_required
 def staff_add_goods_details():
     if request.method == 'POST':
         name = request.form['name']
@@ -1740,8 +1749,10 @@ def staff_add_goods_details():
 修改日期：2019-08-30
 '''
 @app.route('/staff_delete_details', methods=['POST', 'GET'])
+@login_required
 def staff_delete_details():
     if request.method == 'POST':
+
         good_id = request.form['good_id']
 
         print(good_id)
@@ -1759,7 +1770,7 @@ def staff_delete_details():
 函数名：hot_items
 创建时间：2019-08-28
 作者：黄文政
-说明：顾客查看热销榜
+说明：小程序顾客查看热销榜
 修改日期：2019-08-28
 '''
 @app.route('/hot_items', methods=['POST', 'GET'])
@@ -1825,6 +1836,7 @@ def admin_record():
 修改日期：2019-09-01
 '''
 @app.route('/admin_ask_for_record', methods=["POST", "GET"])
+@login_required
 def admin_ask_for_record():
     if request.method == "GET":
         year = request.args.get('year')
@@ -1881,6 +1893,7 @@ def admin_ask_for_record():
 修改日期：2019-09-03
 '''
 @app.route('/admin_ask_for_year_sales', methods=["POST", "GET"])
+@login_required
 def admin_ask_for_year_sales():
     if request.method == "GET":
         year = request.args.get('year')
@@ -1935,6 +1948,7 @@ def admin_ask_for_year_sales():
 修改日期：2019-09-03
 '''
 @app.route('/admin_ask_for_type_sales', methods=["POST", "GET"])
+@login_required
 def admin_ask_for_type_sales():
     if request.method == "GET":
         year = request.args.get('year')
@@ -2025,6 +2039,7 @@ def admin_staff_management():
 修改日期：2019-08-30
 '''
 @app.route('/admin_ask_for_staff', methods=['POST', 'GET'])
+@login_required
 def admin_ask_for_staff():
     # print(request.method)
     if request.method == 'GET':
@@ -2057,6 +2072,7 @@ def admin_ask_for_staff():
 修改日期：2019-08-30
 '''
 @app.route('/admin_add_staff', methods=['POST', 'GET'])
+@login_required
 def admin_add_staff():
     # print(request.method)
     if request.method == 'GET':
@@ -2096,6 +2112,7 @@ def admin_add_staff():
 修改日期：2019-08-30
 '''
 @app.route('/admin_change_staff', methods=['POST', 'GET'])
+@login_required
 def admin_change_staff():
     # print(request.method)
     if request.method == 'GET':
@@ -2133,6 +2150,7 @@ def admin_change_staff():
 修改日期：2019-08-30
 '''
 @app.route('/admin_delete_staff', methods=['POST', 'GET'])
+@login_required
 def admin_delete_staff():
     # print(request.method)
     if request.method == 'GET':
@@ -2157,6 +2175,7 @@ def admin_delete_staff():
 修改日期：2019-08-30
 '''
 @app.route('/admin_ask_for_shop', methods=['GET', 'POST'])
+@login_required
 def admin_ask_for_shop():
     # 返回名称，地址，电话
     result = []
@@ -2179,6 +2198,7 @@ def admin_ask_for_shop():
 修改日期：2019-09-01
 '''
 @app.route('/admin_change_shop', methods=['GET', 'POST'])
+@login_required
 def admin_change_shop():
     if request.method == "GET":
         shop_id = request.args.get('shop_id')
@@ -2207,6 +2227,7 @@ def admin_change_shop():
 修改日期：2019-09-01
 '''
 @app.route('/admin_add_shop', methods=['GET', 'POST'])
+@login_required
 def admin_add_shop():
     # 返回shop_id
     if request.method == "GET":
@@ -2239,6 +2260,7 @@ def admin_add_shop():
 修改日期：2019-09-01
 '''
 @app.route('/admin_delete_shop', methods=['GET', 'POST'])
+@login_required
 def admin_delete_shop():
     if request.method == "GET":
         shop_id = request.args.get('shop_id')
@@ -2252,11 +2274,6 @@ def admin_delete_shop():
     else:
         return "post is not welcomed!"
 
-
-
-@app.route('/test')
-def test():
-    return 'ok'
 
 if __name__ == '__main__':
     app.run()

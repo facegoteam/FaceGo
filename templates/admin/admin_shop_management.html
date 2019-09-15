@@ -3,6 +3,7 @@
 创建时间：2019-08-30
 作者：姜子玥
 说明：管理员进行门店管理，可以按照门店名搜索门店，可以在表中查看门店名称，地址，电话
+修改时间：2019-08-30
 -->
 
 <!DOCTYPE html>
@@ -11,8 +12,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
-        <link rel="stylesheet" href="/static/css/bg.css">
+		<link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
+		<link rel="stylesheet" href="/static/css/bg.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
 		<link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
 	</head>
@@ -36,7 +37,8 @@
 								<font face="FontAwesome"> 门店管理</font>
 							</a>
 							<a href="/admin_record" class="btn btn-outline-dark"><i class="fa fa-database" aria-hidden="true"></i> 销售记录 </a>
-							<a href="/staff_logout" class="btn btn-outline-dark"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; 登出&nbsp;&nbsp;</a>
+							<a href="/staff_logout" class="btn btn-outline-dark"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;
+								登出&nbsp;&nbsp;</a>
 						</div>
 					</div>
 				</div>
@@ -128,7 +130,7 @@
 									</div>
 								</div>
 							</div>
-							
+
 							<!--编辑商店信息模态框-->
 							<div class="modal fade" tabindex="-1" role="dialog" id="editShop">
 								<div class="modal-dialog" role="document">
@@ -163,8 +165,8 @@
 									</div>
 								</div>
 							</div>
-							
-							
+
+
 						</div>
 					</div>
 				</div>
@@ -174,46 +176,48 @@
 		</div>
 	</body>
 	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	 crossorigin="anonymous" style=""></script>
 	<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
 	<script>
 		var app = new Vue({
 			delimiters: ['{[', ']}'],
 			el: "#shop",
 			data: {
-				selected:-1,
-				selectedlist:{
-					"shop_id":"",
-					"name":"",
-					"address":"",
-					"phone":""
+				selected: -1,
+				selectedlist: {
+					"shop_id": "",
+					"name": "",
+					"address": "",
+					"phone": ""
 				},
-				addShop:{
-					"shop_id":"",
-					"id":"",
-					"name":"",
-					"address":"",
-					"phone":""
+				addShop: {
+					"shop_id": "",
+					"id": "",
+					"name": "",
+					"address": "",
+					"phone": ""
 				},
 				shopDatas: [{
-					"id": "1",
-					"name": "东大",
-					"address": "九龙湖",
-					"phone": "555555"
-				},
-				{
-					"id":"2",
-					"name":"中超",
-					"address":"九龙湖校区",
-					"phone":"99999"
-				}],
+						"id": "1",
+						"name": "东大",
+						"address": "九龙湖",
+						"phone": "555555"
+					},
+					{
+						"id": "2",
+						"name": "中超",
+						"address": "九龙湖校区",
+						"phone": "99999"
+					}
+				],
 				cloneTableDatas: [],
 
 			},
-				//方法名：created
-				//创建时间：2019-08-30
-				//作者：姜子玥
-				//说明：获取数据库数据并显示在表格界面中
+			//方法名：created
+			//创建时间：2019-08-30
+			//作者：姜子玥
+			//说明：获取数据库数据并显示在表格界面中
 			created: function() {
 				var _self = this;
 				$.ajax({
@@ -224,10 +228,10 @@
 					jsonp: "callback",
 					jsonpCallback: "successCallback",
 					success: function(data) {
-						for(var i = 0; i < data.length; i++) {
+						for (var i = 0; i < data.length; i++) {
 							_self.shopDatas[i] = data[i];
 							_self.shopDatas[i]['id'] = i + 1;
-							_self.shopDatas[i]["shop_id"]=data[i]["shop_id"];
+							_self.shopDatas[i]["shop_id"] = data[i]["shop_id"];
 						}
 						_self.getShowData(_self.shopDatas);
 					},
@@ -250,189 +254,207 @@
 				//作者：姜子玥
 				//说明：弹出新增门店信息模态框
 				add: function() {
-				    this.addShop = {
-                        "shop_id":"",
-                        "id":"",
-                        "name":"",
-                        "address":"",
-                        "phone":""
-                    };
+					this.addShop = {
+						"shop_id": "",
+						"id": "",
+						"name": "",
+						"address": "",
+						"phone": ""
+					};
 					$('#addShop').modal('show');
 				},
 				//方法名：addSubmit
 				//创建时间：2019-08-30
 				//作者：姜子玥
 				//说明：提交新增门店信息
-				addSubmit:function(){
-					var _self=this;
+				addSubmit: function() {
+					var _self = this;
 
 					//判断输入错误
-                    var isPhoneNumber = /^\d(0|1|2|3|4|5|6|7|8|9|\-)+$/;
-                    if(!isPhoneNumber.test(_self.addShop.phone)){
-                        alert("请输入正确的电话号码");
-                        return;
-                    }
-                    if(_self.addShop.name.length == 0){
-                        alert("请输入商店名");
-                        return;
-                    }
-                    if(_self.addShop.address.length == 0){
-                        alert("请输入商店地址");
-                        return;
-                    }
+					var isPhoneNumber = /^\d(0|1|2|3|4|5|6|7|8|9|\-)+$/;
+					if (!isPhoneNumber.test(_self.addShop.phone)) {
+						alert("请输入正确的电话号码");
+						return;
+					}
+					if (_self.addShop.name.length == 0) {
+						alert("请输入商店名");
+						return;
+					}
+					if (_self.addShop.address.length == 0) {
+						alert("请输入商店地址");
+						return;
+					}
+					//商店名查重
+					for (var i = 0; i < this.shopDatas.length; i++) {
+						if (_self.addShop.name == this.shopDatas[i].name) {
+							alert("商店名重复，请重新输入！");
+							return;
+						}
+					}
 
-					_self.addShop.id=this.shopDatas.length+1;
+					_self.addShop.id = this.shopDatas.length + 1;
 					console.log(_self.addShop.address);
 					$.ajax({
-						type:"get",
-						url:"/admin_add_shop",
-						async:false,
+						type: "get",
+						url: "/admin_add_shop",
+						async: false,
 						dataType: "jsonp",
 						jsonp: "callback",
 						jsonpCallback: "successCallback",
-						data:{
-							"name":_self.addShop.name,
-							"address":_self.addShop.address,
-							"phone":_self.addShop.phone,
+						data: {
+							"name": _self.addShop.name,
+							"address": _self.addShop.address,
+							"phone": _self.addShop.phone,
 						},
-						success:function(data){
+						success: function(data) {
 							//向数据库里添加新消息
 							alert("添加成功！");
-							_self.addShop["shop_id"]=data["shop_id"];
+							_self.addShop["shop_id"] = data["shop_id"];
 							_self.shopDatas.push(_self.addShop);
 							_self.getShowData(_self.shopDatas);
-							_self.addShop={};
+							_self.addShop = {};
 							$("#addShop").modal('hide');
 						},
-						error:function(){
+						error: function() {
 							alert("添加失败");
 						}
 					});
-			},
-                //方法名：edit
+				},
+				//方法名：edit
 				//创建时间：2019-08-30
 				//作者：姜子玥
 				//说明：显示编辑信息
-                edit:function(index){
-                	$("#editShop").modal('show');
-                	this.selected=index;
-                	this.selectedlist=JSON.parse(JSON.stringify(this.shopDatas))[index];
-                },
+				edit: function(index) {
+					$("#editShop").modal('show');
+					this.selected = index;
+					this.selectedlist = JSON.parse(JSON.stringify(this.cloneTableDatas))[index];
+				},
 				//方法名：editSubmit
 				//创建时间：2019-08-30
 				//作者：姜子玥
 				//说明：提交编辑
-                editSubmit:function(){
-                	var _self=this;
+				editSubmit: function() {
+					var _self = this;
 
-                	//判断输入错误
-                    var isPhoneNumber = /^\d(0|1|2|3|4|5|6|7|8|9|\-)+$/;
-                    if(!isPhoneNumber.test(_self.selectedlist.phone)){
-                        alert("请输入正确的电话号码");
-                        return;
-                    }
-                    if(_self.selectedlist.name.length == 0){
-                        alert("请输入商店名");
-                        return;
-                    }
-                    if(_self.selectedlist.address.length == 0){
-                        alert("请输入商店地址");
-                        return;
-                    }
+					//判断输入错误
+					var isPhoneNumber = /^\d(0|1|2|3|4|5|6|7|8|9|\-)+$/;
+					if (!isPhoneNumber.test(_self.selectedlist.phone)) {
+						alert("请输入正确的电话号码");
+						return;
+					}
+					if (_self.selectedlist.name.length == 0) {
+						alert("请输入商店名");
+						return;
+					}
+					if (_self.selectedlist.address.length == 0) {
+						alert("请输入商店地址");
+						return;
+					}
+					console.log(_self.selectedlist.shop_id);
+					console.log(_self.shopDatas);
+					//商店名查重
+					for (var i = 0; i < this.shopDatas.length; i++) {
+						if (_self.selectedlist.shop_id == _self.shopDatas[i].shop_id)
+							continue;
+						if (_self.selectedlist.name == this.shopDatas[i].name) {
+							alert("商店名重复，请重新输入！");
+							return;
+						}
+					}
 
-                	var result=confirm("是否保存所做改动");
-                	if(result==true){
-                		$.ajax({
-                			type:"get",
-                			url:"/admin_change_shop",
-                			async:false,
-                			dataType: "jsonp",
+					var result = confirm("是否保存所做改动");
+					if (result == true) {
+						$.ajax({
+							type: "get",
+							url: "/admin_change_shop",
+							async: false,
+							dataType: "jsonp",
 							jsonp: "callback",
 							jsonpCallback: "successCallback",
-							data:{
-								"shop_id":_self.selectedlist.shop_id,
-								"name":_self.selectedlist.name,
-								"address":_self.selectedlist.address,
-								"phone":_self.selectedlist.phone,
+							data: {
+								"shop_id": _self.selectedlist.shop_id,
+								"name": _self.selectedlist.name,
+								"address": _self.selectedlist.address,
+								"phone": _self.selectedlist.phone,
 							},
-							success:function(data){
+							success: function(data) {
 								alert("修改成功!");
-								Vue.set(_self.shopDatas,_self.selected,_self.selectedlist);
+								//Vue.set(_self.shopDatas,_self.selected,_self.selectedlist);
 								_self.getShowData(_self.shopDatas);
+								document.location.reload();
 								$("#editShop").modal('hide');
 							},
-							error:function(){
+							error: function() {
 								alert("修改失败");
 								_self.getShowData(_self.shopDatas);
 							}
-                		});
-                		//测试
-//              		Vue.set(_self.shopDatas,_self.selected,_self.selectedlist);
-//						_self.getShowData(_self.shopDatas);
-//						$("#editShop").modal('hide');
-                	}
-                	else{}
-                },
-                //方法名：del
+						});
+						//测试
+						//              		Vue.set(_self.shopDatas,_self.selected,_self.selectedlist);
+						//						_self.getShowData(_self.shopDatas);
+						//						$("#editShop").modal('hide');
+					} else {}
+				},
+				//方法名：del
 				//创建时间：2019-08-30
 				//作者：姜子玥
 				//说明：弹出删除信息模态框 并将删除门店提交给后台删除门店
-               del:function(index){
-               	var result=confirm("确定是否删除该门店");
-               	if(result==true){
-               		var _self=this;
-               		_self.selected=index;
-               		_self.selectedlist=JSON.parse(JSON.stringify(_self.shopDatas[index]));
-               		var del_shop_id=_self.selectedlist.shop_id;
-               		$.ajax({
-               			type:"get",
-               			url:"/admin_delete_shop",
-               			async: false,
-               			dataType: "jsonp",
-						jsonp: "callback",
-						jsonpCallback: "successCallback",
-						data:{
-							"shop_id":del_shop_id
-						},
-						success:function(data){
-							alert("删除成功！");
-							_self.shopDatas.splice(index,1);
-							_self.getShowData(_self.shopDatas);
-						},
-						error:function(){
-							alert("删除失败");
-						}
-               		});
-               	}
-               	else{}
-               },
+				del: function(index) {
+					var result = confirm("确定是否删除该门店");
+					if (result == true) {
+						var _self = this;
+						_self.selected = index;
+						_self.selectedlist = JSON.parse(JSON.stringify(_self.cloneTableDatas[index]));
+						var del_shop_id = _self.selectedlist.shop_id;
+						$.ajax({
+							type: "get",
+							url: "/admin_delete_shop",
+							async: false,
+							dataType: "jsonp",
+							jsonp: "callback",
+							jsonpCallback: "successCallback",
+							data: {
+								"shop_id": del_shop_id
+							},
+							success: function(data) {
+								alert("删除成功！");
+								//_self.shopDatas.splice(index,1);
+								_self.getShowData(_self.shopDatas);
+								document.location.reload();
+							},
+							error: function() {
+								alert("删除失败");
+							}
+						});
+					} else {}
+				},
 				//方法名：searchFn
 				//创建时间：2019-08-30
 				//作者：姜子玥
 				//说明：在表格中搜索门店
-               searchFn:function (e) {
-               	var key=e.target.value;
-                
-                //查询firstName列
-                if(key){
-                    var searchArray=[];
-                    this.shopDatas.forEach(function (item) {
-                        if(item.name.indexOf(key)>-1){
-                            searchArray.push(item);
-                        }
-                        if(item.address.indexOf(key)>-1){
-                            searchArray.push(item);
-                        }
-                        if(item.phone.indexOf(key)>-1){
-                            searchArray.push(item);
-                        }
-                    });
-                    this.getShowData(searchArray);
-                }else{
-                   	this.getShowData(this.shopDatas);
-                }
-               }
-		    }
+				searchFn: function(e) {
+					var key = e.target.value;
+
+					//查询firstName列
+					if (key) {
+						var searchArray = [];
+						this.shopDatas.forEach(function(item) {
+							if (item.name.indexOf(key) > -1) {
+								searchArray.push(item);
+							}
+							if (item.address.indexOf(key) > -1) {
+								searchArray.push(item);
+							}
+							if (item.phone.indexOf(key) > -1) {
+								searchArray.push(item);
+							}
+						});
+						this.getShowData(searchArray);
+					} else {
+						this.getShowData(this.shopDatas);
+					}
+				}
+			}
 
 		})
 	</script>

@@ -1,9 +1,9 @@
 <!--
-	文件名：customer_recommend
-	作者：姜子玥
-	时间：2019-09-08
-	描述：顾客商品详情界面显示
-	
+文件名：customer_recommend
+作者：姜子玥
+时间：2019-09-08
+描述：顾客商品详情界面显示
+修改时间：2019-09-09
 -->
 
 <!DOCTYPE html>
@@ -15,12 +15,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 		<link href="/static/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="/static/css/bg.css">
+		<link rel="stylesheet" href="/static/css/bg.css">
 		<link rel="stylesheet" href="/static/css/customer_recommend.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
 		<link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
-        <style>
-            body.modal-fade {
+		<style>
+			body.modal-fade {
                 position: absolute !important;
             }
         </style>
@@ -34,7 +34,7 @@
 						<div class="btn-group">
 							<a href="/customer_records" class="btn btn-outline-dark">
 								<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                购买记录
+								购买记录
 							</a>
 							<a href="/customer_recommend" class="btn btn-dark" style="">
 								<i class="fa fa-diamond" aria-hidden="true"></i>
@@ -56,20 +56,21 @@
 			<div class="overlay"></div>
 			<div class="container">
 				<div class="site-branding">
-					<a href="customer_recommend.html" title="FaceGo"><img class="site-logo" src="/static/img/customer_recommend/logo.png" alt="FaceGo"></a>
+					<a href="/customer_recommend" title="FaceGo"><img class="site-logo" src="/static/img/customer_recommend/logo.png"
+						 alt="FaceGo"></a>
 				</div>
 			</div>
 		</header>
 
-        <div class="row">
-            <div class="col-md-9"></div>
-            <div class="col-md-3" style="position:relative;left: 50px;">
-                <a class="btn btn-link btn-sm" href="#" onclick="initialize()">
-                    <i class="fa fa-repeat" aria-hidden="false"></i>
-                    <font size="5">换一换</font>
-                </a>
-            </div>
-        </div>
+		<div class="row">
+			<div class="col-md-9"></div>
+			<div class="col-md-3" style="position:relative;left: 50px;">
+				<a class="btn btn-link btn-sm" href="#" onclick="initialize()">
+					<i class="fa fa-repeat" aria-hidden="false"></i>
+					<font size="5">换一换</font>
+				</a>
+			</div>
+		</div>
 
 		<!--正文部分-->
 		<div id="page-content" class="index-page">
@@ -94,8 +95,8 @@
 								</div>
 								<div class="content">
 									<h3 class="entry-title">
-									<a href="javascript:void(0)" id="goods_1" onclick="detail(this)" id="goods1_info">Goods1_Title</a>
-								</h3>
+										<a href="javascript:void(0)" id="goods_1" onclick="detail(this)" id="goods1_info">Goods1_Title</a>
+									</h3>
 								</div>
 								<div class="read-more">
 									<a href="javascript:void(0)" onclick="detail(this)" id="goods1_info">
@@ -130,8 +131,8 @@
 								</div>
 								<div class="content">
 									<h3 class="entry-title">
-									<a href="javascript:void(0)" id="goods_2" onclick="detail(this)" id="goods2_info">Goods2_Title</a>
-								</h3>
+										<a href="javascript:void(0)" id="goods_2" onclick="detail(this)" id="goods2_info">Goods2_Title</a>
+									</h3>
 								</div>
 								<div class="read-more">
 									<a href="javascript:void(0)" onclick="detail(this)" id="goods2_info">
@@ -166,8 +167,8 @@
 								</div>
 								<div class="content">
 									<h3 class="entry-title">
-								<a href="javascript:void(0)" id="goods_3" onclick="detail(this)" id="goods3_info">Goods3_Title</a>
-								</h3>
+										<a href="javascript:void(0)" id="goods_3" onclick="detail(this)" id="goods3_info">Goods3_Title</a>
+									</h3>
 								</div>
 								<div class="read-more">
 									<a href="javascript:void(0)" onclick="detail(this)" id="goods3_info">
@@ -201,13 +202,13 @@
 									</svg>
 								</div>
 								<div class="entry-thumb">
-									<img class="img-responsive" src="" id="img4" style="height: 300px;width: 300px;" >
+									<img class="img-responsive" src="" id="img4" style="height: 300px;width: 300px;">
 									<a href="javascript:void(0)" class="thumb-link" onclick="detail(this)" id="goods4_info"><i class="fa fa-link"></i></a>
 								</div>
 								<div class="content">
 									<h3 class="entry-title">
-									<a href="javascript:void(0)" id="goods_4" onclick="detail(this)" id="goods4_info">Goods4_Title</a>
-								</h3>
+										<a href="javascript:void(0)" id="goods_4" onclick="detail(this)" id="goods4_info">Goods4_Title</a>
+									</h3>
 								</div>
 								<div class="read-more">
 									<a href="javascript:void(0)" onclick="detail(this)" id="goods4_info">
@@ -242,8 +243,8 @@
 								</div>
 								<div class="content">
 									<h3 class="entry-title">
-									<a href="javascript:void(0)" id="goods_5" onclick="detail(this)" id="goods5_info">Goods5_Title</a>
-								</h3>
+										<a href="javascript:void(0)" id="goods_5" onclick="detail(this)" id="goods5_info">Goods5_Title</a>
+									</h3>
 								</div>
 								<div class="read-more">
 									<a href="javascript:void(0)" onclick="detail(this)" id="goods5_info">
@@ -278,8 +279,8 @@
 								</div>
 								<div class="content">
 									<h3 class="entry-title">
-									<a href="javascript:void(0)" id="goods_6" onclick="detail(this)" id="goods6_info">Goods6_Title</a>
-								</h3>
+										<a href="javascript:void(0)" id="goods_6" onclick="detail(this)" id="goods6_info">Goods6_Title</a>
+									</h3>
 								</div>
 								<div class="read-more">
 									<a href="javascript:void(0)" onclick='detail(this)' id="goods6_info">
@@ -322,10 +323,23 @@
 									<div class="col-md-6" draggable="true">
 										<div class="row">
 											<div class="col-md-12" id="information">
-												<h2 class="pb-5"><font face="仿宋"><font size="6">商品名称：</font></h2>
-												<h2 class="pb-5"><font face="仿宋"><font size="6">商品价格：</font></h2>
-												<h2 class="pb-5"><font face="仿宋"><font size="6">商品库存：</font></h2>
-												<h2 class="pb-5"><font face="仿宋"><font size="6">具体信息:</p></font></h2>
+												<h2 class="pb-5">
+													<font face="仿宋">
+														<font size="6">商品名称：</font>
+												</h2>
+												<h2 class="pb-5">
+													<font face="仿宋">
+														<font size="6">商品价格：</font>
+												</h2>
+												<h2 class="pb-5">
+													<font face="仿宋">
+														<font size="6">商品库存：</font>
+												</h2>
+												<h2 class="pb-5">
+													<font face="仿宋">
+														<font size="6">具体信息:</p>
+														</font>
+												</h2>
 											</div>
 										</div>
 									</div>
@@ -339,10 +353,10 @@
 
 	</body>
 
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	 crossorigin="anonymous" style=""></script>
 	<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
 	<script type="text/javascript">
-
 		//方法名：initialize
 		//创建时间：2019-09-08
 		//作者：姜子玥
@@ -387,20 +401,20 @@
 		//作者：姜子玥
 		//说明：点击商品显示商品详情模态框
 		function detail(obj) {
-		    console.log(obj);
+			console.log(obj);
 			$("#goods_detail").modal('show');
 			var goods_name;
-			if(obj.id == "goods1_info" || obj.id == "goods_1") {
+			if (obj.id == "goods1_info" || obj.id == "goods_1") {
 				goods_name = document.getElementById("goods_1").innerText;
-			} else if(obj.id == "goods2_info" || obj.id == "goods_2") {
+			} else if (obj.id == "goods2_info" || obj.id == "goods_2") {
 				goods_name = document.getElementById("goods_2").innerText;
-			} else if(obj.id == "goods3_info" || obj.id == "goods_3") {
+			} else if (obj.id == "goods3_info" || obj.id == "goods_3") {
 				goods_name = document.getElementById("goods_3").innerText;
-			} else if(obj.id == "goods4_info" || obj.id == "goods_4") {
+			} else if (obj.id == "goods4_info" || obj.id == "goods_4") {
 				goods_name = document.getElementById("goods_4").innerText;
-			} else if(obj.id == "goods5_info" || obj.id == "goods_5") {
+			} else if (obj.id == "goods5_info" || obj.id == "goods_5") {
 				goods_name = document.getElementById("goods_5").innerText;
-			} else if(obj.id == "goods6_info" || obj.id == "goods_6") {
+			} else if (obj.id == "goods6_info" || obj.id == "goods_6") {
 				goods_name = document.getElementById("goods_6").innerText;
 			}
 			console.log(goods_name);

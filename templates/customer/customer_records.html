@@ -14,7 +14,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
-        <link rel="stylesheet" href="/static/css/bg.css">
+		<link rel="stylesheet" href="/static/css/bg.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
 		<link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
 	</head>
@@ -73,8 +73,8 @@
 										<div class="modal-content">
 											<div class="modal-header">
 												<h4 class="modal-title">
-												<font face="FontAwesome">商品详情</font>
-											</h4>
+													<font face="FontAwesome">商品详情</font>
+												</h4>
 												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
 											</div>
@@ -88,10 +88,23 @@
 															<div class="col-md-6" draggable="true">
 																<div class="row">
 																	<div class="col-md-12" id="information">
-																		<h2 class="pb-5"><font face="仿宋"><font size="6">商品名称：</font></h2>
-																		<h2 class="pb-5"><font face="仿宋"><font size="6">商品价格：</font></h2>
-																		<h2 class="pb-5"><font face="仿宋"><font size="6">商品库存：</font></h2>
-																		<h2 class="pb-5"><font face="仿宋"><font size="6">具体信息:</p></font></h2>
+																		<h2 class="pb-5">
+																			<font face="仿宋">
+																				<font size="6">商品名称：</font>
+																		</h2>
+																		<h2 class="pb-5">
+																			<font face="仿宋">
+																				<font size="6">商品价格：</font>
+																		</h2>
+																		<h2 class="pb-5">
+																			<font face="仿宋">
+																				<font size="6">商品库存：</font>
+																		</h2>
+																		<h2 class="pb-5">
+																			<font face="仿宋">
+																				<font size="6">具体信息:</p>
+																				</font>
+																		</h2>
 																	</div>
 																</div>
 															</div>
@@ -111,7 +124,8 @@
 		</div>
 	</body>
 	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	 crossorigin="anonymous" style=""></script>
 	<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
 	<script>
 		var app = new Vue({
@@ -125,9 +139,9 @@
 
 			},
 			//方法名：created
-            //创建时间：2019-09-08
-            //作者：姜子玥
-            //说明：获取数据库数据显示在消费记录表格中
+			//创建时间：2019-09-08
+			//作者：姜子玥
+			//说明：获取数据库数据显示在消费记录表格中
 			created: function() {
 				var _self = this;
 				$.ajax({
@@ -138,7 +152,7 @@
 					jsonp: "callback",
 					jsonpCallback: "successCallback",
 					success: function(data) {
-						for(var i = 0; i < data.length; i++) {
+						for (var i = 0; i < data.length; i++) {
 							_self.records[i] = data[i];
 							_self.records[i]["id"] = i + 1;
 							_self.records[i]["price"] = _self.records[i]["price"].toFixed(2);
@@ -153,17 +167,17 @@
 			},
 			methods: {
 				//方法名：getShowData
-            	//创建时间：2019-09-08
-            	//作者：姜子玥
-            	//说明：渲染数据
+				//创建时间：2019-09-08
+				//作者：姜子玥
+				//说明：渲染数据
 				getShowData: function(arr) {
 					this.cloneTableDatas = JSON.parse(JSON.stringify(arr));
 				},
 
 				//方法名：detail
-            	//创建时间：2019-09-08
-            	//作者：姜子玥
-            	//说明：显示商品详情信息模态框
+				//创建时间：2019-09-08
+				//作者：姜子玥
+				//说明：显示商品详情信息模态框
 				detail: function(index) {
 					$("#goods").modal('show');
 					this.selected = index;
@@ -191,7 +205,8 @@
 							var info = data['info'];
 							console.log(data);
 							//显示界面
-							img_str += "<img class=\"img-fluid d-block\" src=\"" + "http://" + document.location.host + goods_url + "\"  >";
+							img_str += "<img class=\"img-fluid d-block\" src=\"" + "http://" + document.location.host + goods_url +
+								"\"  >";
 							str += "<h2 class=\"pb-1\"><font face=\"微软雅黑\"><font size=\"4\">商品名称：" + goods_name +
 								"</font></h2><h2 class=\"pb-1\"><font face=\"微软雅黑\"><font size=\"4\">商品价格：" + goods_price +
 								"</font></h2><h2 class=\"pb-1\"><font face=\"微软雅黑\"><font size=\"4\">商品库存：" + goods_count +

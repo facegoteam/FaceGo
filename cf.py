@@ -1,3 +1,11 @@
+'''
+文件名: cf.py
+作者：黄少豪
+创建时间：2019-09-05
+说明：协同过滤推荐算法
+修改时间：2019-09-05
+'''
+
 import math
 import pandas as pd
 import time
@@ -15,9 +23,6 @@ class UserCf:
     def _cosine_sim(target_goods, goods):
         '''
         simple method for calculate cosine distance.
-        e.g: x = [1 0 1 1 0], y = [0 1 1 0 1]
-             cosine = (x1*y1+x2*y2+...) / [sqrt(x1^2+x2^2+...)+sqrt(y1^2+y2^2+...)]
-             that means union_len(goods1, goods2) / sqrt(len(goods1)*len(goods2))
         '''
         union_len = len(set(target_goods) & set(goods))
         if union_len == 0: return 0.0

@@ -7,7 +7,7 @@ pymysql.install_as_MySQLdb()
 app = Flask(__name__)
 app.secret_key = 'super secret key'
 #配置数据库地址
-app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:qian520XX@localhost/facego'
+app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:8008208820@localhost/facego'
 app.config['SQLALCHEMY_TRABACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -53,16 +53,6 @@ class Staff(db.Model):
     pwd = db.Column(db.String(50))
     identity = db.Column(db.String(50))
     shop_id = db.Column(db.Integer)
-
-# 模型Customer
-# 创建时间：2019-08-26
-# 作者：姜子玥
-# 简要说明：用以存储顾客的face_token信息
-class Customer(db.Model):
-    __tablename__ = 'customer'#表名customer
-    #字段
-    id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
-    face_token = db.Column(db.String(50), unique=True)
 
 
 # 模型Goods

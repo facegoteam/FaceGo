@@ -11,8 +11,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
-        <link rel="stylesheet" href="/static/css/bg.css">
+		<link rel="shortcut icon" href="http://47.107.33.136/images/2019/08/23/facego_icon.png">
+		<link rel="stylesheet" href="/static/css/bg.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
 		<link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
 	</head>
@@ -36,7 +36,8 @@
 								<font face="FontAwesome"> 门店管理</font>
 							</a>
 							<a href="/admin_record" class="btn btn-dark"><i class="fa fa-database" aria-hidden="true"></i> 销售记录 </a>
-							<a href="/staff_logout" class="btn btn-outline-dark"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; 登出&nbsp;&nbsp;</a>
+							<a href="/staff_logout" class="btn btn-outline-dark"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;
+								登出&nbsp;&nbsp;</a>
 						</div>
 					</div>
 				</div>
@@ -85,7 +86,7 @@
 						</div>
 
 						<div class="table-responsive">
-							<table class="table table-bordered "  style="background:rgba(255,255,255,0.2);filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000,endcolorstr=#7F000000)">
+							<table class="table table-bordered " style="background:rgba(255,255,255,0.2);filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000,endcolorstr=#7F000000)">
 								<thead class="thead-dark">
 									<tr>
 										<th>No</th>
@@ -201,7 +202,8 @@
 		</div>
 		</div>
 		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		 crossorigin="anonymous" style=""></script>
 		<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
 		<script src="/static/js/echarts.min.js"></script>
 		<script type="text/jscript"></script>
@@ -243,12 +245,12 @@
 							"shop_name": "all",
 						},
 						success: function(data) {
-							for(var i = 0; i < data.length; i++) {
+							for (var i = 0; i < data.length; i++) {
 								_self.records[i] = data[i];
 								_self.records[i]["no"] = i + 1;
 								_self.records[i]['total'] = _self.records[i]['total'].toFixed(2);
-                            }
-                            console.log(_self.records);
+							}
+							console.log(_self.records);
 							_self.getShowData(_self.records);
 						},
 						error: function() {
@@ -256,10 +258,10 @@
 						},
 						complete: function() {
 							var year = parseInt(current_year.toString());
-							for(var i = year; i > year - 1; i--) {
+							for (var i = year; i > year - 1; i--) {
 								$('#year').append("<option value='" + i + "'>" + i + "</option>");
-                            }
-                            //获取门店列表数据
+							}
+							//获取门店列表数据
 							$.ajax({
 								type: "post",
 								url: "/admin_ask_for_shop",
@@ -273,10 +275,11 @@
 								success: function(data) {
 									_self.shoplist = data;
 									var shop_list = _self.shoplist;
-									for(var i = 0; i < shop_list.length; i++) {
-										$('#shop').append("<option value='" + shop_list[i]["name"] + "'>" + shop_list[i]["name"] + "</option>");
-                                    }
-                                },
+									for (var i = 0; i < shop_list.length; i++) {
+										$('#shop').append("<option value='" + shop_list[i]["name"] + "'>" + shop_list[i]["name"] +
+											"</option>");
+									}
+								},
 								error: function() {
 									alert("获取商店列表失败");
 								}
@@ -285,10 +288,10 @@
 					});
 				},
 				methods: {
-				//方法名：getShowData
-				//创建时间：2019-09-04
-				//作者：姜子玥
-				//说明：渲染数据
+					//方法名：getShowData
+					//创建时间：2019-09-04
+					//作者：姜子玥
+					//说明：渲染数据
 					getShowData: function(arr) {
 						this.cloneTableDatas = JSON.parse(JSON.stringify(arr));
 					},
@@ -303,18 +306,18 @@
 						_self.searchRecord.shop_name = document.getElementById("shop").value;
 
 						//判断输入错误
-						if(_self.searchRecord.year == "选择查看年份"){
-						    alert("请选择年份");
-						    return;
-                        }
-						if(_self.searchRecord.month == "选择查看月份"){
-						    alert("请选择月份");
-						    return;
-                        }
-						if(_self.searchRecord.shop_name == "选择商店"){
-						    alert("请选择商店");
-						    return;
-                        }
+						if (_self.searchRecord.year == "选择查看年份") {
+							alert("请选择年份");
+							return;
+						}
+						if (_self.searchRecord.month == "选择查看月份") {
+							alert("请选择月份");
+							return;
+						}
+						if (_self.searchRecord.shop_name == "选择商店") {
+							alert("请选择商店");
+							return;
+						}
 
 						$.ajax({
 							type: "get",
@@ -329,12 +332,12 @@
 								"month": _self.searchRecord.month,
 							},
 							success: function(data) {
-								for(var i = 0; i < data.length; i++) {
+								for (var i = 0; i < data.length; i++) {
 									_self.records[i] = data[i];
 									_self.records[i]["no"] = i + 1;
 									_self.records[i]['total'] = _self.records[i]['total'].toFixed(2);
-                                }
-                                _self.getShowData(_self.records);
+								}
+								_self.getShowData(_self.records);
 								_self.searchRecord = {
 									"shop_name": "",
 									"year": "",
@@ -361,22 +364,30 @@
 					//作者：姜子玥，黄文政
 					//说明：在模态框中显示时间-销售额图
 					showTime: function() {
-                        var search_year = document.getElementById("selectYear").value;
+						var search_year = document.getElementById("selectYear").value;
 						//判断输入错误
-						if(search_year == "选择年份"){
-						    alert("请选择年份");
-						    return;
-                        }
+						if (search_year == "选择年份") {
+							alert("请选择年份");
+							return;
+						}
 						this.showShoplist = [];
 						this.timeSeries = [];
-						for(var i=0; i<this.shoplist.length; i++){
-						    this.showShoplist.push(this.shoplist[i].name);
-						    this.timeSeries.push({'name': this.shoplist[i].name, 'type': 'bar', 'data': [],})
-                        }
+						for (var i = 0; i < this.shoplist.length; i++) {
+							this.showShoplist.push(this.shoplist[i].name);
+							this.timeSeries.push({
+								'name': this.shoplist[i].name,
+								'type': 'bar',
+								'data': [],
+							})
+						}
 						this.showShoplist.push('全部商店');
-						this.timeSeries.push({'name': '全部门店销售金额', 'type': 'line', 'data': [],});
+						this.timeSeries.push({
+							'name': '全部门店销售金额',
+							'type': 'line',
+							'data': [],
+						});
 
-                        var _self = this;
+						var _self = this;
 
 						var yearChart = echarts.init(document.getElementById('year_data_show'));
 						var option = {
@@ -436,14 +447,22 @@
 								year: search_year
 							},
 							success: function(result) {
-								if(result) {
-                                    _self.timeSeries = [];
-                                    for(var i=0; i<_self.shoplist.length; i++){
-                                        _self.timeSeries.push({'name': _self.shoplist[i].name, 'type': 'bar', 'data': result[_self.shoplist[i].name],})
-                                    }
-                                    _self.timeSeries.push({'name': '全部商店', 'type': 'line', 'data': result['全部']});
+								if (result) {
+									_self.timeSeries = [];
+									for (var i = 0; i < _self.shoplist.length; i++) {
+										_self.timeSeries.push({
+											'name': _self.shoplist[i].name,
+											'type': 'bar',
+											'data': result[_self.shoplist[i].name],
+										})
+									}
+									_self.timeSeries.push({
+										'name': '全部商店',
+										'type': 'line',
+										'data': result['全部']
+									});
 
-                                    yearChart.hideLoading();
+									yearChart.hideLoading();
 									yearChart.setOption({
 										series: _self.timeSeries
 									});
@@ -472,28 +491,36 @@
 					//作者：姜子玥，黄文政
 					//说明：在模态框中显示商品种类-销售额图
 					showType: function() {
-					    var type_year = document.getElementById("selectTypeYear").value;
+						var type_year = document.getElementById("selectTypeYear").value;
 						var search_month = document.getElementById("selectMonth").value;
 
-					    //判断输入错误
-						if(type_year == "选择年份"){
-						    alert("请选择年份");
-						    return;
-                        }
-						if(search_month == "选择月份"){
-						    alert("请选择月份");
-						    return;
-                        }
+						//判断输入错误
+						if (type_year == "选择年份") {
+							alert("请选择年份");
+							return;
+						}
+						if (search_month == "选择月份") {
+							alert("请选择月份");
+							return;
+						}
 
 						this.showShoplist = [];
 						this.typeSeries = [];
-						for(var i=0; i<this.shoplist.length; i++){
-						    this.showShoplist.push(this.shoplist[i].name);
-						    this.typeSeries.push({type: 'bar', smooth: true, seriesLayoutBy: 'row'});
-                        }
-						this.typeSeries.push({type: 'line', smooth: true, seriesLayoutBy: 'row'});
+						for (var i = 0; i < this.shoplist.length; i++) {
+							this.showShoplist.push(this.shoplist[i].name);
+							this.typeSeries.push({
+								type: 'bar',
+								smooth: true,
+								seriesLayoutBy: 'row'
+							});
+						}
+						this.typeSeries.push({
+							type: 'line',
+							smooth: true,
+							seriesLayoutBy: 'row'
+						});
 
-                        var _self = this;
+						var _self = this;
 
 						var typeChart = echarts.init(document.getElementById("type_data_show"));
 						var option = {
@@ -508,7 +535,7 @@
 									}
 								}
 							},
-                            toolbox: {
+							toolbox: {
 								feature: {
 									magicType: {
 										show: true,
@@ -544,7 +571,7 @@
 							series: _self.typeSeries,
 						};
 
-                        var _self = this;
+						var _self = this;
 
 						typeChart.setOption(option);
 						$.ajax({
@@ -555,17 +582,18 @@
 							jsonp: "callback",
 							jsonpCallback: "successCallback",
 							data: {
-								year:type_year,
+								year: type_year,
 								month: search_month
 							},
 							success: function(result) {
-							    _self.typeSource = [];
-							    _self.typeSource.push(['type', '食品', '饮品', '日用品', '书籍杂志']);
-							    var i;
-							    for(i=0; i<_self.showShoplist.length; i++){
-							        _self.typeSource.push([_self.showShoplist[i], result['食品'][i], result['饮品'][i], result['日用品'][i], result['书籍杂志'][i]]);
-                                }
-							    _self.typeSource.push(['全部', result['食品'][i], result['饮品'][i], result['日用品'][i], result['书籍杂志'][i]]);
+								_self.typeSource = [];
+								_self.typeSource.push(['type', '食品', '饮品', '日用品', '书籍杂志']);
+								var i;
+								for (i = 0; i < _self.showShoplist.length; i++) {
+									_self.typeSource.push([_self.showShoplist[i], result['食品'][i], result['饮品'][i], result['日用品'][i], result[
+										'书籍杂志'][i]]);
+								}
+								_self.typeSource.push(['全部', result['食品'][i], result['饮品'][i], result['日用品'][i], result['书籍杂志'][i]]);
 
 								typeChart.hideLoading();
 								typeChart.setOption({
